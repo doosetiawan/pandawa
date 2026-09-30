@@ -3,1063 +3,713 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel — Pandawa Social Sport</title>
+<title>Pandawa Social Sport — The First Integrated Social Sport Space in Madiun</title>
+<meta name="description" content="Padel, Minisoccer, Badminton & Cafe dalam satu kawasan. Jl. Basuki Rahmad No. 1, Kota Madiun. Open daily 06.00–00.00. Own The Stage.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237b1113'/%3E%3Ctext x='32' y='44' font-family='Georgia' font-size='34' font-weight='bold' fill='%23d9b36c' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
 <style>
-:root{color-scheme:light;--bg:#f6f5f2;--surface:#fff;--surface-2:#fbfaf8;--border:#e7e4dd;--border-2:#d9d4c9;--ink:#201a14;--muted:#7a7264;--muted-2:#a49c8c;--maroon:#7b1113;--maroon-2:#9d1618;--maroon-soft:#f8ecec;--gold:#b3872e;--gold-2:#8f6a1d;--gold-soft:#f8f0dd;--ok:#15803d;--ok-soft:#e9f6ef;--warn:#a16207;--warn-soft:#fdf6e3;--err:#b91c1c;--err-soft:#fdecec;--info:#1d4ed8;--info-soft:#e9effc;--shadow:0 1px 2px rgba(32,26,20,.05),0 4px 14px rgba(32,26,20,.06);--shadow-lg:0 8px 30px rgba(32,26,20,.12);--disp:'Archivo',sans-serif;--serif:'Fraunces',serif;--body:'Plus Jakarta Sans',sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.6;font-size:14px}
-img{display:block;max-width:100%}a{text-decoration:none;color:inherit}ul{list-style:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select,textarea{font-family:inherit;color:var(--ink)}
-[data-act]{cursor:pointer}
-::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
-#jsError{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--err);color:#fff;padding:10px 20px;font-size:.82rem;font-weight:700}
-.app{display:flex;min-height:100vh}
-.sidebar{width:20%;min-width:212px;max-width:252px;background:var(--surface);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:22px;flex-shrink:0}
-.sb-logo{display:flex;align-items:center;gap:11px;padding:4px 8px 18px;border-bottom:1px solid var(--border)}
-.sb-logo .logo-mark{width:38px;height:38px;border-radius:10px;background:var(--maroon);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:900;color:#e9c87e;font-size:1.1rem;flex-shrink:0}
-.sb-logo-txt b{font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.05em;font-size:.92rem;display:block}
-.sb-logo-txt span{font-size:.56rem;letter-spacing:.26em;color:var(--gold-2);text-transform:uppercase;font-weight:700}
-.sb-section .lbl{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2);font-weight:700;padding:0 10px 8px}
-.sb-menu{display:flex;flex-direction:column;gap:2px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;color:var(--muted);font-weight:600;font-size:.84rem;transition:.22s;cursor:pointer;position:relative}
-.sb-item:hover{background:var(--surface-2);color:var(--ink)}
-.sb-item.active{background:var(--maroon);color:#fff;box-shadow:0 6px 16px rgba(123,17,19,.28)}
-.sb-item.active::before{content:"";position:absolute;left:-14px;top:50%;transform:translateY(-50%);width:3px;height:20px;background:var(--gold);border-radius:0 3px 3px 0}
-.sb-item .ic{width:17px;height:17px;display:grid;place-items:center;flex-shrink:0}
-.sb-item svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
-.sb-item .badge{margin-left:auto;background:var(--gold);color:#fff;font-size:.66rem;font-weight:800;padding:2px 8px;border-radius:10px}
-.sb-foot{margin-top:auto;padding:14px 10px 4px;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted-2)}
-.main{flex:1;min-width:0;display:flex;flex-direction:column}
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:13px 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
-.topbar h1{font-family:var(--disp);font-stretch:115%;text-transform:uppercase;font-weight:800;font-size:1.08rem;letter-spacing:.03em;white-space:nowrap}
-.topbar h1 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--maroon)}
-.topbar-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
-.tb-icon{width:38px;height:38px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);position:relative;transition:.25s}
-.tb-icon:hover{color:var(--maroon);border-color:var(--maroon)}
-.tb-icon svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
-.tb-icon .dot{position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--err);border-radius:50%;border:2px solid var(--surface)}
-.tb-user{display:flex;align-items:center;gap:9px;padding:4px 14px 4px 4px;border-radius:50px;background:var(--surface-2);border:1px solid var(--border)}
-.tb-user .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--maroon),var(--gold));display:grid;place-items:center;color:#fff;font-weight:800;font-size:.8rem}
-.tb-user .name{font-size:.8rem;font-weight:700}.tb-user .role{font-size:.66rem;color:var(--muted)}
-.burger{display:none}
-.content{padding:26px 28px 60px;flex:1;min-width:0}
-.page{display:none;animation:fadeIn .35s ease}.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.page-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px;flex-wrap:wrap}
-.page-head h2{font-family:var(--disp);font-stretch:115%;text-transform:uppercase;font-weight:800;font-size:1.6rem;letter-spacing:.02em}
-.page-head h2 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--maroon)}
-.page-head .sub{color:var(--muted);font-size:.86rem;margin-top:4px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
-.card-head{display:flex;justify-content:space-between;align-items:start;margin-bottom:14px;gap:10px}
-.card-head .lbl{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.card-head .ic{width:38px;height:38px;border-radius:10px;background:var(--gold-soft);display:grid;place-items:center;color:var(--gold-2)}
-.card-head .ic svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
-.card-val{font-family:var(--disp);font-stretch:115%;font-weight:800;font-size:1.7rem;line-height:1}
-.card-val small{font-size:.92rem;color:var(--muted);font-weight:500;font-family:var(--body)}
-.card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:.76rem;color:var(--muted);padding-top:10px;border-top:1px solid var(--border)}
-.chg{font-weight:700}.chg.up{color:var(--ok)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.datebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.date-nav{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px 10px;box-shadow:var(--shadow)}
-.dn-btn{width:34px;height:34px;border-radius:9px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);font-size:1.05rem;transition:.2s}
-.dn-btn:hover{color:var(--maroon);border-color:var(--maroon)}
-.date-display{text-align:center;min-width:210px}
-.date-display .d1{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:.92rem;letter-spacing:.03em}
-.date-display .d2{font-size:.66rem;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:1px}
-.today-tag{background:var(--gold-soft);color:var(--gold-2);border-radius:50px;padding:2px 10px;font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-left:6px;vertical-align:2px}
-.sched-stats{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.stat-chip{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:8px 15px;font-size:.74rem;font-weight:700;color:var(--muted)}
-.stat-chip .dot{width:9px;height:9px;border-radius:50%}
-.dot.fill{background:var(--maroon)}.dot.free{background:var(--ok)}
-.sched{margin-bottom:20px;overflow:hidden;padding:0}
-.sched-title{padding:15px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.sched-title h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:.95rem;letter-spacing:.03em}
-.sched-legend{display:flex;gap:14px;font-size:.7rem;color:var(--muted);font-weight:700}
-.sched-legend span{display:flex;align-items:center;gap:6px}
-.sched-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-.sched-scroll{overflow-x:auto}
-.sched-grid{display:grid;grid-template-columns:180px repeat(3,1fr);min-width:680px}
-.sg-cell{padding:12px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;min-height:86px}
-.sg-cell:nth-child(4n){border-right:none}
-.sched-grid>:nth-last-child(-n+4){border-bottom:none}
-.sg-head{background:var(--surface-2);min-height:auto;padding:10px 14px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:800;line-height:1.5}
-.sg-court{background:var(--surface-2)}
-.sg-court .name{font-weight:800;font-size:.82rem}
-.sg-court .sub{font-size:.7rem;color:var(--muted);margin-top:2px}
-.sg-filled{background:var(--maroon-soft);cursor:pointer;transition:.2s}
-.sg-filled:hover{background:#f3e0e0}
-.sf-name{font-weight:800;font-size:.84rem;color:var(--maroon);line-height:1.3}
-.sf-meta{font-size:.7rem;color:var(--muted);margin-top:2px}
-.sg-free{background:#f7fbf8}
-.sf-free{font-size:.72rem;font-weight:800;color:var(--ok);letter-spacing:.08em;text-transform:uppercase}
-.sg-add{margin-top:7px;align-self:flex-start;font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);background:var(--ok-soft);border:1px dashed var(--ok);border-radius:50px;padding:4px 11px;transition:.2s}
-.sg-add:hover{background:var(--ok);color:#fff;border-style:solid}
-.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-.tb-filter{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 13px;display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);font-weight:600}
-.tb-filter select{background:none;border:none;outline:none;cursor:pointer;font-weight:600;color:var(--ink)}
-.search-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 13px;display:flex;align-items:center;gap:8px;flex:1;min-width:180px;max-width:320px}
-.search-box input{background:none;border:none;outline:none;width:100%;font-size:.84rem}
-.toolbar .spacer{flex:1}
-.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.tbl-scroll{overflow-x:auto}
-.tbl{width:100%;border-collapse:collapse;font-size:.84rem;min-width:820px}
-.tbl thead th{background:var(--surface-2);padding:12px 15px;text-align:left;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap}
-.tbl tbody td{padding:12px 15px;border-bottom:1px solid var(--border);vertical-align:middle}
-.tbl tbody tr{transition:.18s}.tbl tbody tr:hover{background:var(--surface-2)}
-.tbl tbody tr:last-child td{border-bottom:none}
-.av-cell{display:flex;align-items:center;gap:10px}
-.av{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:.76rem;color:#fff;flex-shrink:0}
-.name{font-weight:700}.sub{font-size:.72rem;color:var(--muted);margin-top:1px}
-.price{font-family:var(--disp);font-stretch:110%;font-weight:700;color:var(--maroon)}
-.tbl-actions{display:flex;gap:6px}
-.act-btn{width:31px;height:31px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);transition:.2s}
-.act-btn:hover{color:var(--maroon);border-color:var(--maroon)}
-.act-btn.danger:hover{background:var(--err-soft);color:var(--err);border-color:var(--err)}
-.act-btn.success:hover{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
-.act-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
-.empty{padding:50px 20px;text-align:center;color:var(--muted)}
-.empty .ic{font-size:2.6rem;margin-bottom:12px;opacity:.5}
-.badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:50px;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-.b-pending{background:var(--warn-soft);color:var(--warn)}
-.b-confirmed{background:var(--ok-soft);color:var(--ok)}
-.b-cancelled{background:var(--err-soft);color:var(--err)}
-.b-completed{background:var(--info-soft);color:var(--info)}
-.b-gold{background:var(--gold-soft);color:var(--gold-2)}
-.b-silver{background:#eef0f2;color:#64748b}
-.b-bronze{background:#f6ece2;color:#b45f27}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:11px 22px;border-radius:50px;transition:.25s;cursor:pointer;border:none;white-space:nowrap}
-.btn-gold{background:var(--maroon);color:#fff;box-shadow:0 6px 16px rgba(123,17,19,.25)}
-.btn-gold:hover{background:var(--maroon-2);transform:translateY(-2px)}
-.btn-ghost{border:1px solid var(--border-2);color:var(--ink);background:var(--surface)}
-.btn-ghost:hover{border-color:var(--maroon);color:var(--maroon)}
-.btn-ok{background:var(--ok);color:#fff}.btn-err{background:var(--err);color:#fff}
-.btn-sm{padding:8px 16px;font-size:.7rem}.btn-lg{padding:14px 28px;font-size:.84rem}
-.modal{position:fixed;inset:0;background:rgba(32,26,20,.45);backdrop-filter:blur(6px);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
-.modal.open{display:flex;animation:fadeIn .22s}
-.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;position:relative;margin:auto;box-shadow:var(--shadow-lg)}
-.modal-head{padding:20px 26px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--surface);z-index:2}
-.modal-head h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.05rem}
-.modal-head h3 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--maroon)}
-.modal-close{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--muted);font-size:1.3rem;transition:.2s}
-.modal-close:hover{background:var(--err-soft);color:var(--err)}
-.modal-body{padding:24px 26px}
-.modal-foot{padding:16px 26px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;align-items:center;position:sticky;bottom:0;background:var(--surface);flex-wrap:wrap}
-.form-row{margin-bottom:14px}
-.form-row label{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);margin-bottom:7px;font-weight:700}
-.form-row label small{color:var(--err);margin-left:3px}
-.form-row input,.form-row select,.form-row textarea{width:100%;background:var(--surface-2);border:1px solid var(--border);padding:11px 13px;border-radius:10px;font-size:.86rem;transition:.25s}
-.form-row input:focus,.form-row select:focus,.form-row textarea:focus{outline:none;border-color:var(--maroon);box-shadow:0 0 0 3px rgba(123,17,19,.1)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.form-row.full{grid-column:1/-1}
-.manual-total{margin-left:auto;font-size:.8rem;color:var(--muted);font-weight:600}
-.manual-total b{font-family:var(--disp);font-stretch:112%;font-size:1.15rem;color:var(--maroon);margin-left:6px}
-.pay-note{background:var(--gold-soft);border:1px dashed var(--gold);border-radius:10px;padding:10px 14px;font-size:.76rem;color:var(--gold-2);font-weight:600;margin-bottom:14px}
-.dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:20px}
-.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
-.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
-.chart-head h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:.98rem;letter-spacing:.03em}
-.chart-wrap{position:relative;height:270px}
-.chart-fallback{display:grid;place-items:center;height:100%;color:var(--muted);font-size:.85rem}
-.recent-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.recent-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.recent-head h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:.98rem}
-.recent-head a{color:var(--maroon);font-size:.76rem;font-weight:700}
-.rc-item{display:grid;grid-template-columns:auto 1fr auto auto;gap:13px;align-items:center;padding:11px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:.2s}
-.rc-item:last-child{border-bottom:none}.rc-item:hover{background:var(--surface-2)}
-.rc-av{width:35px;height:35px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:.78rem;color:#fff;flex-shrink:0}
-.rc-info .name{font-weight:700;font-size:.86rem}.rc-info .meta{font-size:.72rem;color:var(--muted);margin-top:1px}
-.rc-price{font-family:var(--disp);font-stretch:110%;font-weight:700;color:var(--maroon);font-size:.88rem}
-.pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.price-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.price-card-head{padding:15px 20px;background:linear-gradient(135deg,var(--maroon),var(--maroon-2))}
-.price-card-head h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;color:#fff;font-size:.95rem;letter-spacing:.04em}
-.price-card-body{padding:18px 20px}
-.price-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
-.price-row:last-child{border-bottom:none}
-.price-row .lbl{font-size:.82rem;font-weight:600}
-.price-row input{background:var(--surface-2);border:1px solid var(--border);color:var(--maroon);padding:6px 10px;border-radius:8px;width:104px;text-align:right;font-family:var(--disp);font-weight:700;font-size:.82rem;outline:none}
-.sec-lbl{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 0 8px}
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.gal-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;transition:.25s;box-shadow:var(--shadow)}
-.gal-item:hover{border-color:var(--gold);transform:translateY(-3px)}
-.gal-img{height:150px;overflow:hidden;position:relative}
-.gal-img img{width:100%;height:100%;object-fit:cover}
-.gal-img .tag{position:absolute;top:9px;left:9px;background:var(--maroon);color:#fff;padding:3px 10px;border-radius:50px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.gal-body{padding:12px 14px}.gal-body h4{font-family:var(--disp);font-weight:700;font-size:.84rem;margin-bottom:3px}.gal-body .meta{font-size:.7rem;color:var(--muted)}
-.gal-act{position:absolute;top:9px;right:9px}
-.gal-btn{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--err)}
-.gal-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
-.upload-box{background:var(--surface);border:2px dashed var(--border-2);border-radius:14px;padding:36px;text-align:center;cursor:pointer;transition:.25s;margin-bottom:20px}
-.upload-box:hover{border-color:var(--maroon);background:var(--maroon-soft)}
-.upload-box .ic{font-size:2.4rem;margin-bottom:10px}
-.upload-box h4{font-family:var(--disp);text-transform:uppercase;font-weight:800;font-size:.92rem;margin-bottom:5px}
-.upload-box p{font-size:.8rem;color:var(--muted)}
-.members-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
-.m-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;transition:.25s;box-shadow:var(--shadow)}
-.m-card:hover{transform:translateY(-3px)}
-.m-card .tier{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;font-weight:800;margin-bottom:8px}
-.m-card.gold{border-top:3px solid var(--gold)}.m-card.gold .tier{color:var(--gold-2)}
-.m-card.silver{border-top:3px solid #94a3b8}.m-card.silver .tier{color:#64748b}
-.m-card.bronze{border-top:3px solid #b45f27}.m-card.bronze .tier{color:#b45f27}
-.m-card h4{font-family:var(--disp);text-transform:uppercase;font-weight:800;font-size:.95rem}
-.m-card .count{font-family:var(--disp);font-stretch:115%;font-weight:800;font-size:1.55rem;margin:10px 0 2px}
-.m-card .sub{font-size:.76rem;color:var(--muted)}
-.m-card .bar{height:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-top:12px}
-.m-card .bar-fill{height:100%;background:var(--gold)}
-.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
-.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
-.kpi-val{font-family:var(--disp);font-stretch:115%;font-weight:800;font-size:1.8rem}
-.kpi-val small{font-size:.95rem;color:var(--muted);font-weight:500;font-family:var(--body)}
-.rank-list{margin-top:10px}
-.rank-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
-.rank-item:last-child{border-bottom:none}
-.rank-num{width:24px;height:24px;border-radius:6px;background:var(--gold-soft);color:var(--gold-2);display:grid;place-items:center;font-weight:800;font-size:.7rem}
-.rank-name{font-size:.86rem;font-weight:600}
-.rank-val{font-family:var(--disp);font-weight:700;color:var(--maroon);font-size:.86rem}
-.toast{position:fixed;bottom:28px;right:28px;z-index:4000;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--ok);padding:13px 18px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-lg);min-width:270px;transform:translateX(420px);transition:.4s;pointer-events:none}
-.toast.show{transform:translateX(0);pointer-events:auto}
-.toast.err{border-left-color:var(--err)}.toast.warn{border-left-color:var(--warn)}
-.toast .ic{font-size:1.2rem}
-.toast p{font-size:.84rem;font-weight:700}
-.toast p small{display:block;font-size:.7rem;color:var(--muted);font-weight:400;margin-top:1px}
-@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}.dash-grid,.report-grid,.pricing-grid{grid-template-columns:1fr}.members-grid{grid-template-columns:1fr 1fr}.gal-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:820px){
-  .sidebar{position:fixed;left:-270px;width:250px;z-index:500;transition:.35s;box-shadow:var(--shadow-lg)}
-  .sidebar.open{left:0}
-  .sidebar-overlay{position:fixed;inset:0;background:rgba(32,26,20,.4);z-index:400;display:none}
-  .sidebar-overlay.open{display:block}
-  .burger{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);color:var(--muted)}
-  .burger svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
-  .content{padding:18px 16px 60px}.topbar{padding:11px 16px}
-  .gal-grid{grid-template-columns:repeat(2,1fr)}.members-grid,.form-grid{grid-template-columns:1fr}.sched-stats{margin-left:0}
+/* ============ DESIGN TOKENS ============ */
+:root{
+  --ink:#0b0d12;          /* hitam kebiruan */
+  --ink-2:#12151c;
+  --maroon:#7b1113;
+  --maroon-deep:#4d090b;
+  --gold:#d9b36c;
+  --gold-2:#ecd7a7;
+  --cream:#f4eee2;
+  --cream-2:#ece2cf;
+  --text-d:#e9e6df;       /* teks di bg gelap */
+  --muted-d:#98a0ae;
+  --text-c:#1c1712;       /* teks di bg cream */
+  --muted-c:#6f6555;
+  --line-d:rgba(255,255,255,.09);
+  --line-c:rgba(28,23,18,.14);
+  --wa:#1fbf5f;
+  --disp:'Archivo',sans-serif;
+  --serif:'Fraunces',serif;
+  --body:'Plus Jakarta Sans',sans-serif;
 }
-@media(max-width:500px){.stats-grid,.gal-grid{grid-template-columns:1fr}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ink);color:var(--text-d);line-height:1.7;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+section{scroll-margin-top:86px;position:relative}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* noise overlay */
+body::after{content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.wrap{width:min(1180px,92%);margin:0 auto}
+.display{font-family:var(--disp);font-stretch:118%;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02}
+.serif-it{font-family:var(--serif);font-style:italic;font-weight:400}
+
+/* ============ HEADER ============ */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.4s;padding:20px 0}
+header.scrolled{background:rgba(11,13,18,.92);backdrop-filter:blur(14px);padding:12px 0;border-bottom:1px solid var(--line-d)}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:42px;height:42px;border-radius:10px;background:var(--maroon);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:900;color:var(--gold);font-size:1.25rem;box-shadow:inset 0 0 0 1px rgba(217,179,108,.35)}
+.logo-txt{line-height:1.1}
+.logo-txt b{font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.06em;font-size:1.02rem;color:#fff;display:block}
+.logo-txt span{font-size:.62rem;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+nav ul{display:flex;gap:26px;align-items:center}
+nav ul li a{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-d);font-weight:600;position:relative;padding:6px 0;transition:.3s}
+nav ul li a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:.3s}
+nav ul li a:hover{color:var(--gold-2)}
+nav ul li a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:14px 26px;border-radius:60px;transition:.35s;cursor:pointer;border:none}
+.btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 24px rgba(217,179,108,.25)}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px rgba(217,179,108,.35)}
+.btn-ghost{border:1px solid var(--line-d);color:var(--text-d);background:transparent}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-2)}
+.btn-maroon{background:var(--maroon);color:#fff}
+.btn-maroon:hover{background:var(--maroon-deep);transform:translateY(-2px)}
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+.burger span{width:26px;height:2px;background:var(--gold);display:block;transition:.3s}
+
+/* ============ HERO ============ */
+.hero{min-height:100svh;display:flex;align-items:center;padding:150px 0 90px;position:relative;overflow:hidden;
+  background:
+   radial-gradient(900px 500px at 85% -10%, rgba(123,17,19,.5), transparent 60%),
+   radial-gradient(700px 500px at -10% 90%, rgba(123,17,19,.35), transparent 60%),
+   var(--ink);}
+.hero::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='560' viewBox='0 0 900 560'%3E%3Cg fill='none' stroke='%23d9b36c' stroke-opacity='.07' stroke-width='2'%3E%3Crect x='20' y='20' width='860' height='520' rx='6'/%3E%3Cline x1='450' y1='20' x2='450' y2='540'/%3E%3Ccircle cx='450' cy='280' r='95'/%3E%3Crect x='20' y='165' width='130' height='230'/%3E%3Crect x='750' y='165' width='130' height='230'/%3E%3C/g%3E%3C/svg%3E") center/900px auto no-repeat;}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:26px}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(3rem,7.2vw,6rem);color:#fff}
+.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold);letter-spacing:0}
+.hero-sub{max-width:520px;color:var(--muted-d);font-size:1.02rem;font-weight:300;margin:26px 0 36px}
+.hero-sub b{color:var(--text-d);font-weight:600}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:26px;margin-top:44px;flex-wrap:wrap}
+.hero-meta div{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-d)}
+.hero-meta b{display:block;color:var(--gold-2);font-size:.95rem;letter-spacing:.06em}
+
+/* kolase kanan */
+.hero-visual{position:relative;justify-self:end;width:min(460px,100%)}
+.frame{position:relative;border-radius:220px 220px 18px 18px;overflow:hidden;border:1px solid rgba(217,179,108,.35);box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.frame img{width:100%;height:520px;object-fit:cover;transition:1.2s ease}
+.frame:hover img{transform:scale(1.05)}
+.polaroid{position:absolute;left:-70px;bottom:34px;width:170px;background:#fff;padding:10px 10px 14px;border-radius:6px;transform:rotate(-7deg);box-shadow:0 20px 40px rgba(0,0,0,.45)}
+.polaroid img{height:150px;width:100%;object-fit:cover;border-radius:3px}
+.polaroid figcaption{font-family:var(--serif);font-style:italic;color:#333;font-size:.8rem;text-align:center;margin-top:8px}
+.spin-badge{position:absolute;right:-38px;top:-30px;width:120px;height:120px}
+.spin-badge svg{width:100%;height:100%;animation:spin 22s linear infinite}
+.spin-badge text{font-size:10.5px;letter-spacing:2.6px;fill:var(--gold);text-transform:uppercase;font-family:var(--body);font-weight:700}
+.spin-badge .core{position:absolute;inset:0;display:grid;place-items:center;font-size:1.5rem;color:var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* stats */
+.stats{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);margin-top:80px;position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:34px 20px;text-align:center;border-right:1px solid var(--line-d)}
+.stat:last-child{border-right:none}
+.stat h3{font-family:var(--disp);font-stretch:118%;font-weight:800;font-size:2.4rem;color:var(--gold)}
+.stat p{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-d);margin-top:4px}
+
+/* marquee */
+.marquee{background:var(--maroon);overflow:hidden;padding:16px 0;border-block:1px solid rgba(217,179,108,.3)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:mq 28s linear infinite}
+.marquee span{font-family:var(--disp);font-stretch:115%;font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:.85rem;color:var(--gold-2);padding:0 22px;white-space:nowrap}
+.marquee i{color:rgba(255,255,255,.5);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ SECTION HEAD ============ */
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.sec-no{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold)}
+.sec-line{width:52px;height:1px;background:var(--gold)}
+.sec-tag{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
+.on-dark .sec-tag{color:var(--muted-d)}
+h2.title{font-size:clamp(2.1rem,4.4vw,3.4rem);color:inherit}
+h2.title em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--maroon)}
+.on-dark h2.title em{color:var(--gold)}
+.sec-sub{max-width:640px;margin-top:16px;font-weight:300}
+
+/* ============ TENTANG ============ */
+.about{background:var(--cream);color:var(--text-c);padding:110px 0}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;margin-top:50px}
+.about-txt p{margin-bottom:18px;color:#41382c;font-weight:300}
+.about-txt p b{font-weight:600;color:var(--text-c)}
+.about-quote{border-left:3px solid var(--maroon);padding:6px 0 6px 22px;margin:26px 0;font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--maroon);line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chips li{border:1px solid var(--line-c);border-radius:50px;padding:8px 18px;font-size:.78rem;font-weight:600;letter-spacing:.06em;color:#4c4234;background:#fff;transition:.3s}
+.chips li:hover{background:var(--maroon);color:var(--gold-2);border-color:var(--maroon);transform:translateY(-2px)}
+.about-visual{position:relative}
+.about-visual .big{border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(28,23,18,.25)}
+.about-visual .big img{height:520px;width:100%;object-fit:cover}
+.about-visual .small{position:absolute;width:220px;right:-30px;bottom:-40px;border-radius:12px;overflow:hidden;border:6px solid var(--cream);box-shadow:0 20px 40px rgba(28,23,18,.3)}
+.exp-badge{position:absolute;top:-34px;left:-34px;width:110px;height:110px;border-radius:50%;background:var(--maroon);color:var(--gold-2);display:grid;place-items:center;text-align:center;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;line-height:1.5;box-shadow:0 16px 30px rgba(123,17,19,.4);padding:10px}
+.exp-badge b{font-family:var(--disp);font-stretch:115%;font-size:1.5rem;display:block;color:#fff}
+
+/* ============ FASILITAS ============ */
+.facilities{background:var(--ink);padding:110px 0}
+.fac-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:56px}
+.card{background:var(--ink-2);border:1px solid var(--line-d);border-radius:16px;overflow:hidden;transition:.45s;position:relative;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-10px);border-color:rgba(217,179,108,.5);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.card-img{height:210px;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:1s ease}
+.card:hover .card-img img{transform:scale(1.08)}
+.card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,13,18,.75),transparent 55%)}
+.card-no{position:absolute;top:14px;left:16px;z-index:2;font-family:var(--serif);font-style:italic;color:var(--gold-2);font-size:.95rem}
+.card-body{padding:24px 22px 26px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:1.05rem;color:#fff;letter-spacing:.03em}
+.card-body p{font-size:.86rem;color:var(--muted-d);font-weight:300;margin:12px 0 18px;flex:1}
+.card-meta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-d);padding-top:16px;font-size:.78rem}
+.card-meta .price{color:var(--gold);font-weight:700;letter-spacing:.05em}
+.card-meta a{color:var(--text-d);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;transition:.3s}
+.card-meta a:hover{color:var(--gold-2)}
+
+/* ============ HARGA ============ */
+.pricing{background:var(--cream);color:var(--text-c);padding:110px 0}
+.price-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;margin-top:56px;align-items:start}
+.rate-panel{background:#fff;border:1px solid var(--line-c);border-radius:18px;padding:38px 40px;box-shadow:0 20px 50px rgba(28,23,18,.08)}
+.rate-panel + .rate-panel{margin-top:26px}
+.rate-panel h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.15rem;color:var(--maroon);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rate-panel h3 span{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted-c);font-size:.9rem;text-transform:none}
+.rate-row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px dashed var(--line-c);font-size:.95rem}
+.rate-row:last-child{border-bottom:none}
+.rate-row .lbl{font-weight:600}
+.rate-row .dots{flex:1;border-bottom:2px dotted var(--line-c);transform:translateY(-4px)}
+.rate-row .val{font-family:var(--disp);font-stretch:110%;font-weight:800;color:var(--maroon)}
+.rate-note{margin-top:14px;font-size:.8rem;color:var(--muted-c);font-style:italic}
+.clinic-box{background:var(--maroon);color:#fff;border-radius:18px;padding:38px 40px;position:sticky;top:110px;box-shadow:0 30px 60px rgba(123,17,19,.35)}
+.clinic-box h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.3rem;color:var(--gold-2)}
+.clinic-box .price-tag{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:#fff;margin:8px 0 4px}
+.clinic-box .price-tag small{font-size:1rem;color:var(--gold-2)}
+.clinic-box ul{margin:20px 0 26px}
+.clinic-box li{padding:9px 0 9px 28px;position:relative;font-size:.9rem;font-weight:300;border-bottom:1px solid rgba(255,255,255,.12)}
+.clinic-box li::before{content:"✦";position:absolute;left:2px;color:var(--gold)}
+
+/* ============ CLINIC / MEMBERSHIP STRIP ============ */
+.member{background:var(--ink);padding:100px 0;overflow:hidden}
+.member-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+.member-img{border-radius:16px;overflow:hidden;position:relative}
+.member-img img{height:480px;width:100%;object-fit:cover}
+.member-img::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(217,179,108,.3);border-radius:16px}
+.member h2{font-size:clamp(1.9rem,3.6vw,2.9rem);color:#fff}
+.member p{color:var(--muted-d);font-weight:300;margin:20px 0 14px}
+.member .perks{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:26px 0 34px}
+.member .perks li{font-size:.88rem;color:var(--text-d);padding-left:24px;position:relative;font-weight:500}
+.member .perks li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
+
+/* ============ GALERI IG ============ */
+.gallery{background:var(--cream-2);color:var(--text-c);padding:110px 0}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px;align-items:start}
+.ig-wrap{border-radius:14px;overflow:hidden;box-shadow:0 16px 40px rgba(28,23,18,.14);background:#fff}
+.ig-fallback{display:block;text-align:center;padding:14px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon)}
+.ig-cta{margin-top:46px;text-align:center}
+
+/* ============ EVENT ============ */
+.events{background:var(--ink);padding:110px 0}
+.event-list{margin-top:56px;border-top:1px solid var(--line-d)}
+.event{display:grid;grid-template-columns:130px 1fr auto;gap:34px;align-items:center;padding:36px 10px;border-bottom:1px solid var(--line-d);transition:.35s}
+.event:hover{background:rgba(123,17,19,.14);padding-left:26px;padding-right:26px}
+.ev-date{text-align:center;border-right:1px solid var(--line-d);padding-right:26px}
+.ev-date b{font-family:var(--disp);font-stretch:115%;font-weight:900;font-size:2.6rem;color:var(--gold);display:block;line-height:1}
+.ev-date span{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-d)}
+.ev-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:1.25rem;color:#fff;margin-bottom:8px}
+.ev-body p{color:var(--muted-d);font-weight:300;font-size:.92rem;max-width:640px}
+.ev-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ev-tags li{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold-2);border:1px solid rgba(217,179,108,.4);padding:5px 12px;border-radius:50px}
+
+/* ============ TESTIMONI ============ */
+.testi{background:var(--cream);color:var(--text-c);padding:110px 0}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
+.t-card{background:#fff;border:1px solid var(--line-c);border-radius:16px;padding:36px 32px;position:relative;transition:.4s}
+.t-card:hover{transform:translateY(-8px);box-shadow:0 26px 50px rgba(28,23,18,.14)}
+.t-card .q{font-family:var(--serif);font-style:italic;font-size:3.4rem;color:var(--maroon);line-height:1;opacity:.35}
+.t-card p{font-family:var(--serif);font-style:italic;font-size:1.08rem;line-height:1.6;margin:10px 0 22px;color:#33291d}
+.t-card .stars{color:var(--gold);letter-spacing:4px;font-size:.9rem}
+.t-card .who{margin-top:14px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
+.t-card .who b{color:var(--maroon)}
+
+/* ============ LOKASI ============ */
+.location{background:var(--ink);padding:110px 0}
+.loc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;margin-top:56px;align-items:stretch}
+.loc-card{border:1px solid var(--line-d);border-radius:18px;padding:44px;background:var(--ink-2);display:flex;flex-direction:column;gap:26px}
+.loc-item h4{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.loc-item p{color:var(--text-d);font-weight:300;font-size:.98rem}
+.loc-item p b{font-weight:600}
+.loc-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto}
+.map-box{border-radius:18px;overflow:hidden;border:1px solid var(--line-d);min-height:420px}
+.map-box iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(25%) contrast(1.05)}
+
+/* ============ FOOTER ============ */
+footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)}
+.foot-word{font-family:var(--disp);font-stretch:120%;font-weight:900;text-transform:uppercase;font-size:clamp(3rem,10vw,8.4rem);line-height:.95;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(217,179,108,.35);letter-spacing:.02em;user-select:none}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;margin:64px 0 50px}
+.foot-grid h5{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.foot-grid p, .foot-grid a{color:var(--muted-d);font-weight:300;font-size:.9rem}
+.foot-grid ul li{margin-bottom:10px}
+.foot-grid ul a{transition:.3s}
+.foot-grid ul a:hover{color:var(--gold-2);padding-left:6px}
+.foot-bottom{border-top:1px solid var(--line-d);padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--muted-d)}
+.foot-bottom i{font-family:var(--serif);color:var(--gold)}
+
+/* ============ FLOATING WA ============ */
+.floating-wa{position:fixed;bottom:28px;right:28px;z-index:1500;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 12px 30px rgba(31,191,95,.4);transition:.3s}
+.floating-wa:hover{transform:translateY(-4px) scale(1.05)}
+.floating-wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.floating-wa svg{width:30px;height:30px;fill:#fff}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.65,.25,1),transform .9s cubic-bezier(.2,.65,.25,1)}
+.rv.on{opacity:1;transform:none}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .hero-grid{grid-template-columns:1fr;gap:70px}
+  .hero-visual{justify-self:center}
+  .price-grid,.member-grid,.loc-grid,.about-grid{grid-template-columns:1fr}
+  .clinic-box{position:static}
+  .ig-grid,.testi-grid{grid-template-columns:1fr 1fr}
+  .about-visual .small{right:0}
+}
+@media(max-width:760px){
+  nav ul{position:fixed;inset:0;background:rgba(7,8,12,.98);flex-direction:column;justify-content:center;gap:26px;transform:translateY(-100%);transition:.5s;z-index:-1}
+  nav.open ul{transform:none}
+  nav ul li a{font-size:1rem}
+  .burger{display:flex;z-index:2}
+  .nav-cta{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:none}
+  .stat{border-bottom:1px solid var(--line-d)}
+  .stat:nth-child(3),.stat:nth-child(4){border-bottom:none}
+  .cards,.ig-grid,.testi-grid{grid-template-columns:1fr}
+  .event{grid-template-columns:1fr;gap:16px}
+  .ev-date{border-right:none;text-align:left;display:flex;gap:10px;align-items:baseline}
+  .polaroid{left:-8px}
+  .spin-badge{right:-8px}
+  .foot-grid{grid-template-columns:1fr}
+  .frame img{height:420px}
+}
 </style>
 </head>
 <body>
-<div id="jsError"></div>
 
-<!-- LOGIN tetap dikomentari. Aktifkan lewat blok "LOGIN ACTIVATE" di JS bawah jika diperlukan. -->
+<!-- ================= HEADER ================= -->
+<header id="header">
+  <div class="wrap nav-bar">
+    <a href="#beranda" class="logo">
+      <div class="logo-mark">P</div>
+      <div class="logo-txt"><b>PANDAWA</b><span>Social Sport</span></div>
+    </a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#fasilitas">Fasilitas</a></li>
+        <li><a href="#harga">Harga</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#event">Event</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+      </ul>
+    </nav>
+    <a href="booking.html" class="btn btn-gold nav-cta">Reservasi</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
-<div class="app" id="app">
-<div class="sidebar-overlay" id="sbOverlay"></div>
-<aside class="sidebar" id="sidebar">
-  <div class="sb-logo"><div class="logo-mark">P</div><div class="sb-logo-txt"><b>PANDAWA</b><span>Admin Panel</span></div></div>
-  <div class="sb-section"><div class="lbl">Overview</div><div class="sb-menu">
-    <div class="sb-item active" data-page="dashboard"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></div>Dashboard</div>
-  </div></div>
-  <div class="sb-section"><div class="lbl">Manajemen</div><div class="sb-menu">
-    <div class="sb-item" data-page="bookings"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>Jadwal & Booking <span class="badge" id="pendBadge">0</span></div>
-    <div class="sb-item" data-page="payments"><div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>Pembayaran</div>
-    <div class="sb-item" data-page="members"><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>Membership</div>
-  </div></div>
-  <div class="sb-section"><div class="lbl">Konten</div><div class="sb-menu">
-    <div class="sb-item" data-page="pricing"><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>Harga & Tarif</div>
-    <div class="sb-item" data-page="gallery"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>Galeri Foto</div>
-    <div class="sb-item" data-page="facilities"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>Fasilitas</div>
-  </div></div>
-  <div class="sb-section"><div class="lbl">Analytics</div><div class="sb-menu">
-    <div class="sb-item" data-page="reports"><div class="ic"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>Laporan</div>
-  </div></div>
-  <div class="sb-section"><div class="lbl">Sistem</div><div class="sb-menu">
-    <div class="sb-item" data-page="settings"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m7 7l4.3 4.3M1 12h6m10 0h6M4.2 19.8l4.3-4.3m7-7l4.3-4.3"/></svg></div>Pengaturan</div>
-    <div class="sb-item" id="logoutBtn"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>Keluar</div>
-  </div></div>
-  <div class="sb-foot">© 2026 Pandawa Social Sport<br><span style="color:var(--gold-2);font-style:italic">Own The Stage.</span></div>
-</aside>
+<!-- ================= HERO ================= -->
+<section class="hero" id="beranda">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow rv">Jl. Basuki Rahmad No. 1 — Kota Madiun</p>
+        <h1 class="display rv">Own The<br><em>Stage.</em></h1>
+        <p class="hero-sub rv">The first integrated social sport space in Madiun. <b>Padel, minisoccer, badminton</b> & secangkir kopi dari <b>Moest Coffee</b> — satu kawasan untuk bermain, terhubung, dan jadi bagian dari sport lifestyle. <em class="serif-it">More than just a game.</em></p>
+        <div class="hero-cta rv">
+          <a href="booking.html" class="btn btn-gold">Reservasi Lapangan</a>
+          <a href="#fasilitas" class="btn btn-ghost">Jelajahi Fasilitas</a>
+        </div>
+        <div class="hero-meta rv">
+          <div><b>Open Daily</b>06.00 – 00.00 WIB</div>
+          <div><b>Book via</b>AYO App & Admin</div>
+          <div><b>IG</b>@pandawasocialsport</div>
+        </div>
+      </div>
 
-<main class="main">
-  <div class="topbar">
-    <button type="button" class="burger" id="burger"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-    <h1 id="pageTitle">Dashboard <em>Overview</em></h1>
-    <div class="topbar-actions">
-      <button type="button" class="tb-icon" title="Belum lunas hari ini"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot" id="notifDot"></span></button>
-      <a href="index.html" class="tb-icon" title="Lihat Website"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-      <div class="tb-user"><div class="av">A</div><div><div class="name">Admin</div><div class="role">Super Admin</div></div></div>
+      <div class="hero-visual rv">
+        <div class="frame">
+          <!-- Ganti dengan foto dari feed IG @pandawasocialsport bila diinginkan -->
+          <img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/2f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb08859.png" alt="Suasana social sport di Pandawa" loading="eager">
+        </div>
+        <figure class="polaroid">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" alt="Moest Coffee">
+          <figcaption>Moest Coffee ☕</figcaption>
+        </figure>
+        <div class="spin-badge">
+          <svg viewBox="0 0 120 120">
+            <defs><path id="cir" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text><textPath href="#cir">Pandawa Social Sport • Madiun • Own The Stage •</textPath></text>
+          </svg>
+          <span class="core">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats rv">
+      <div class="stats-grid">
+        <div class="stat"><h3 data-count="4.9" data-dec="1">0</h3><p>Rating Komunitas</p></div>
+        <div class="stat"><h3 data-count="18">0</h3><p>Jam Buka / Hari</p></div>
+        <div class="stat"><h3 data-count="3">0</h3><p>Cabang Olahraga</p></div>
+        <div class="stat"><h3 data-count="11">0</h3><p>Fasilitas Penunjang</p></div>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="content">
-
-    <!-- DASHBOARD -->
-    <div class="page active" id="page-dashboard">
-      <div class="page-head">
-        <div><h2>Dashboard <em>Overview</em></h2><p class="sub">Ringkasan aktivitas Pandawa Social Sport.</p></div>
-        <button type="button" class="btn btn-gold" data-act="addmanual">+ Booking Manual</button>
-      </div>
-      <div class="stats-grid">
-        <div class="card"><div class="card-head"><div class="lbl">Total Booking</div><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div></div><div class="card-val" id="stTotal">0</div><div class="card-foot"><span>Bulan ini</span><span class="chg up">↑ 12.4%</span></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Pendapatan</div><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div><div class="card-val">Rp<span id="stRevenue">0</span> <small>Jt</small></div><div class="card-foot"><span>Bulan ini (lunas)</span><span class="chg up">↑ 8.2%</span></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Booking Hari Ini</div><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="card-val" id="stToday">0</div><div class="card-foot"><span>Jadwal hari ini</span><span class="chg up" id="stTodayFree">—</span></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Member Aktif</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div><div class="card-val" id="stMembers">0</div><div class="card-foot"><span>Total member</span><span class="chg up">↑ 24 baru</span></div></div>
-      </div>
-      <div class="dash-grid">
-        <div class="chart-box"><div class="chart-head"><h3>Pendapatan Bulanan</h3></div><div class="chart-wrap"><canvas id="revChart"></canvas></div></div>
-        <div class="chart-box"><div class="chart-head"><h3>Distribusi Fasilitas</h3></div><div class="chart-wrap"><canvas id="distChart"></canvas></div></div>
-      </div>
-      <div class="recent-box">
-        <div class="recent-head"><h3>Booking Terbaru</h3><a href="#" data-act="go" data-id="bookings">Lihat Jadwal →</a></div>
-        <div id="recentList"></div>
-      </div>
-    </div>
-
-    <!-- JADWAL & BOOKING -->
-    <div class="page" id="page-bookings">
-      <div class="page-head">
-        <div><h2>Jadwal <em>& Booking</em></h2><p class="sub">List booking per hari, slot kosong/terisi, dan booking manual (Cash / QRIS).</p></div>
-        <button type="button" class="btn btn-gold" data-act="addmanual">+ Booking Manual</button>
-      </div>
-      <div class="datebar">
-        <div class="date-nav">
-          <button type="button" class="dn-btn" id="dPrev" title="Hari sebelumnya">‹</button>
-          <div class="date-display"><div class="d1" id="dateTitle">—</div><div class="d2" id="dateSub">—</div></div>
-          <button type="button" class="dn-btn" id="dNext" title="Hari berikutnya">›</button>
-        </div>
-        <div class="date-nav">
-          <input type="date" id="jumpDate" style="border:none;background:none;outline:none;font-family:var(--body);font-size:.84rem;font-weight:600;color:var(--ink)">
-          <button type="button" class="dn-btn" id="dToday" style="width:auto;padding:0 12px;font-size:.7rem;font-weight:800;letter-spacing:.1em">HARI INI</button>
-        </div>
-        <div class="sched-stats">
-          <div class="stat-chip"><span class="dot fill"></span><span id="statFilled">0 terisi</span></div>
-          <div class="stat-chip"><span class="dot free"></span><span id="statFree">0 kosong</span></div>
-        </div>
-      </div>
-      <div class="card sched">
-        <div class="sched-title">
-          <h3>Ketersediaan Lapangan</h3>
-          <div class="sched-legend">
-            <span><i style="background:var(--maroon-soft);border:1px solid var(--maroon)"></i> Terisi</span>
-            <span><i style="background:#f7fbf8;border:1px solid var(--ok)"></i> Kosong</span>
-          </div>
-        </div>
-        <div class="sched-scroll"><div class="sched-grid" id="schedGrid"></div></div>
-      </div>
-      <div class="toolbar">
-        <div class="search-box"><input type="text" id="bookSearch" placeholder="Cari nama / ID pada tanggal ini..."></div>
-        <div class="tb-filter">Status:<select id="bookStatus"><option value="all">Semua</option><option value="confirmed">Confirmed</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div>
-        <div class="spacer"></div>
-        <button type="button" class="btn btn-ghost btn-sm" data-act="export">⬇️ Export CSV</button>
-      </div>
-      <div class="table-wrap"><div class="tbl-scroll">
-        <table class="tbl">
-          <thead><tr><th>Jam</th><th>Fasilitas</th><th>Pemesan</th><th>Pemain</th><th>Metode</th><th>Total</th><th>Status</th><th style="text-align:right">Aksi</th></tr></thead>
-          <tbody id="bookTable"></tbody>
-        </table>
-      </div></div>
-    </div>
-
-    <!-- PAYMENTS -->
-    <div class="page" id="page-payments">
-      <div class="page-head"><div><h2>Riwayat <em>Pembayaran</em></h2><p class="sub">Transaksi Cash & QRIS yang diterima.</p></div></div>
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
-        <div class="card"><div class="card-head"><div class="lbl">Total Masuk (Lunas)</div></div><div class="card-val">Rp<span id="pyTotal">0</span> <small>Jt</small></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Lunas</div></div><div class="card-val" id="pyConfirmed">0</div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Belum Lunas</div></div><div class="card-val" id="pyPending">0</div></div>
-      </div>
-      <div class="table-wrap"><div class="tbl-scroll">
-        <table class="tbl"><thead><tr><th>Order ID</th><th>Pemesan</th><th>Metode</th><th>Tanggal Main</th><th>Total</th><th>Status Bayar</th><th style="text-align:right">Aksi</th></tr></thead><tbody id="payTable"></tbody></table>
-      </div></div>
-    </div>
-
-    <!-- MEMBERS -->
-    <div class="page" id="page-members">
-      <div class="page-head">
-        <div><h2>Program <em>Membership</em></h2><p class="sub">Kelola member Padelapan Club & tier membership.</p></div>
-        <button type="button" class="btn btn-gold" data-act="addmember">+ Tambah Member</button>
-      </div>
-      <div class="members-grid">
-        <div class="m-card gold"><div class="tier">🏆 Gold Tier</div><h4>Exclusive Members</h4><div class="count" id="goldCount">0</div><div class="sub">Akses VIP, diskon 20%, free drink</div><div class="bar"><div class="bar-fill" style="width:85%"></div></div></div>
-        <div class="m-card silver"><div class="tier">🥈 Silver Tier</div><h4>Active Members</h4><div class="count" id="silverCount">0</div><div class="sub">Diskon 10%, poin reward 2x</div><div class="bar"><div class="bar-fill" style="width:60%"></div></div></div>
-        <div class="m-card bronze"><div class="tier">🥉 Bronze Tier</div><h4>New Members</h4><div class="count" id="bronzeCount">0</div><div class="sub">Welcome kit, poin reward 1x</div><div class="bar"><div class="bar-fill" style="width:35%"></div></div></div>
-      </div>
-      <div class="table-wrap"><div class="tbl-scroll">
-        <table class="tbl"><thead><tr><th>Member ID</th><th>Nama</th><th>Tier</th><th>Bergabung</th><th>Total Jam</th><th>Poin</th><th style="text-align:right">Aksi</th></tr></thead><tbody id="memTable"></tbody></table>
-      </div></div>
-    </div>
-
-    <!-- PRICING -->
-    <div class="page" id="page-pricing">
-      <div class="page-head">
-        <div><h2>Harga <em>& Tarif</em></h2><p class="sub">Kelola harga sewa per fasilitas dan slot waktu.</p></div>
-        <button type="button" class="btn btn-gold" data-act="savepricing">💾 Simpan Perubahan</button>
-      </div>
-      <div class="pricing-grid" id="pricingGrid"></div>
-      <div class="card" style="margin-top:20px">
-        <div class="card-head"><div class="lbl">Tarif Tambahan</div></div>
-        <div class="form-grid">
-          <div class="form-row"><label>Sewa Raket (per unit / sesi)</label><input type="number" id="priceRacket"></div>
-          <div class="form-row"><label>Coaching Clinic (per pax)</label><input type="number" id="priceClinic"></div>
-          <div class="form-row"><label>Denda Late (per 30 menit)</label><input type="number" id="priceLate"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GALLERY -->
-    <div class="page" id="page-gallery">
-      <div class="page-head"><div><h2>Galeri <em>Foto</em></h2><p class="sub">Kelola foto yang tampil di halaman reservasi.</p></div></div>
-      <div class="upload-box" data-act="upload"><div class="ic">📤</div><h4>Upload Foto Baru</h4><p>Klik untuk memilih file (JPG/PNG, max 5MB).</p><input type="file" id="galUpload" accept="image/*" multiple style="display:none"></div>
-      <div class="toolbar"><div class="tb-filter">Filter:<select id="galFilter"><option value="all">Semua</option><option value="terracotta">Terracotta</option><option value="royalblue">Royal Blue</option><option value="minisoccer">Minisoccer</option><option value="badminton">Badminton</option><option value="general">Umum</option></select></div></div>
-      <div class="gal-grid" id="galGrid"></div>
-    </div>
-
-    <!-- FACILITIES -->
-    <div class="page" id="page-facilities">
-      <div class="page-head">
-        <div><h2>Manajemen <em>Fasilitas</em></h2><p class="sub">Tambah atau hapus fasilitas.</p></div>
-        <button type="button" class="btn btn-gold" data-act="addfac">+ Tambah Fasilitas</button>
-      </div>
-      <div class="table-wrap"><div class="tbl-scroll">
-        <table class="tbl"><thead><tr><th>ID</th><th>Nama Fasilitas</th><th>Tipe</th><th>Kapasitas</th><th>Status</th><th style="text-align:right">Aksi</th></tr></thead><tbody id="facTable"></tbody></table>
-      </div></div>
-    </div>
-
-    <!-- REPORTS -->
-    <div class="page" id="page-reports">
-      <div class="page-head">
-        <div><h2>Laporan <em>& Analitik</em></h2><p class="sub">Insight performa bisnis bulan ini.</p></div>
-        <button type="button" class="btn btn-gold" data-act="report">📊 Export Laporan</button>
-      </div>
-      <div class="stats-grid">
-        <div class="card"><div class="card-head"><div class="lbl">AOV (Rata-rata)</div></div><div class="card-val">Rp<span id="rpAov">0</span> <small>K</small></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Occupancy Rate</div></div><div class="card-val">68<small>%</small></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Repeat Customer</div></div><div class="card-val">42<small>%</small></div></div>
-        <div class="card"><div class="card-head"><div class="lbl">Rating</div></div><div class="card-val">4.9<small> / 5 ★</small></div></div>
-      </div>
-      <div class="report-grid">
-        <div class="kpi-card"><div style="font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px">Top Fasilitas</div><div class="kpi-val">Berdasarkan <small>booking</small></div><div class="rank-list" id="topFac"></div></div>
-        <div class="kpi-card"><div style="font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px">Jam Puncak</div><div class="kpi-val">Slot <small>paling ramai</small></div><div class="rank-list" id="topSlot"></div></div>
-      </div>
-      <div class="chart-box" style="margin-top:20px"><div class="chart-head"><h3>Tren Booking Mingguan</h3></div><div class="chart-wrap"><canvas id="trendChart"></canvas></div></div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="page" id="page-settings">
-      <div class="page-head">
-        <div><h2>Pengaturan <em>Venue</em></h2><p class="sub">Konfigurasi profil venue & jam operasional.</p></div>
-        <button type="button" class="btn btn-gold" data-act="savesettings">💾 Simpan</button>
-      </div>
-      <div class="card" style="margin-bottom:20px">
-        <div class="card-head"><div class="lbl">Profil Venue</div></div>
-        <div class="form-grid">
-          <div class="form-row"><label>Nama Venue</label><input type="text" id="setName"></div>
-          <div class="form-row"><label>Tagline</label><input type="text" id="setTag"></div>
-          <div class="form-row full"><label>Alamat</label><input type="text" id="setAddr"></div>
-          <div class="form-row"><label>No. WhatsApp Admin</label><input type="text" id="setWA"></div>
-          <div class="form-row"><label>Email</label><input type="email" id="setEmail"></div>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:20px">
-        <div class="card-head"><div class="lbl">Jam Operasional</div></div>
-        <div class="form-grid">
-          <div class="form-row"><label>Jam Buka</label><input type="time" id="setOpen"></div>
-          <div class="form-row"><label>Jam Tutup</label><input type="time" id="setClose"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head"><div class="lbl">Zona Berbahaya</div></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-          <button type="button" class="btn btn-ghost" data-act="reset">🔄 Reset Data Demo</button>
-          <button type="button" class="btn btn-err" data-act="clear">🗑️ Hapus Semua Data</button>
-        </div>
-      </div>
-    </div>
-
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Padel <i>✦</i></span><span>Minisoccer <i>✦</i></span><span>Badminton <i>✦</i></span><span>Cafe & Resto <i>✦</i></span><span>Community <i>✦</i></span><span>Own The Stage <i>✦</i></span>
+    <span>Padel <i>✦</i></span><span>Minisoccer <i>✦</i></span><span>Badminton <i>✦</i></span><span>Cafe & Resto <i>✦</i></span><span>Community <i>✦</i></span><span>Own The Stage <i>✦</i></span>
   </div>
-</main>
 </div>
 
-<!-- MODAL MANUAL -->
-<div class="modal" id="modalManual"><div class="modal-box">
-  <div class="modal-head"><h3>Booking <em>Manual</em></h3><button type="button" class="modal-close" data-act="close" data-id="manual">×</button></div>
-  <div class="modal-body">
-    <div class="pay-note">💵 Pembayaran hanya via <b>CASH</b> atau <b>QRIS</b> di lokasi — tanpa payment gateway.</div>
-    <div class="form-grid">
-      <div class="form-row"><label>Nama Pemesan <small>*</small></label><input type="text" id="mb-name" placeholder="Nama lengkap"></div>
-      <div class="form-row"><label>No. WhatsApp <small>*</small></label><input type="tel" id="mb-phone" placeholder="08xx-xxxx-xxxx"></div>
-      <div class="form-row"><label>Fasilitas <small>*</small></label><select id="mb-court"><option value="terracotta">Terracotta Padel Court</option><option value="royalblue">Royal Blue Padel Court</option><option value="minisoccer">Minisoccer Field</option><option value="badminton">Badminton Court</option></select></div>
-      <div class="form-row"><label>Tanggal Main <small>*</small></label><input type="date" id="mb-date"></div>
-      <div class="form-row"><label>Slot Waktu <small>*</small></label><select id="mb-slot"></select></div>
-      <div class="form-row"><label>Jumlah Pemain</label><select id="mb-players"><option>2</option><option selected>4</option><option>6</option><option>8</option><option>10</option><option>12</option></select></div>
-      <div class="form-row"><label>Sewa Raket</label><select id="mb-racket"><option value="0">Tidak</option><option value="15000">1 raket (+Rp15K)</option><option value="30000">2 raket (+Rp30K)</option><option value="60000">4 raket (+Rp60K)</option></select></div>
-      <div class="form-row"><label>Metode Pembayaran</label><select id="mb-method"><option value="Cash">💵 Cash</option><option value="QRIS">📱 QRIS</option></select></div>
-      <div class="form-row"><label>Status Pembayaran</label><select id="mb-pay"><option value="lunas">Lunas</option><option value="unpaid">Belum Lunas (bayar di lokasi)</option></select></div>
-      <div class="form-row full"><label>Catatan</label><textarea id="mb-note" rows="2" placeholder="Opsional"></textarea></div>
+<!-- ================= TENTANG ================= -->
+<section class="about" id="tentang">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">01</span><span class="sec-line"></span><span class="sec-tag">Tentang Pandawa</span></div>
+    <h2 class="title display rv">More Than <em>Just a Game.</em></h2>
+
+    <div class="about-grid">
+      <div class="about-txt rv">
+        <p><b>Pandawa Social Sport</b> adalah integrated social sport area pertama di Madiun yang menghadirkan pengalaman olahraga modern melalui fasilitas padel premium, minisoccer, badminton, dan ruang sosial yang dirancang untuk komunitas aktif.</p>
+        <p>Lebih dari sekadar tempat olahraga, Pandawa adalah destinasi untuk membangun koneksi, menikmati gaya hidup sehat, dan menjadi bagian dari tren sport lifestyle yang berkembang di Kota Madiun — sekaligus rumah pembinaan atlet padel menuju level nasional.</p>
+        <div class="about-quote">“It’s never just about the game. It’s about spending quality time with the people who matter most.”</div>
+        <p>Standar fasilitas tingkat tinggi, kebersihan terjaga (skor kebersihan <b>4.9/5</b>), dan layanan yang ramah — karena setiap kunjungan adalah pengalaman.</p>
+        <ul class="chips">
+          <li>☕ Cafe & Resto — Moest Coffee</li><li>🚿 Hot Shower</li><li>👕 Ruang Ganti</li><li>🕌 Musholla</li><li>🚗 Parkir Luas</li><li>🪑 Tribun Penonton</li><li>📶 Wi-Fi Gratis</li><li>🥤 Jual Minuman</li>
+        </ul>
+      </div>
+      <div class="about-visual rv">
+        <div class="exp-badge"><span><b>1st</b>Padel di Madiun</span></div>
+        <div class="big"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/1f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb06260.png" alt="Padel court premium Pandawa" loading="lazy"></div>
+        <div class="small"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=500&q=80" alt="Cafe area" loading="lazy"></div>
+      </div>
     </div>
   </div>
-  <div class="modal-foot">
-    <div class="manual-total">Total:<b id="mbTotal">Rp0</b></div>
-    <button type="button" class="btn btn-ghost" data-act="close" data-id="manual">Batal</button>
-    <button type="button" class="btn btn-gold" data-act="savemanual">💾 Simpan Booking</button>
+</section>
+
+<!-- ================= FASILITAS ================= -->
+<section class="facilities on-dark" id="fasilitas">
+  <div class="wrap">
+    <div class="fac-head">
+      <div>
+        <div class="sec-head rv"><span class="sec-no">02</span><span class="sec-line"></span><span class="sec-tag">Fasilitas</span></div>
+        <h2 class="title display rv">Choose <em>Your Court.</em></h2>
+      </div>
+      <a href="booking.html" class="btn btn-ghost rv">Cek Ketersediaan</a>
+    </div>
+
+    <div class="cards">
+      <article class="card rv">
+        <div class="card-img"><span class="card-no">No. 01</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb02146.png" alt="Terracotta Padel Court" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Terracotta Padel Court</h3>
+          <p>Court ikonik bernuansa hangat dengan kaca panoramic dan tribun penonton — “best padel venue in Madiun” versi komunitas.</p>
+          <div class="card-meta"><span class="price">Mulai 180K</span><a href="booking.html?court=terracotta">Reservasi →</a></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <div class="card-img"><span class="card-no">No. 02</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/0f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb07555.png" alt="Royal Blue Padel Court" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Royal Blue Padel Court</h3>
+          <p>Court biru royal standar turnamen — panggung resmi Madiun’s first padel tournament dan latihan atlet PBPI.</p>
+          <div class="card-meta"><span class="price">Mulai 180K</span><a href="booking.html?court=royalblue">Reservasi →</a></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <div class="card-img"><span class="card-no">No. 03</span><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80" alt="Minisoccer Field" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Minisoccer Field</h3>
+          <p>Lapangan untuk fun match, turnamen komunitas, hingga corporate event. Include 2 dus air mineral setiap sesi.</p>
+          <div class="card-meta"><span class="price">Mulai 250K</span><a href="booking.html?court=minisoccer">Reservasi →</a></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <div class="card-img"><span class="card-no">No. 04</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb06321.png" alt="Badminton Court" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Badminton Court</h3>
+          <p>Court indoor nyaman untuk rally santai maupun sparing serius — lengkap dengan pencahayaan premium.</p>
+          <div class="card-meta"><span class="price">via AYO</span><a href="booking.html?court=badminton">Reservasi →</a></div>
+        </div>
+      </article>
+    </div>
   </div>
-</div></div>
+</section>
 
-<!-- MODAL MEMBER -->
-<div class="modal" id="modalAddMember"><div class="modal-box">
-  <div class="modal-head"><h3>Tambah <em>Member Baru</em></h3><button type="button" class="modal-close" data-act="close" data-id="addMember">×</button></div>
-  <div class="modal-body"><div class="form-grid">
-    <div class="form-row"><label>Nama <small>*</small></label><input type="text" id="nm-name"></div>
-    <div class="form-row"><label>No. WhatsApp</label><input type="tel" id="nm-phone"></div>
-    <div class="form-row"><label>Email</label><input type="email" id="nm-email"></div>
-    <div class="form-row"><label>Tier</label><select id="nm-tier"><option value="gold">Gold</option><option value="silver" selected>Silver</option><option value="bronze">Bronze</option></select></div>
-  </div></div>
-  <div class="modal-foot"><button type="button" class="btn btn-ghost" data-act="close" data-id="addMember">Batal</button><button type="button" class="btn btn-gold" data-act="savemember">Tambah Member</button></div>
-</div></div>
+<!-- ================= HARGA ================= -->
+<section class="pricing" id="harga">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">03</span><span class="sec-line"></span><span class="sec-tag">Tarif & Jam Bermain</span></div>
+    <h2 class="title display rv">Simple Rates, <em>Premium Play.</em></h2>
 
-<!-- MODAL FASILITAS -->
-<div class="modal" id="modalAddFacility"><div class="modal-box">
-  <div class="modal-head"><h3>Tambah <em>Fasilitas</em></h3><button type="button" class="modal-close" data-act="close" data-id="addFacility">×</button></div>
-  <div class="modal-body"><div class="form-grid">
-    <div class="form-row"><label>Nama <small>*</small></label><input type="text" id="nf-name"></div>
-    <div class="form-row"><label>Tipe</label><select id="nf-type"><option value="padel">Padel</option><option value="minisoccer">Minisoccer</option><option value="badminton">Badminton</option><option value="other">Lainnya</option></select></div>
-    <div class="form-row"><label>Kapasitas</label><input type="number" id="nf-cap" value="12"></div>
-    <div class="form-row"><label>Harga Dasar (Rp)</label><input type="number" id="nf-price" value="250000"></div>
-  </div></div>
-  <div class="modal-foot"><button type="button" class="btn btn-ghost" data-act="close" data-id="addFacility">Batal</button><button type="button" class="btn btn-gold" data-act="savefac">Simpan</button></div>
-</div></div>
+    <div class="price-grid">
+      <div class="rv">
+        <div class="rate-panel">
+          <h3>Padel Court <span>per sesi • soft opening rate</span></h3>
+          <div class="rate-row"><span class="lbl">Weekdays • 06.00 – 10.00</span><span class="dots"></span><span class="val">Rp200K</span></div>
+          <div class="rate-row"><span class="lbl">Weekdays • 10.00 – 15.00</span><span class="dots"></span><span class="val">Rp180K</span></div>
+          <div class="rate-row"><span class="lbl">Weekdays • 15.00 – 00.00</span><span class="dots"></span><span class="val">Rp250K</span></div>
+          <div class="rate-row"><span class="lbl">Weekend</span><span class="dots"></span><span class="val">Bundling</span></div>
+          <p class="rate-note">* Reservasi melalui aplikasi AYO — tersedia opsi DP, reschedule, promo & voucher.</p>
+        </div>
+        <div class="rate-panel">
+          <h3>Minisoccer <span>per sesi • maks. 12 pax / lapangan</span></h3>
+          <div class="rate-row"><span class="lbl">Sesi reguler (include 2 dus air mineral)</span><span class="dots"></span><span class="val">Rp250K</span></div>
+          <div class="rate-row"><span class="lbl">Event / turnamen / corporate</span><span class="dots"></span><span class="val">Hubungi Admin</span></div>
+        </div>
+      </div>
 
-<!-- MODAL DETAIL -->
-<div class="modal" id="modalDetail"><div class="modal-box">
-  <div class="modal-head"><h3>Detail <em>Booking</em></h3><button type="button" class="modal-close" data-act="close" data-id="detail">×</button></div>
-  <div class="modal-body" id="detailBody"></div>
-  <div class="modal-foot" id="detailFoot"></div>
-</div></div>
+      <aside class="clinic-box rv" id="clinic">
+        <h3>Coaching Clinic</h3>
+        <div class="price-tag">Rp75K <small>/ pax</small></div>
+        <p style="font-weight:300;font-size:.9rem;opacity:.9">Your first padel experience starts here — dirancang khusus untuk pemain pemula.</p>
+        <ul>
+          <li>1 jam akses court</li>
+          <li>Pendampingan coach bersertifikat</li>
+          <li>Sewa raket</li>
+          <li>Bola padel</li>
+          <li>Dokumentasi fotografer</li>
+        </ul>
+        <a href="https://lynk.id/pandawasocialsport" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center">Daftar Clinic</a>
+      </aside>
+    </div>
+  </div>
+</section>
 
-<div class="toast" id="toast"><div class="ic">✓</div><div><p id="toastMsg">Berhasil</p><small id="toastSub"></small></div></div>
+<!-- ================= MEMBERSHIP ================= -->
+<section class="member on-dark">
+  <div class="wrap member-grid">
+    <div class="member-img rv"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/1f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb05322.png" alt="Padel action di Pandawa" loading="lazy"></div>
+    <div class="rv">
+      <div class="sec-head"><span class="sec-no">04</span><span class="sec-line"></span><span class="sec-tag">Membership & Rewards</span></div>
+      <h2 class="display">Play More,<br><em>Earn More.</em></h2>
+      <p>There’s more waiting behind every game. <b style="color:var(--text-d)">Pandawa Padel Membership</b> memberi nilai lebih setiap kali Anda melangkah ke court, bersama <b style="color:var(--text-d)">Padelapan Club</b> — pantau jam bermain Anda dan buka exclusive perks seiring perjalanan padel Anda.</p>
+      <ul class="perks">
+        <li>Exclusive member benefits</li>
+        <li>Track playing hours</li>
+        <li>Curated privileges</li>
+        <li>Community events access</li>
+      </ul>
+      <a href="https://wa.me/6281246813631" target="_blank" class="btn btn-gold">Tanya Membership</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERI INSTAGRAM ================= -->
+<section class="gallery" id="galeri">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">05</span><span class="sec-line"></span><span class="sec-tag">Dokumentasi</span></div>
+    <h2 class="title display rv">Straight From <em>Our Feed.</em></h2>
+    <p class="sec-sub rv" style="color:var(--muted-c)">Momen keseruan komunitas — diambil langsung dari postingan Instagram resmi <b>@pandawasocialsport</b>.</p>
+
+    <div class="ig-grid">
+      <div class="ig-wrap rv">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DYwbsKmlHPh/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote>
+        <a class="ig-fallback" href="https://www.instagram.com/p/DYwbsKmlHPh/" target="_blank">Lihat di Instagram ↗</a>
+      </div>
+      <div class="ig-wrap rv">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbasDUsT-0A/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote>
+        <a class="ig-fallback" href="https://www.instagram.com/p/DbasDUsT-0A/" target="_blank">Lihat di Instagram ↗</a>
+      </div>
+      <div class="ig-wrap rv">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZU1UNqk_Mk/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote>
+        <a class="ig-fallback" href="https://www.instagram.com/p/DZU1UNqk_Mk/" target="_blank">Lihat di Instagram ↗</a>
+      </div>
+    </div>
+
+    <div class="ig-cta rv">
+      <a href="https://www.instagram.com/pandawasocialsport/" target="_blank" class="btn btn-maroon">Follow @pandawasocialsport</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVENT ================= -->
+<section class="events on-dark" id="event">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">06</span><span class="sec-line"></span><span class="sec-tag">Event Terdekat</span></div>
+    <h2 class="title display rv">See You On <em>The Pitch.</em></h2>
+
+    <div class="event-list">
+      <div class="event rv">
+        <div class="ev-date"><b>15–17</b><span>Aug 2026</span></div>
+        <div class="ev-body">
+          <h3>Pandawa Merdeka Cup 2026</h3>
+          <p>Turnamen minisoccer antar komunitas se-Kota Madiun menyambut HUT RI ke-81, dengan total hadiah jutaan rupiah. Segera daftarkan tim Anda!</p>
+          <ul class="ev-tags"><li>Minisoccer</li><li>Turnamen</li><li>Komunitas</li></ul>
+        </div>
+        <a href="booking.html" class="btn btn-gold">Daftar Tim</a>
+      </div>
+
+      <div class="event rv">
+        <div class="ev-date"><b>31</b><span>Setiap Bulan</span></div>
+        <div class="ev-body">
+          <h3>Fun Minisoccer — Community Night</h3>
+          <p>Kolaborasi bersama komunitas Madiun: malam penuh koneksi dan kompetisi seru di lapangan. Edisi berikutnya segera diumumkan — follow IG kami.</p>
+          <ul class="ev-tags"><li>Fun Match</li><li>Networking</li></ul>
+        </div>
+        <a href="https://www.instagram.com/pandawasocialsport/" target="_blank" class="btn btn-ghost">Info IG</a>
+      </div>
+
+      <div class="event rv">
+        <div class="ev-date"><b>AM</b><span>Weekend</span></div>
+        <div class="ev-body">
+          <h3>Mindful Morning — Yoga × Padel</h3>
+          <p>Wellness collab bersama Moest Coffee & Aranya Flow: sesi yoga menenangkan dilanjutkan melangkah ke court, ditutup dengan kopi terbaik.</p>
+          <ul class="ev-tags"><li>Wellness</li><li>Yoga</li><li>Moest Coffee</li></ul>
+        </div>
+        <a href="https://wa.me/6281246813631" target="_blank" class="btn btn-ghost">Reservasi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONI ================= -->
+<section class="testi">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">07</span><span class="sec-line"></span><span class="sec-tag">Kata Komunitas</span></div>
+    <h2 class="title display rv">Loved By <em>The Community.</em></h2>
+
+    <div class="testi-grid">
+      <div class="t-card rv">
+        <div class="q">“</div>
+        <p>Best padel venueeeeeeeee in Madiyunnnn!</p>
+        <div class="stars">★★★★★</div>
+        <div class="who"><b>Fachrizal R.</b> — Terracotta Padel Court</div>
+      </div>
+      <div class="t-card rv">
+        <div class="q">“</div>
+        <p>Premium courts. Comfortable viewing areas. Great coffee.</p>
+        <div class="stars">★★★★★</div>
+        <div class="who"><b>Komunitas Padel</b> — via Instagram</div>
+      </div>
+      <div class="t-card rv">
+        <div class="q">“</div>
+        <p>Nice place… kereeen!</p>
+        <div class="stars">★★★★★</div>
+        <div class="who"><b>Aji W. & Fachrizal</b> — Minisoccer Field</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOKASI ================= -->
+<section class="location on-dark" id="lokasi">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="sec-no">08</span><span class="sec-line"></span><span class="sec-tag">Lokasi & Kontak</span></div>
+    <h2 class="title display rv">Find Us In <em>Madiun.</em></h2>
+
+    <div class="loc-grid">
+      <div class="loc-card rv">
+        <div class="loc-item">
+          <h4>Alamat</h4>
+          <p><b>Jl. Basuki Rahmad No. 1</b>, Tawangrejo, Kec. Kartoharjo, Kota Madiun, Jawa Timur</p>
+        </div>
+        <div class="loc-item">
+          <h4>Jam Operasional</h4>
+          <p>Open daily • <b>06.00 – 00.00 WIB</b></p>
+        </div>
+        <div class="loc-item">
+          <h4>Kontak</h4>
+          <p>WA <b>+62 812-4681-3631</b><br>Email pandawasocialsport@gmail.com</p>
+        </div>
+        <div class="loc-links">
+          <a href="https://wa.me/6281246813631" target="_blank" class="btn btn-gold">Chat Admin</a>
+          <a href="https://ayo.co.id/v/pandawa-social-sport" target="_blank" class="btn btn-ghost">Booking via AYO</a>
+        </div>
+      </div>
+      <div class="map-box rv">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.5422615468165!2d111.5348986!3d-7.6247072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bf0063f13615%3A0xc3f28cf69e3a6503!2sKota%20Madiun%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Pandawa Social Sport"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-word rv">Pandawa</div>
+    <div class="foot-grid">
+      <div>
+        <h5>Pandawa Social Sport</h5>
+        <p>The first integrated social sport space in Madiun. Padel, badminton, minisoccer & cafe — dibangun untuk komunitas aktif. <i class="serif-it">Own the stage.</i></p>
+      </div>
+      <div>
+        <h5>Jelajah</h5>
+        <ul>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#fasilitas">Fasilitas</a></li>
+          <li><a href="#harga">Harga</a></li>
+          <li><a href="#event">Event</a></li>
+          <li><a href="booking.html">Reservasi</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Terhubung</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/pandawasocialsport/" target="_blank">Instagram — @pandawasocialsport</a></li>
+          <li><a href="https://wa.me/6281246813631" target="_blank">WhatsApp Admin</a></li>
+          <li><a href="https://ayo.co.id/v/pandawa-social-sport" target="_blank">AYO Indonesia</a></li>
+          <li><a href="https://lynk.id/pandawasocialsport" target="_blank">lynk.id/pandawasocialsport</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pandawa Social Sport. Hak cipta dilindungi.</span>
+      <span><i>Own The Stage.</i> — Madiun, Jawa Timur</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/6281246813631" class="floating-wa" target="_blank" aria-label="Hubungi Admin WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.031 21.082h-.002c-1.621 0-3.208-.435-4.596-1.261l-5.111 1.34 1.365-4.984c-.905-1.428-1.382-3.08-1.382-4.781 0-4.922 4.004-8.927 8.927-8.927 2.387 0 4.632.93 6.318 2.618 1.687 1.688 2.617 3.932 2.617 6.32 0 4.922-4.005 8.925-8.926 8.925zm4.908-6.702c-.269-.135-1.593-.787-1.841-.877-.248-.09-.43-.135-.609.135-.179.27-.697.877-.855 1.057-.157.18-.315.203-.585.068-2.038-1.022-3.32-2.193-4.148-3.633-.11-.191.077-.184.342-.713.09-.18.045-.337-.023-.472-.068-.135-.609-1.469-.834-2.012-.22-.527-.442-.455-.608-.464-.158-.009-.338-.011-.518-.011-.18 0-.472.068-.72.338-.248.27-.945.923-.945 2.25 0 1.328.968 2.61 1.103 2.79.135.18 1.902 2.905 4.607 4.072 1.977.854 2.698.928 3.655.776.81-.128 2.518-1.028 2.87-2.02.353-.993.353-1.843.248-2.02-.105-.18-.383-.27-.653-.405z"/></svg>
+</a>
+
+<!-- Instagram embed (foto asli dari feed IG) -->
+<script async src="//www.instagram.com/embed.js"></script>
 
 <script>
-/* Banner error: jika ada masalah JS, penyebabnya tampil di atas layar */
-window.addEventListener('error', function(e){
-  var b=document.getElementById('jsError');
-  if(b){b.style.display='block';b.textContent='⚠ Error JavaScript: '+e.message+' (baris '+e.lineno+'). Buka file dengan Chrome/Edge terbaru & pastikan hasil copy-paste tidak mengubah tanda kutip.';}
-});
+// Header scrolled state
+const header = document.getElementById('header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40));
 
-var SK={BOOKINGS:'pss_bookings_v3',MEMBERS:'pss_members',PRICING:'pss_pricing',GALLERY:'pss_gallery',FACILITIES:'pss_facilities',SETTINGS:'pss_settings'};
-var COURT_NAMES={terracotta:'Terracotta Padel Court',royalblue:'Royal Blue Padel Court',minisoccer:'Minisoccer Field',badminton:'Badminton Court'};
-var AVATAR_COLORS=['#7b1113','#b3872e','#4d090b','#1d4ed8','#15803d','#a16207'];
+// Mobile menu
+const burger = document.getElementById('burger'), nav = document.getElementById('nav');
+burger.addEventListener('click', () => nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-function localISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function parseDate(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
-function todayStr(){return localISO(new Date())}
-function slotsForDate(dateStr){
-  var d=parseDate(dateStr),we=d.getDay()===0||d.getDay()===6;
-  return we?[
-    {key:'weekendMorning',label:'06.00 - 12.00',tag:'Pagi'},
-    {key:'weekendAfternoon',label:'12.00 - 18.00',tag:'Siang'},
-    {key:'weekendEvening',label:'18.00 - 00.00',tag:'Malam'}
-  ]:[
-    {key:'morning',label:'06.00 - 10.00',tag:'Pagi'},
-    {key:'noon',label:'10.00 - 15.00',tag:'Siang'},
-    {key:'evening',label:'15.00 - 00.00',tag:'Malam'}
-  ];
-}
+// Reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * .08 + 's'; io.observe(el); });
 
-function seedData(){
-  if(!localStorage.getItem(SK.PRICING))localStorage.setItem(SK.PRICING,JSON.stringify({
-    courts:{
-      terracotta:{morning:200000,noon:180000,evening:250000,weekendMorning:250000,weekendAfternoon:250000,weekendEvening:280000},
-      royalblue:{morning:200000,noon:180000,evening:250000,weekendMorning:250000,weekendAfternoon:250000,weekendEvening:280000},
-      minisoccer:{morning:250000,noon:250000,evening:250000,weekendMorning:250000,weekendAfternoon:250000,weekendEvening:250000},
-      badminton:{morning:200000,noon:180000,evening:250000,weekendMorning:250000,weekendAfternoon:250000,weekendEvening:280000}
-    },racket:15000,clinic:75000,late:25000}));
-  if(!localStorage.getItem(SK.GALLERY))localStorage.setItem(SK.GALLERY,JSON.stringify([
-    {id:1,court:'terracotta',title:'Terracotta Padel - Main Court',url:'https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb02146.png',date:'2026-07-20'},
-    {id:2,court:'royalblue',title:'Royal Blue - Tournament Ready',url:'https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/0f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb07555.png',date:'2026-07-22'},
-    {id:3,court:'minisoccer',title:'Minisoccer - Night Match',url:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80',date:'2026-07-25'},
-    {id:4,court:'badminton',title:'Badminton - Indoor Court',url:'https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb06321.png',date:'2026-07-28'},
-    {id:5,court:'general',title:'Moest Coffee - Cafe Area',url:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80',date:'2026-07-30'}]));
-  if(!localStorage.getItem(SK.FACILITIES))localStorage.setItem(SK.FACILITIES,JSON.stringify([
-    {id:'terracotta',name:'Terracotta Padel Court',type:'padel',capacity:4,status:'active',price:200000},
-    {id:'royalblue',name:'Royal Blue Padel Court',type:'padel',capacity:4,status:'active',price:200000},
-    {id:'minisoccer',name:'Minisoccer Field',type:'minisoccer',capacity:12,status:'active',price:250000},
-    {id:'badminton',name:'Badminton Court',type:'badminton',capacity:4,status:'active',price:200000}]));
-  if(!localStorage.getItem(SK.MEMBERS))localStorage.setItem(SK.MEMBERS,JSON.stringify([
-    {id:'PDM-0001',name:'Fachrizal Rafa Setya Putra',phone:'081234567890',email:'fach@example.com',tier:'gold',joined:'2026-06-20',hours:42,points:840},
-    {id:'PDM-0002',name:'Aji Wicaksono Budi',phone:'081298765432',email:'aji@example.com',tier:'gold',joined:'2026-06-22',hours:36,points:720},
-    {id:'PDM-0003',name:'Bagus Panuntun',phone:'081246813631',email:'bagus@example.com',tier:'gold',joined:'2026-06-15',hours:58,points:1160},
-    {id:'PDM-0004',name:'Leo Prasetyo',phone:'081211112222',email:'leo@example.com',tier:'silver',joined:'2026-07-05',hours:22,points:220},
-    {id:'PDM-0005',name:'Dewi Lestari',phone:'081222223333',email:'dewi@example.com',tier:'silver',joined:'2026-07-12',hours:18,points:180},
-    {id:'PDM-0006',name:'Reza Maulana',phone:'081233334444',email:'reza@example.com',tier:'silver',joined:'2026-07-18',hours:15,points:150},
-    {id:'PDM-0007',name:'Siti Nurhaliza',phone:'081244445555',email:'siti@example.com',tier:'bronze',joined:'2026-08-01',hours:8,points:40},
-    {id:'PDM-0008',name:'Andi Wijaya',phone:'081255556666',email:'andi@example.com',tier:'bronze',joined:'2026-08-02',hours:5,points:25}]));
-  if(!localStorage.getItem(SK.BOOKINGS)){
-    var P=get(SK.PRICING);
-    var names=['Fachrizal Rafa','Aji Wicaksono','Bagus Panuntun','Leo Prasetyo','Dewi Lestari','Reza Maulana','Siti Nurhaliza','Andi Wijaya','Rizky Pratama','Nanda Puspita'];
-    var courts=Object.keys(COURT_NAMES),methods=['Cash','QRIS'];
-    var used={},arr=[],seq=1;
-    function mk(dateObj){
-      var dateStr=localISO(dateObj),slots=slotsForDate(dateStr),court,slot,tries=0;
-      do{court=courts[Math.floor(Math.random()*courts.length)];slot=slots[Math.floor(Math.random()*slots.length)];tries++}
-      while(used[dateStr+court+slot.label]&&tries<15);
-      if(used[dateStr+court+slot.label])return null;
-      used[dateStr+court+slot.label]=1;
-      var past=dateStr<todayStr(),rack=Math.random()>.6?2:0,price=P.courts[court][slot.key];
-      return {id:'PSW-'+(26000000+seq++),court:court,courtName:COURT_NAMES[court],date:dateStr,slot:slot.label,slotKey:slot.key,
-        players:court==='minisoccer'?6+Math.floor(Math.random()*7):4,
-        name:names[Math.floor(Math.random()*names.length)],phone:'0812'+Math.floor(Math.random()*90000000+10000000),
-        email:'',equipment:rack?('Ya, '+rack+' raket'):'Tidak',equipFee:rack*15000,
-        method:methods[Math.floor(Math.random()*methods.length)],
-        payStatus:past?'lunas':(Math.random()>.4?'lunas':'unpaid'),
-        price:price,total:price+rack*15000,status:past?'completed':'confirmed',note:'',createdAt:new Date().toISOString()};
-    }
-    var today=new Date(),tom=new Date();tom.setDate(tom.getDate()+1);
-    for(var i=0;i<6;i++){var b=mk(today);if(b)arr.push(b)}
-    for(var i2=0;i2<3;i2++){var b2=mk(tom);if(b2)arr.push(b2)}
-    for(var i3=0;i3<14;i3++){var d3=new Date();d3.setDate(d3.getDate()-(1+Math.floor(Math.random()*28)));var b3=mk(d3);if(b3)arr.push(b3)}
-    for(var i4=0;i4<4;i4++){var d4=new Date();d4.setDate(d4.getDate()+2+Math.floor(Math.random()*6));var b4=mk(d4);if(b4)arr.push(b4)}
-    if(arr[5])arr[5].status='cancelled';
-    localStorage.setItem(SK.BOOKINGS,JSON.stringify(arr));
-  }
-  if(!localStorage.getItem(SK.SETTINGS))localStorage.setItem(SK.SETTINGS,JSON.stringify({
-    name:'Pandawa Social Sport',tag:'Own The Stage',addr:'Jl. Basuki Rahmad No. 1, Tawangrejo, Kota Madiun',
-    wa:'+62 812-4681-3631',email:'pandawasocialsport@gmail.com',open:'06:00',close:'00:00'}));
-}
-seedData();
-
-function $(id){return document.getElementById(id)}
-function get(k){return JSON.parse(localStorage.getItem(k)||'[]')}
-function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
-function fmt(n){return 'Rp'+(n||0).toLocaleString('id-ID')}
-function fmtJt(n){return (n/1000000).toFixed(1)}
-function initials(n){return n.split(' ').map(function(w){return w[0]}).slice(0,2).join('').toUpperCase()}
-function avatarColor(n){var s=0;for(var i=0;i<n.length;i++)s+=n.charCodeAt(i);return AVATAR_COLORS[Math.abs(s)%AVATAR_COLORS.length]}
-function toast(msg,sub,type){
-  $('toast').className='toast show '+(type||'');
-  $('toast').querySelector('.ic').textContent=type==='err'?'✗':type==='warn'?'⚠':'✓';
-  $('toastMsg').textContent=msg;$('toastSub').textContent=sub||'';
-  clearTimeout(window._tt);window._tt=setTimeout(function(){$('toast').classList.remove('show')},3200);
-}
-function openModal(id){$('modal'+id.charAt(0).toUpperCase()+id.slice(1)).classList.add('open')}
-function closeModal(id){$('modal'+id.charAt(0).toUpperCase()+id.slice(1)).classList.remove('open')}
-
-/* ===== DELEGASI SEMUA TOMBOL (anti tombol mati) ===== */
-document.addEventListener('click',function(e){
-  var t=e.target.closest('[data-act]');
-  if(!t)return;
-  var a=t.getAttribute('data-act'),id=t.getAttribute('data-id');
-  if(a==='go'){e.preventDefault();nav(id);return}
-  if(a==='close'){closeModal(id);return}
-  if(a==='addmanual'){openManual();return}
-  if(a==='manual'){openManual(t.getAttribute('data-court'),t.getAttribute('data-slot'));return}
-  if(a==='detail'){showDetail(id);return}
-  if(a==='paid'){togglePaid(id);return}
-  if(a==='complete'){setStatus(id,'completed');return}
-  if(a==='cancelb'){setStatus(id,'cancelled');return}
-  if(a==='delb'){deleteBooking(id);return}
-  if(a==='delm'){deleteMember(id);return}
-  if(a==='delf'){deleteFacility(id);return}
-  if(a==='delg'){deleteGallery(parseFloat(id));return}
-  if(a==='edit'){toast('Segera hadir','Fitur edit masih dalam pengembangan','warn');return}
-  if(a==='savemanual'){saveManual();return}
-  if(a==='savemember'){saveMember();return}
-  if(a==='savefac'){saveFacility();return}
-  if(a==='savepricing'){savePricing();return}
-  if(a==='savesettings'){saveSettings();return}
-  if(a==='export'){exportBookings();return}
-  if(a==='report'){exportReport();return}
-  if(a==='reset'){resetData();return}
-  if(a==='clear'){clearAllData();return}
-  if(a==='upload'){$('galUpload').click();return}
-});
-
-/* ===== NAV ===== */
-function nav(page){
-  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active')});
-  var si=document.querySelector('.sb-item[data-page="'+page+'"]');if(si)si.classList.add('active');
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
-  var pg=$('page-'+page);if(pg)pg.classList.add('active');
-  var titles={dashboard:'Dashboard <em>Overview</em>',bookings:'Jadwal <em>& Booking</em>',payments:'Riwayat <em>Pembayaran</em>',members:'Program <em>Membership</em>',pricing:'Harga <em>& Tarif</em>',gallery:'Galeri <em>Foto</em>',facilities:'Manajemen <em>Fasilitas</em>',reports:'Laporan <em>& Analitik</em>',settings:'Pengaturan <em>Venue</em>'};
-  $('pageTitle').innerHTML=titles[page]||page;
-  $('sidebar').classList.remove('open');$('sbOverlay').classList.remove('open');
-  window.scrollTo(0,0);
-  var fn={dashboard:renderDashboard,bookings:renderBookings,payments:renderPayments,members:renderMembers,pricing:renderPricing,gallery:renderGallery,facilities:renderFacilities,reports:renderReports,settings:renderSettings}[page];
-  if(fn)fn();
-}
-document.querySelectorAll('.sb-item[data-page]').forEach(function(i){i.addEventListener('click',function(){nav(i.getAttribute('data-page'))})});
-$('burger').addEventListener('click',function(){$('sidebar').classList.toggle('open');$('sbOverlay').classList.toggle('open')});
-$('sbOverlay').addEventListener('click',function(){$('sidebar').classList.remove('open');$('sbOverlay').classList.remove('open')});
-$('logoutBtn').addEventListener('click',function(){toast('Login dinonaktifkan','Mode demo tanpa login','warn')});
-
-/* ===== CHART (aman offline) ===== */
-var revChart=null,distChart=null,trendChart=null;
-var chartFont={family:'Plus Jakarta Sans',size:11},tickColor='#7a7264',gridColor='rgba(32,26,20,.07)';
-function chartReady(el){if(typeof Chart==='undefined'){el.parentElement.innerHTML='<div class="chart-fallback">📊 Grafik tidak dimuat (butuh internet untuk Chart.js)</div>';return false}return true}
-
-function renderDashboard(){
-  var books=get(SK.BOOKINGS),members=get(SK.MEMBERS);
-  var mNow=new Date().getMonth();
-  var monthBooks=books.filter(function(b){return parseDate(b.date).getMonth()===mNow&&b.status!=='cancelled'});
-  var revenue=monthBooks.filter(function(b){return b.payStatus==='lunas'}).reduce(function(s,b){return s+b.total},0);
-  var todayBooks=books.filter(function(b){return b.date===todayStr()&&b.status!=='cancelled'});
-  var freeToday=get(SK.FACILITIES).length*slotsForDate(todayStr()).length-todayBooks.length;
-  $('stTotal').textContent=monthBooks.length;
-  $('stRevenue').textContent=fmtJt(revenue);
-  $('stToday').textContent=todayBooks.length;
-  $('stTodayFree').textContent=freeToday+' slot kosong';
-  $('pendBadge').textContent=todayBooks.length;
-  var unpaidToday=books.filter(function(b){return b.date===todayStr()&&b.status!=='cancelled'&&b.payStatus==='unpaid'}).length;
-  $('notifDot').style.display=unpaidToday>0?'block':'none';
-  $('stMembers').textContent=members.length;
-
-  if(chartReady($('revChart'))){
-    var labels=[],data=[];
-    for(var i=5;i>=0;i--){var d=new Date();d.setMonth(d.getMonth()-i);(function(m,y){
-      labels.push(d.toLocaleDateString('id-ID',{month:'short'}));
-      data.push(+(books.filter(function(b){var bd=parseDate(b.date);return bd.getMonth()===m&&bd.getFullYear()===y&&b.status!=='cancelled'&&b.payStatus==='lunas'}).reduce(function(s,b){return s+b.total},0)/1000000).toFixed(2));
-    })(d.getMonth(),d.getFullYear());}
-    if(revChart)revChart.destroy();
-    revChart=new Chart($('revChart'),{type:'line',data:{labels:labels,datasets:[{label:'Pendapatan (Jt)',data:data,borderColor:'#7b1113',backgroundColor:'rgba(123,17,19,.08)',fill:true,tension:.4,pointBackgroundColor:'#b3872e',pointBorderColor:'#fff',pointRadius:4,borderWidth:2.5}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#201a14',titleColor:'#e9c87e',bodyColor:'#f6f5f2',padding:12,callbacks:{label:function(c){return 'Rp'+c.parsed.y.toFixed(2)+' Jt'}}}},
-      scales:{y:{ticks:{color:tickColor,font:chartFont,callback:function(v){return 'Rp'+v+'Jt'}},grid:{color:gridColor}},x:{ticks:{color:tickColor,font:chartFont},grid:{display:false}}}}});
-  }
-  if(chartReady($('distChart'))){
-    var dist={};
-    books.forEach(function(b){if(b.status!=='cancelled')dist[b.courtName]=(dist[b.courtName]||0)+1});
-    if(distChart)distChart.destroy();
-    distChart=new Chart($('distChart'),{type:'doughnut',data:{labels:Object.keys(dist),datasets:[{data:Object.values(dist),backgroundColor:['#7b1113','#b3872e','#4d090b','#1d4ed8'],borderColor:'#fff',borderWidth:3}]},
-      options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#201a14',padding:12,font:chartFont}}}}});
-  }
-  var recent=books.slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)}).slice(0,5);
-  $('recentList').innerHTML=recent.length?recent.map(function(b){return '<div class="rc-item" data-act="detail" data-id="'+b.id+'">'
-    +'<div class="rc-av" style="background:'+avatarColor(b.name)+'">'+initials(b.name)+'</div>'
-    +'<div class="rc-info"><div class="name">'+b.name+'</div><div class="meta">'+b.courtName+' • '+parseDate(b.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'})+' • '+b.slot+'</div></div>'
-    +'<div class="rc-price">'+fmt(b.total)+'</div>'
-    +'<span class="badge b-'+b.status+'">'+b.status+'</span></div>'}).join(''):'<div class="empty"><p>Belum ada booking</p></div>';
-}
-
-/* ===== JADWAL & BOOKING ===== */
-var viewDate=todayStr();
-function slotIndex(b){var i=slotsForDate(b.date).findIndex(function(s){return s.label===b.slot});return i<0?99:i}
-var EYE='<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-var CHK='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
-var X='<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-var TRASH='<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
-var PEN='<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
-var MONEY='<svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';
-
-function renderBookings(){
-  var facs=get(SK.FACILITIES),books=get(SK.BOOKINGS);
-  var d=parseDate(viewDate),isToday=viewDate===todayStr();
-  $('dateTitle').innerHTML=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+(isToday?'<span class="today-tag">Hari Ini</span>':'');
-  $('dateSub').textContent=isToday?'Jadwal operasional hari ini':'Jadwal operasional tanggal terpilih';
-  $('jumpDate').value=viewDate;
-  var slots=slotsForDate(viewDate);
-  var dayBooks=books.filter(function(b){return b.date===viewDate});
-  var active=dayBooks.filter(function(b){return b.status!=='cancelled'});
-  var html='<div class="sg-cell sg-head">Fasilitas</div>'+slots.map(function(s){return '<div class="sg-cell sg-head">'+s.label+'<br><span style="opacity:.65">'+s.tag+'</span></div>'}).join('');
-  var filled=0;
-  facs.forEach(function(f){
-    html+='<div class="sg-cell sg-court"><div class="name">'+f.name+'</div><div class="sub">'+f.type+' • maks '+f.capacity+' pax</div></div>';
-    slots.forEach(function(s){
-      var b=null;
-      for(var i=0;i<active.length;i++){if(active[i].court===f.id&&active[i].slot===s.label){b=active[i];break}}
-      if(b){filled++;
-        html+='<div class="sg-cell sg-filled" data-act="detail" data-id="'+b.id+'" title="Klik untuk detail">'
-          +'<div class="sf-name">'+b.name+'</div>'
-          +'<div class="sf-meta">'+b.players+' pax • '+b.method+'</div>'
-          +'<span class="badge '+(b.payStatus==='lunas'?'b-confirmed':'b-pending')+'" style="margin-top:6px;align-self:flex-start">'+(b.payStatus==='lunas'?'Lunas':'Belum Lunas')+'</span></div>';
-      }else{
-        html+='<div class="sg-cell sg-free"><span class="sf-free">✓ Kosong</span>'
-          +'<button type="button" class="sg-add" data-act="manual" data-court="'+f.id+'" data-slot="'+s.label+'">+ Booking</button></div>';
-      }
-    });
-  });
-  $('schedGrid').innerHTML=html;
-  $('statFilled').textContent=filled+' terisi';
-  $('statFree').textContent=(facs.length*slots.length-filled)+' kosong';
-
-  var q=($('bookSearch').value||'').toLowerCase(),st=$('bookStatus').value;
-  var list=dayBooks.filter(function(b){return (!q||b.name.toLowerCase().indexOf(q)>-1||b.id.toLowerCase().indexOf(q)>-1)&&(st==='all'||b.status===st)}).sort(function(a,b){return slotIndex(a)-slotIndex(b)});
-  $('bookTable').innerHTML=list.length?list.map(function(b){
-    var acts='<button type="button" class="act-btn" title="Detail" data-act="detail" data-id="'+b.id+'">'+EYE+'</button>';
-    if(b.payStatus==='unpaid'&&b.status!=='cancelled')acts+='<button type="button" class="act-btn success" title="Tandai Lunas" data-act="paid" data-id="'+b.id+'">'+MONEY+'</button>';
-    if(b.status==='confirmed')acts+='<button type="button" class="act-btn success" title="Tandai Selesai" data-act="complete" data-id="'+b.id+'">'+CHK+'</button><button type="button" class="act-btn danger" title="Batalkan" data-act="cancelb" data-id="'+b.id+'">'+X+'</button>';
-    acts+='<button type="button" class="act-btn danger" title="Hapus" data-act="delb" data-id="'+b.id+'">'+TRASH+'</button>';
-    return '<tr>'
-      +'<td><b style="font-family:var(--disp)">'+b.slot+'</b></td>'
-      +'<td>'+b.courtName+'</td>'
-      +'<td><div class="av-cell"><div class="av" style="background:'+avatarColor(b.name)+'">'+initials(b.name)+'</div><div><div class="name">'+b.name+'</div><div class="sub">'+b.phone+'</div></div></div></td>'
-      +'<td>'+b.players+' pax</td>'
-      +'<td>'+(b.method==='Cash'?'💵':'📱')+' '+b.method+'</td>'
-      +'<td class="price">'+fmt(b.total)+'</td>'
-      +'<td><span class="badge '+(b.status==='cancelled'?'b-cancelled':b.payStatus==='lunas'?'b-confirmed':'b-pending')+'">'+(b.status==='cancelled'?'Batal':b.payStatus==='lunas'?'Lunas':'Belum Lunas')+'</span></td>'
-      +'<td><div class="tbl-actions" style="justify-content:flex-end">'+acts+'</div></td></tr>';
-  }).join(''):'<tr><td colspan="8"><div class="empty"><div class="ic">📭</div><p>Tidak ada booking pada tanggal ini</p></div></td></tr>';
-}
-$('bookSearch').addEventListener('input',renderBookings);
-$('bookStatus').addEventListener('change',renderBookings);
-$('dPrev').addEventListener('click',function(){var d=parseDate(viewDate);d.setDate(d.getDate()-1);viewDate=localISO(d);renderBookings()});
-$('dNext').addEventListener('click',function(){var d=parseDate(viewDate);d.setDate(d.getDate()+1);viewDate=localISO(d);renderBookings()});
-$('dToday').addEventListener('click',function(){viewDate=todayStr();renderBookings()});
-$('jumpDate').addEventListener('change',function(e){if(e.target.value){viewDate=e.target.value;renderBookings()}});
-
-function setStatus(id,status){
-  var books=get(SK.BOOKINGS);
-  for(var i=0;i<books.length;i++){if(books[i].id===id){books[i].status=status;break}}
-  set(SK.BOOKINGS,books);renderAll();
-  toast(status==='cancelled'?'Booking dibatalkan':'Booking diselesaikan',id,status==='cancelled'?'warn':'');
-}
-function togglePaid(id){
-  var books=get(SK.BOOKINGS);
-  for(var i=0;i<books.length;i++){if(books[i].id===id){books[i].payStatus='lunas;break'=== ''?'lunas':'lunas';break}}
-  set(SK.BOOKINGS,books);renderAll();toast('Pembayaran lunas',id);
-}
-function deleteBooking(id){
-  if(!confirm('Yakin hapus booking '+id+'?'))return;
-  set(SK.BOOKINGS,get(SK.BOOKINGS).filter(function(b){return b.id!==id}));renderAll();toast('Booking dihapus',id,'warn');
-}
-
-/* ===== BOOKING MANUAL ===== */
-function openManual(court,slot){
-  $('mb-date').value=viewDate||todayStr();
-  refreshManualSlots();
-  if(court)$('mb-court').value=court;
-  if(slot)$('mb-slot').value=slot;
-  calcManualTotal();
-  openModal('manual');
-}
-function refreshManualSlots(){
-  var dateVal=$('mb-date').value||todayStr();
-  var slots=slotsForDate(dateVal),cur=$('mb-slot').value;
-  $('mb-slot').innerHTML=slots.map(function(s){return '<option value="'+s.label+'" data-key="'+s.key+'">'+s.label+' • '+s.tag+'</option>'}).join('');
-  if(slots.some(function(s){return s.label===cur}))$('mb-slot').value=cur;
-}
-function calcManualTotal(){
-  var p=get(SK.PRICING),court=$('mb-court').value;
-  var sel=$('mb-slot').selectedOptions[0];
-  var key=sel?sel.getAttribute('data-key'):'morning';
-  var rack=+$('mb-racket').value;
-  var total=((p.courts[court]||{})[key]||0)+rack;
-  $('mbTotal').textContent=fmt(total);
-  return total;
-}
-$('mb-court').addEventListener('change',calcManualTotal);
-$('mb-racket').addEventListener('change',calcManualTotal);
-$('mb-slot').addEventListener('change',calcManualTotal);
-$('mb-date').addEventListener('change',function(){refreshManualSlots();calcManualTotal()});
-
-function saveManual(){
-  var name=$('mb-name').value.trim(),phone=$('mb-phone').value.trim(),date=$('mb-date').value;
-  if(!name||!phone||!date){toast('Data tidak lengkap','Isi nama, WhatsApp & tanggal','err');return}
-  var sel=$('mb-slot').selectedOptions[0];
-  var slotLabel=sel.value,slotKey=sel.getAttribute('data-key');
-  var court=$('mb-court').value;
-  var clash=get(SK.BOOKINGS).find(function(x){return x.date===date&&x.court===court&&x.slot===slotLabel&&x.status!=='cancelled'});
-  if(clash){toast('Slot sudah terisi',COURT_NAMES[court]+' • '+slotLabel+' ('+clash.name+')','err');return}
-  var p=get(SK.PRICING),rack=+$('mb-racket').value,price=p.courts[court][slotKey];
-  var b={id:'PSW-'+Date.now().toString().slice(-8),court:court,courtName:COURT_NAMES[court],date:date,slot:slotLabel,slotKey:slotKey,
-    players:+$('mb-players').value,name:name,phone:phone,email:'',equipment:rack?('Ya, '+(rack/15000)+' raket'):'Tidak',equipFee:rack,
-    method:$('mb-method').value,payStatus:$('mb-pay').value,price:price,total:price+rack,
-    status:'confirmed',note:$('mb-note').value,createdAt:new Date().toISOString()};
-  var books=get(SK.BOOKINGS);books.unshift(b);set(SK.BOOKINGS,books);
-  closeModal('manual');
-  $('mb-name').value='';$('mb-phone').value='';$('mb-note').value='';
-  viewDate=date;renderAll();
-  toast('Booking manual dibuat',b.id+' • '+fmt(b.total)+' • '+b.method);
-}
-
-/* ===== DETAIL ===== */
-function showDetail(id){
-  var b=get(SK.BOOKINGS).find(function(x){return x.id===id});if(!b)return;
-  function L(t){return '<div style="font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px">'+t+'</div>'}
-  $('detailBody').innerHTML='<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)">'
-    +'<div class="av" style="background:'+avatarColor(b.name)+';width:48px;height:48px;border-radius:12px;font-size:1.05rem">'+initials(b.name)+'</div>'
-    +'<div><div style="font-weight:800;font-size:1rem">'+b.name+'</div><div style="font-size:.8rem;color:var(--muted)">'+b.phone+'</div></div>'
-    +'<span class="badge '+(b.status==='cancelled'?'b-cancelled':b.payStatus==='lunas'?'b-confirmed':'b-pending')+'" style="margin-left:auto">'+(b.status==='cancelled'?'Batal':b.payStatus==='lunas'?'Lunas':'Belum Lunas')+'</span></div>'
-    +'<div class="form-grid" style="gap:10px">'
-    +'<div>'+L('Order ID')+'<div style="font-family:var(--disp);font-weight:700;color:var(--maroon)">'+b.id+'</div></div>'
-    +'<div>'+L('Fasilitas')+'<div>'+b.courtName+'</div></div>'
-    +'<div>'+L('Tanggal')+'<div>'+parseDate(b.date).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'</div></div>'
-    +'<div>'+L('Jam')+'<div>'+b.slot+'</div></div>'
-    +'<div>'+L('Pemain')+'<div>'+b.players+' orang</div></div>'
-    +'<div>'+L('Raket')+'<div>'+(b.equipment||'-')+'</div></div>'
-    +'<div>'+L('Metode')+'<div>'+(b.method==='Cash'?'💵 Cash':'📱 QRIS')+'</div></div>'
-    +'<div>'+L('Total')+'<div style="font-family:var(--disp);font-weight:800;color:var(--maroon);font-size:1.05rem">'+fmt(b.total)+'</div></div>'
-    +'</div>'
-    +(b.note?'<div style="margin-top:16px;padding:13px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px">'+L('Catatan')+'<div style="font-size:.86rem">'+b.note+'</div></div>':'');
-  var foot='<button type="button" class="btn btn-ghost" data-act="close" data-id="detail">Tutup</button>';
-  if(b.payStatus==='unpaid'&&b.status!=='cancelled')foot+='<button type="button" class="btn btn-ok" data-act="paid" data-id="'+b.id+'" data-act2="">💰 Tandai Lunas</button>';
-  if(b.status==='confirmed')foot+='<button type="button" class="btn btn-gold" data-act="complete" data-id="'+b.id+'">Tandai Selesai</button>';
-  $('detailFoot').innerHTML=foot;
-  openModal('detail');
-}
-/* setelah aksi di detail, tutup modal */
-document.addEventListener('click',function(e){
-  var t=e.target.closest('[data-act="paid"],[data-act="complete"]');
-  if(t&&t.closest('#modalDetail'))closeModal('detail');
-});
-
-/* ===== PAYMENTS ===== */
-function renderPayments(){
-  var all=get(SK.BOOKINGS);
-  var books=all.filter(function(b){return b.status!=='cancelled'});
-  var lunas=books.filter(function(b){return b.payStatus==='lunas'});
-  $('pyTotal').textContent=fmtJt(lunas.reduce(function(s,b){return s+b.total},0));
-  $('pyConfirmed').textContent=lunas.length;
-  $('pyPending').textContent=books.filter(function(b){return b.payStatus==='unpaid'}).length;
-  $('payTable').innerHTML=all.map(function(b){
-    var act=(b.payStatus==='unpaid'&&b.status!=='cancelled')
-      ?'<button type="button" class="btn btn-ok btn-sm" data-act="paid" data-id="'+b.id+'">Tandai Lunas</button>'
-      :'<button type="button" class="act-btn" data-act="detail" data-id="'+b.id+'">'+EYE+'</button>';
-    return '<tr>'
-      +'<td><span style="font-family:var(--disp);font-weight:700;color:var(--maroon);font-size:.76rem">'+b.id+'</span></td>'
-      +'<td><div class="name">'+b.name+'</div></td>'
-      +'<td>'+(b.method==='Cash'?'💵 Cash':' QRIS')+'</td>'
-      +'<td>'+parseDate(b.date).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})+' • '+b.slot+'</td>'
-      +'<td class="price">'+fmt(b.total)+'</td>'
-      +'<td><span class="badge '+(b.status==='cancelled'?'b-cancelled':b.payStatus==='lunas'?'b-confirmed':'b-pending')+'">'+(b.status==='cancelled'?'Batal':b.payStatus==='lunas'?'Lunas':'Belum Lunas')+'</span></td>'
-      +'<td style="text-align:right">'+act+'</td></tr>';
-  }).join('');
-}
-
-/* ===== MEMBERS ===== */
-function renderMembers(){
-  var m=get(SK.MEMBERS);
-  $('goldCount').textContent=m.filter(function(x){return x.tier==='gold'}).length;
-  $('silverCount').textContent=m.filter(function(x){return x.tier==='silver'}).length;
-  $('bronzeCount').textContent=m.filter(function(x){return x.tier==='bronze'}).length;
-  $('memTable').innerHTML=m.map(function(x){
-    return '<tr>'
-      +'<td><span style="font-family:var(--disp);font-weight:700;color:var(--maroon);font-size:.76rem">'+x.id+'</span></td>'
-      +'<td><div class="av-cell"><div class="av" style="background:'+avatarColor(x.name)+'">'+initials(x.name)+'</div><div><div class="name">'+x.name+'</div><div class="sub">'+x.phone+'</div></div></div></td>'
-      +'<td><span class="badge b-'+x.tier+'">'+x.tier.toUpperCase()+'</span></td>'
-      +'<td>'+parseDate(x.joined).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})+'</td>'
-      +'<td>'+x.hours+' jam</td>'
-      +'<td style="font-family:var(--disp);font-weight:700;color:var(--gold-2)">'+x.points+'</td>'
-      +'<td><div class="tbl-actions" style="justify-content:flex-end">'
-      +'<button type="button" class="act-btn" title="Edit" data-act="edit">'+PEN+'</button>'
-      +'<button type="button" class="act-btn danger" title="Hapus" data-act="delm" data-id="'+x.id+'">'+TRASH+'</button>'
-      +'</div></td></tr>';
-  }).join('');
-}
-function saveMember(){
-  var name=$('nm-name').value.trim();if(!name){toast('Nama wajib diisi','','err');return}
-  var m=get(SK.MEMBERS);var id='PDM-'+String(m.length+1).padStart(4,'0');
-  m.push({id:id,name:name,phone:$('nm-phone').value,email:$('nm-email').value,tier:$('nm-tier').value,joined:todayStr(),hours:0,points:0});
-  set(SK.MEMBERS,m);closeModal('addMember');
-  $('nm-name').value='';$('nm-phone').value='';$('nm-email').value='';
-  renderMembers();toast('Member ditambahkan',id);
-}
-function deleteMember(id){if(!confirm('Hapus member '+id+'?'))return;set(SK.MEMBERS,get(SK.MEMBERS).filter(function(x){return x.id!==id}));renderMembers();toast('Member dihapus',id,'warn')}
-
-/* ===== PRICING ===== */
-function renderPricing(){
-  var p=get(SK.PRICING);
-  $('priceRacket').value=p.racket;$('priceClinic').value=p.clinic;$('priceLate').value=p.late;
-  $('pricingGrid').innerHTML=Object.keys(p.courts).map(function(k){var c=p.courts[k];
-    return '<div class="price-card"><div class="price-card-head"><h3>'+COURT_NAMES[k]+'</h3></div><div class="price-card-body">'
-      +'<div class="sec-lbl">Weekday</div>'
-      +'<div class="price-row"><span class="lbl">06.00 - 10.00 (Pagi)</span><input type="number" data-court="'+k+'" data-key="morning" value="'+c.morning+'"></div>'
-      +'<div class="price-row"><span class="lbl">10.00 - 15.00 (Siang)</span><input type="number" data-court="'+k+'" data-key="noon" value="'+c.noon+'"></div>'
-      +'<div class="price-row"><span class="lbl">15.00 - 00.00 (Malam)</span><input type="number" data-court="'+k+'" data-key="evening" value="'+c.evening+'"></div>'
-      +'<div class="sec-lbl">Weekend</div>'
-      +'<div class="price-row"><span class="lbl">06.00 - 12.00 (Pagi)</span><input type="number" data-court="'+k+'" data-key="weekendMorning" value="'+c.weekendMorning+'"></div>'
-      +'<div class="price-row"><span class="lbl">12.00 - 18.00 (Siang)</span><input type="number" data-court="'+k+'" data-key="weekendAfternoon" value="'+c.weekendAfternoon+'"></div>'
-      +'<div class="price-row"><span class="lbl">18.00 - 00.00 (Malam)</span><input type="number" data-court="'+k+'" data-key="weekendEvening" value="'+c.weekendEvening+'"></div>'
-      +'</div></div>'}).join('');
-}
-function savePricing(){
-  var p=get(SK.PRICING);
-  document.querySelectorAll('#pricingGrid input').forEach(function(i){p.courts[i.getAttribute('data-court')][i.getAttribute('data-key')]=+i.value});
-  p.racket=+$('priceRacket').value;p.clinic=+$('priceClinic').value;p.late=+$('priceLate').value;
-  set(SK.PRICING,p);toast('Harga diperbarui','Perubahan tersimpan');
-}
-
-/* ===== GALLERY ===== */
-function renderGallery(){
-  var f=$('galFilter').value;
-  var list=f==='all'?get(SK.GALLERY):get(SK.GALLERY).filter(function(g){return g.court===f});
-  $('galGrid').innerHTML=list.length?list.map(function(g){
-    return '<div class="gal-item"><div class="gal-img"><img src="'+g.url+'" alt="'+g.title+'" onerror="this.src=\'https://placehold.co/400x300/f6f5f2/7b1113?text=No+Image\'">'
-      +'<span class="tag">'+(g.court==='general'?'Umum':(COURT_NAMES[g.court]||g.court).split(' ')[0])+'</span></div>'
-      +'<div class="gal-body"><h4>'+g.title+'</h4><div class="meta">'+g.date+'</div></div>'
-      +'<div class="gal-act"><button type="button" class="gal-btn" title="Hapus" data-act="delg" data-id="'+g.id+'"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></div>';
-  }).join(''):'<div class="empty" style="grid-column:1/-1"><div class="ic">🖼️</div><p>Belum ada foto</p></div>';
-}
-$('galFilter').addEventListener('change',renderGallery);
-$('galUpload').addEventListener('change',function(e){
-  var files=e.target.files;if(!files.length)return;
-  var gal=get(SK.GALLERY);var court=$('galFilter').value==='all'?'general':$('galFilter').value;
-  var pending=files.length;
-  Array.prototype.forEach.call(files,function(f){
-    var r=new FileReader();
-    r.onload=function(ev){gal.unshift({id:Date.now()+Math.random(),court:court,title:f.name.replace(/\.[^/.]+$/,''),url:ev.target.result,date:todayStr()});
-      if(--pending===0){set(SK.GALLERY,gal);renderGallery();toast('Foto diupload',files.length+' file')}};
-    r.readAsDataURL(f);
-  });
-  e.target.value='';
-});
-function deleteGallery(id){if(!confirm('Hapus foto ini?'))return;set(SK.GALLERY,get(SK.GALLERY).filter(function(g){return g.id!==id}));renderGallery();toast('Foto dihapus','','warn')}
-
-/* ===== FACILITIES ===== */
-function renderFacilities(){
-  $('facTable').innerHTML=get(SK.FACILITIES).map(function(x){
-    return '<tr>'
-      +'<td><span style="font-family:var(--disp);font-weight:700;color:var(--maroon)">'+x.id+'</span></td>'
-      +'<td><div class="name">'+x.name+'</div></td>'
-      +'<td><span class="badge b-confirmed">'+x.type+'</span></td>'
-      +'<td>'+x.capacity+' pax</td>'
-      +'<td><span class="badge '+(x.status==='active'?'b-confirmed':'b-cancelled')+'">'+x.status+'</span></td>'
-      +'<td><div class="tbl-actions" style="justify-content:flex-end">'
-      +'<button type="button" class="act-btn" title="Edit" data-act="edit">'+PEN+'</button>'
-      +'<button type="button" class="act-btn danger" title="Hapus" data-act="delf" data-id="'+x.id+'">'+TRASH+'</button>'
-      +'</div></td></tr>';
-  }).join('');
-}
-function saveFacility(){
-  var name=$('nf-name').value.trim();if(!name){toast('Nama wajib diisi','','err');return}
-  var f=get(SK.FACILITIES);
-  f.push({id:name.toLowerCase().replace(/[^a-z]/g,'').slice(0,12),name:name,type:$('nf-type').value,capacity:+$('nf-cap').value,status:'active',price:+$('nf-price').value});
-  set(SK.FACILITIES,f);closeModal('addFacility');$('nf-name').value='';
-  renderFacilities();toast('Fasilitas ditambahkan',name);
-}
-function deleteFacility(id){if(!confirm('Hapus fasilitas ini?'))return;set(SK.FACILITIES,get(SK.FACILITIES).filter(function(x){return x.id!==id}));renderFacilities();toast('Fasilitas dihapus',id,'warn')}
-
-/* ===== REPORTS ===== */
-function renderReports(){
-  var books=get(SK.BOOKINGS).filter(function(b){return b.status!=='cancelled'});
-  var total=books.reduce(function(s,b){return s+b.total},0);
-  $('rpAov').textContent=books.length?Math.round(total/books.length/1000):0;
-  var fc={};books.forEach(function(b){fc[b.courtName]=(fc[b.courtName]||0)+1});
-  $('topFac').innerHTML=Object.entries(fc).sort(function(a,b){return b[1]-a[1]}).slice(0,5).map(function(e,i){return '<div class="rank-item"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+e[0]+'</div><div class="rank-val">'+e[1]+' booking</div></div>'}).join('')||'<div class="empty">Belum ada data</div>';
-  var sc={};books.forEach(function(b){sc[b.slot]=(sc[b.slot]||0)+1});
-  $('topSlot').innerHTML=Object.entries(sc).sort(function(a,b){return b[1]-a[1]}).slice(0,5).map(function(e,i){return '<div class="rank-item"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+e[0]+'</div><div class="rank-val">'+e[1]+' sesi</div></div>'}).join('')||'<div class="empty">Belum ada data</div>';
-  if(chartReady($('trendChart'))){
-    var labels=[],data=[];
-    for(var i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);labels.push(d.toLocaleDateString('id-ID',{weekday:'short'}));data.push(books.filter(function(b){return parseDate(b.date).toDateString()===d.toDateString()}).length)}
-    if(trendChart)trendChart.destroy();
-    trendChart=new Chart($('trendChart'),{type:'bar',data:{labels:labels,datasets:[{label:'Booking',data:data,backgroundColor:'#7b1113',hoverBackgroundColor:'#b3872e',borderRadius:8,borderSkipped:false}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:tickColor,font:chartFont},grid:{color:gridColor}},x:{ticks:{color:tickColor,font:chartFont},grid:{display:false}}}}});
-  }
-}
-
-/* ===== SETTINGS & EXPORT ===== */
-function renderSettings(){
-  var s=get(SK.SETTINGS);
-  $('setName').value=s.name;$('setTag').value=s.tag;$('setAddr').value=s.addr;
-  $('setWA').value=s.wa;$('setEmail').value=s.email;$('setOpen').value=s.open;$('setClose').value=s.close;
-}
-function saveSettings(){
-  set(SK.SETTINGS,{name:$('setName').value,tag:$('setTag').value,addr:$('setAddr').value,wa:$('setWA').value,email:$('setEmail').value,open:$('setOpen').value,close:$('setClose').value});
-  toast('Pengaturan disimpan');
-}
-function exportBookings(){
-  var csv=[['ID','Nama','Fasilitas','Tanggal','Jam','Pemain','Metode','Status Bayar','Total','Status']].concat(get(SK.BOOKINGS).map(function(b){return [b.id,b.name,b.courtName,b.date,b.slot,b.players,b.method,b.payStatus,b.total,b.status]}))
-    .map(function(r){return r.map(function(c){return '"'+c+'"'}).join(',')}).join('\n');
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download='booking-pandawa-'+todayStr()+'.csv';a.click();
-  toast('CSV diexport',get(SK.BOOKINGS).length+' baris');
-}
-function exportReport(){toast('Laporan diproses','File akan terunduh');setTimeout(exportBookings,800)}
-function resetData(){if(!confirm('Reset semua data ke contoh awal?'))return;Object.keys(SK).forEach(function(k){localStorage.removeItem(SK[k])});seedData();viewDate=todayStr();renderAll();toast('Data direset')}
-function clearAllData(){if(!confirm('HAPUS SEMUA DATA?'))return;Object.keys(SK).forEach(function(k){localStorage.removeItem(SK[k])});seedData();viewDate=todayStr();renderAll();toast('Semua data dihapus','','warn')}
-
-function renderAll(){renderDashboard();renderBookings();renderPayments();renderMembers();renderPricing();renderGallery();renderFacilities();renderReports();renderSettings()}
-renderAll();
+// Count-up stats
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0);
+  const t0 = performance.now(), dur = 1600;
+  (function tick(t){ const p = Math.min((t - t0) / dur, 1), v = end * (1 - Math.pow(1 - p, 3));
+    el.textContent = v.toFixed(dec); if (p < 1) requestAnimationFrame(tick); })(t0);
+  cio.unobserve(el);
+}), { threshold: .6 });
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 </script>
 </body>
 </html>

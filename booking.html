@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservasi Lapangan — Pandawa Social Sport Madiun</title>
+<meta name="description" content="Booking lapangan Padel, Minisoccer, Badminton di Pandawa Social Sport Madiun. Reservasi online, pembayaran mudah, konfirmasi instan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237b1113'/%3E%3Ctext x='32' y='44' font-family='Georgia' font-size='34' font-weight='bold' fill='%23d9b36c' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0b0d12;--ink-2:#12151c;--ink-3:#181c26;
+  --maroon:#7b1113;--maroon-deep:#4d090b;--maroon-soft:rgba(123,17,19,.12);
+  --gold:#d9b36c;--gold-2:#ecd7a7;--gold-soft:rgba(217,179,108,.12);
+  --cream:#f4eee2;--cream-2:#ece2cf;
+  --text-d:#e9e6df;--muted-d:#98a0ae;
+  --text-c:#1c1712;--muted-c:#6f6555;
+  --line-d:rgba(255,255,255,.09);--line-c:rgba(28,23,18,.14);
+  --ok:#12a150;--ok-soft:rgba(18,161,80,.12);
+  --warn:#c98b1e;--err:#c8443a;
+  --disp:'Archivo',sans-serif;--serif:'Fraunces',serif;--body:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ink);color:var(--text-d);line-height:1.7;overflow-x:hidden}
+img{display:block;max-width:100%}a{text-decoration:none;color:inherit}ul{list-style:none}
+::selection{background:var(--gold);color:var(--ink)}
+
+body::after{content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.wrap{width:min(1180px,92%);margin:0 auto}
+.display{font-family:var(--disp);font-stretch:118%;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02}
+.serif-it{font-family:var(--serif);font-style:italic;font-weight:400}
+
+/* ===== HEADER ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.4s;padding:18px 0;background:rgba(11,13,18,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:42px;height:42px;border-radius:10px;background:var(--maroon);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:900;color:var(--gold);font-size:1.25rem;box-shadow:inset 0 0 0 1px rgba(217,179,108,.35)}
+.logo-txt{line-height:1.1}
+.logo-txt b{font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.06em;font-size:1.02rem;color:#fff;display:block}
+.logo-txt span{font-size:.62rem;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);font-weight:600;padding:10px 18px;border:1px solid var(--line-d);border-radius:50px;transition:.3s}
+.back:hover{color:var(--gold-2);border-color:var(--gold)}
+
+/* ===== HERO ===== */
+.page-hero{padding:150px 0 60px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(700px 400px at 85% -20%, rgba(123,17,19,.55), transparent 60%),
+    radial-gradient(600px 400px at -10% 100%, rgba(123,17,19,.35), transparent 60%),
+    var(--ink);}
+.page-hero::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='560' viewBox='0 0 900 560'%3E%3Cg fill='none' stroke='%23d9b36c' stroke-opacity='.06' stroke-width='2'%3E%3Crect x='20' y='20' width='860' height='520' rx='6'/%3E%3Cline x1='450' y1='20' x2='450' y2='540'/%3E%3Ccircle cx='450' cy='280' r='95'/%3E%3C/g%3E%3C/svg%3E") center/900px auto no-repeat;}
+.breadcrumb{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:22px}
+.breadcrumb a{color:var(--muted-d);transition:.3s}
+.breadcrumb a:hover{color:var(--gold-2)}
+.breadcrumb i{font-style:normal;opacity:.6}
+.page-hero h1{font-size:clamp(2.3rem,5.6vw,4.4rem);color:#fff;max-width:780px}
+.page-hero h1 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold);letter-spacing:0}
+.page-hero p{max-width:640px;color:var(--muted-d);font-weight:300;margin-top:18px;font-size:1rem}
+
+/* ===== PROGRESS ===== */
+.progress{background:var(--ink-2);border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);padding:22px 0;position:sticky;top:74px;z-index:50}
+.progress-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.p-step{display:flex;align-items:center;gap:12px;font-size:.75rem;color:var(--muted-d);letter-spacing:.08em;text-transform:uppercase;font-weight:600;position:relative}
+.p-step::after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:1px;background:var(--line-d)}
+.p-step:last-child::after{display:none}
+.p-dot{width:28px;height:28px;border-radius:50%;border:1px solid var(--line-d);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:800;color:var(--muted-d);font-size:.72rem;transition:.4s;flex-shrink:0}
+.p-step.active .p-dot{background:var(--gold);color:var(--ink);border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,179,108,.18)}
+.p-step.active .p-label{color:var(--text-d)}
+.p-step.done .p-dot{background:var(--maroon);color:var(--gold);border-color:var(--maroon)}
+.p-step.done .p-dot::before{content:"✓"}
+.p-step.done .p-dot span{display:none}
+.p-label{display:block}
+
+/* ===== MAIN LAYOUT ===== */
+.main{padding:50px 0 90px}
+.stage{display:none;animation:fadeUp .5s cubic-bezier(.2,.65,.25,1)}
+.stage.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.stage-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:34px;flex-wrap:wrap}
+.stage-head .sec-head{margin-bottom:14px}
+.sec-head{display:flex;align-items:center;gap:12px}
+.sec-no{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold)}
+.sec-line{width:44px;height:1px;background:var(--gold)}
+.sec-tag{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--muted-d)}
+h2.stage-title{font-size:clamp(1.7rem,3.6vw,2.6rem);color:#fff;max-width:640px}
+h2.stage-title em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold);letter-spacing:0}
+.stage-sub{color:var(--muted-d);font-weight:300;margin-top:10px;font-size:.92rem;max-width:640px}
+
+.layout-2col{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+
+/* ===== STAGE 1: COURTS ===== */
+.courts{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.court{position:relative;cursor:pointer;border:1px solid var(--line-d);border-radius:18px;overflow:hidden;background:var(--ink-2);transition:.4s;display:flex;flex-direction:column}
+.court:hover{border-color:rgba(217,179,108,.5);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.court.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,179,108,.18), 0 24px 48px rgba(0,0,0,.5)}
+.court.selected::after{content:"✓";position:absolute;top:16px;right:16px;width:34px;height:34px;background:var(--gold);color:var(--ink);border-radius:50%;display:grid;place-items:center;font-weight:900;z-index:3;font-size:1.1rem}
+.court-img{height:180px;overflow:hidden;position:relative}
+.court-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,13,18,.85),transparent 55%)}
+.court-img img{width:100%;height:100%;object-fit:cover;transition:1s}
+.court:hover .court-img img{transform:scale(1.06)}
+.court-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.court-body h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-size:1.05rem;color:#fff;letter-spacing:.03em}
+.court-body .desc{font-size:.86rem;color:var(--muted-d);margin:10px 0 16px;font-weight:300;flex:1}
+.court-price{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--line-d)}
+.court-price .from{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-d);font-weight:600}
+.court-price .amt{font-family:var(--disp);font-stretch:112%;font-weight:800;color:var(--gold);font-size:1.15rem;letter-spacing:.03em}
+.court-price .per{font-size:.72rem;color:var(--muted-d);font-weight:500}
+
+/* ===== STAGE 2: DATE & SLOTS ===== */
+.schedule-wrap{display:grid;grid-template-columns:1fr;gap:30px}
+.cal-panel{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;padding:28px}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.cal-head h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-size:1rem;color:#fff;letter-spacing:.03em}
+.cal-head h3 span{color:var(--gold);font-style:italic;font-family:var(--serif);text-transform:none}
+.cal-nav{display:flex;gap:8px}
+.cal-nav button{width:36px;height:36px;border-radius:50%;background:var(--ink-3);border:1px solid var(--line-d);color:var(--gold);cursor:pointer;transition:.3s;display:grid;place-items:center}
+.cal-nav button:hover{background:var(--gold);color:var(--ink)}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:10px;text-align:center}
+.cal-days span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);font-weight:700;padding:6px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-cell{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:grid;place-items:center;font-family:var(--disp);font-stretch:110%;font-weight:700;font-size:.95rem;color:var(--text-d);cursor:pointer;transition:.25s;background:transparent}
+.cal-cell:hover:not(.disabled):not(.empty){background:var(--gold-soft);border-color:rgba(217,179,108,.3)}
+.cal-cell.today{border-color:var(--gold)}
+.cal-cell.selected{background:var(--gold);color:var(--ink);box-shadow:0 8px 20px rgba(217,179,108,.3)}
+.cal-cell.disabled{color:rgba(152,160,174,.35);cursor:not-allowed}
+.cal-cell.empty{cursor:default}
+
+.slots-panel{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;padding:28px}
+.slots-panel h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-size:1rem;color:#fff;letter-spacing:.03em;margin-bottom:8px}
+.slots-panel h3 span{color:var(--gold);font-style:italic;font-family:var(--serif);text-transform:none}
+.slots-panel .hint{font-size:.82rem;color:var(--muted-d);margin-bottom:20px;font-weight:300}
+.slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.slot{padding:16px 10px;text-align:center;background:var(--ink-3);border:1px solid var(--line-d);border-radius:12px;cursor:pointer;transition:.3s;position:relative}
+.slot:hover{border-color:rgba(217,179,108,.4);transform:translateY(-2px)}
+.slot.selected{border-color:var(--gold);background:var(--gold-soft);box-shadow:0 0 0 3px rgba(217,179,108,.15)}
+.slot.selected .s-time{color:var(--gold-2)}
+.slot .s-time{font-family:var(--disp);font-stretch:110%;font-weight:800;color:#fff;font-size:.9rem;letter-spacing:.04em}
+.slot .s-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);font-weight:700;margin:4px 0}
+.slot .s-price{font-size:.76rem;color:var(--gold);font-weight:700;letter-spacing:.04em;margin-top:4px}
+.slot.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+
+/* ===== STAGE 3: FORM ===== */
+.form-wrap{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;padding:36px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-grid .full{grid-column:1/-1}
+.input-group label{display:block;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700}
+.input-group label small{color:var(--err);margin-left:4px}
+.input-group input,.input-group select,.input-group textarea{width:100%;background:var(--ink-3);border:1px solid var(--line-d);color:var(--text-d);padding:14px 16px;border-radius:10px;font-family:var(--body);font-size:.95rem;transition:.3s}
+.input-group input:focus,.input-group select:focus,.input-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,179,108,.12)}
+.input-group input::placeholder,.input-group textarea::placeholder{color:var(--muted-d)}
+.input-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d9b36c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.input-hint{font-size:.74rem;color:var(--muted-d);margin-top:6px;font-style:italic}
+
+/* ===== STAGE 4: PAYMENT ===== */
+.pay-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:start}
+.order-box{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;overflow:hidden}
+.order-head{padding:24px 30px;background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));display:flex;justify-content:space-between;align-items:center}
+.order-head .label{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+.order-head .id{font-family:var(--disp);font-stretch:115%;font-weight:800;color:#fff;font-size:.95rem;letter-spacing:.08em}
+.order-body{padding:28px 30px}
+.order-row{display:grid;grid-template-columns:130px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line-d)}
+.order-row:last-child{border-bottom:none}
+.order-row .k{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);font-weight:700}
+.order-row .v{font-size:.95rem;color:var(--text-d);font-weight:500}
+.order-row .v b{color:var(--gold);font-family:var(--disp);font-stretch:112%;font-weight:800}
+
+.pay-box{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;padding:28px;position:sticky;top:160px}
+.pay-box h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-size:1rem;color:#fff;letter-spacing:.03em;margin-bottom:6px}
+.pay-box .sub{font-size:.82rem;color:var(--muted-d);margin-bottom:22px;font-weight:300}
+.pay-methods{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.pay-m{padding:16px 18px;background:var(--ink-3);border:1px solid var(--line-d);border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:.3s}
+.pay-m:hover{border-color:rgba(217,179,108,.4)}
+.pay-m.selected{border-color:var(--gold);background:var(--gold-soft)}
+.pay-m .ic{width:44px;height:44px;border-radius:10px;background:rgba(217,179,108,.12);display:grid;place-items:center;font-size:1.4rem;color:var(--gold);flex-shrink:0}
+.pay-m .info h4{font-family:var(--disp);font-stretch:110%;font-weight:800;font-size:.9rem;color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.pay-m .info p{font-size:.78rem;color:var(--muted-d);margin-top:2px;font-weight:300}
+.pay-total{padding:20px;background:var(--ink-3);border-radius:12px;margin-bottom:16px}
+.pay-total .k{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted-d);font-weight:700}
+.pay-total .h{font-family:var(--disp);font-stretch:118%;font-weight:800;font-size:1.8rem;color:var(--gold);margin-top:4px;line-height:1.1}
+.pay-total .h small{font-size:.82rem;color:var(--muted-d);font-weight:500;font-family:var(--body);letter-spacing:.05em}
+.pay-breakdown{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-d)}
+.pay-breakdown .r{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted-d);padding:3px 0}
+.pay-breakdown .r b{color:var(--text-d);font-weight:600}
+
+/* ===== STAGE 5: SUCCESS ===== */
+.success{max-width:640px;margin:20px auto;text-align:center}
+.success-icon{width:100px;height:100px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;margin:0 auto 24px;color:var(--ok);font-size:3rem;border:2px solid var(--ok);animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.success h2{font-size:clamp(1.8rem,4vw,2.6rem);color:#fff}
+.success h2 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold)}
+.success p{color:var(--muted-d);font-weight:300;margin:16px 0 26px;font-size:1rem}
+.success .oid{display:inline-block;background:var(--gold-soft);color:var(--gold-2);padding:10px 22px;border-radius:50px;font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.16em;font-size:.85rem;margin-bottom:30px;border:1px solid rgba(217,179,108,.3)}
+
+.success-details{background:var(--ink-2);border:1px solid var(--line-d);border-radius:16px;text-align:left;margin-bottom:26px;overflow:hidden}
+.sd-head{padding:18px 24px;background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));display:flex;justify-content:space-between;align-items:center}
+.sd-head .label{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+.sd-head .status{font-family:var(--disp);font-stretch:115%;font-weight:800;color:#fff;font-size:.82rem;letter-spacing:.14em;padding:5px 14px;background:rgba(255,255,255,.12);border-radius:50px}
+.sd-body{padding:22px 24px}
+.sd-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line-d);font-size:.9rem}
+.sd-row:last-child{border-bottom:none}
+.sd-row .k{color:var(--muted-d);font-weight:500}
+.sd-row .v{color:var(--text-d);font-weight:600;text-align:right}
+.sd-total{padding:16px 24px;background:var(--ink-3);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-d)}
+.sd-total .k{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-d);font-weight:700}
+.sd-total .h{font-family:var(--disp);font-stretch:118%;font-weight:800;color:var(--gold);font-size:1.4rem}
+
+.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+
+/* ===== SIDEBAR SUMMARY ===== */
+.summary{position:sticky;top:160px;background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;overflow:hidden}
+.summary-head{padding:22px 26px;background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));position:relative;overflow:hidden}
+.summary-head::before{content:"✦";position:absolute;top:10px;right:18px;color:rgba(217,179,108,.4);font-size:2.4rem}
+.summary-head .k{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+.summary-head .h{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;color:#fff;font-size:1.1rem;letter-spacing:.03em;margin-top:4px}
+.summary-body{padding:22px 26px}
+.sum-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line-d);font-size:.86rem}
+.sum-row:last-child{border-bottom:none}
+.sum-row .k{color:var(--muted-d);font-weight:500}
+.sum-row .v{color:var(--text-d);font-weight:600;text-align:right}
+.sum-row .v.empty{color:var(--muted-d);font-style:italic;font-weight:300}
+.sum-total{padding:20px 26px;background:var(--ink-3);border-top:1px solid var(--line-d)}
+.sum-total .k{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted-d);font-weight:700}
+.sum-total .h{font-family:var(--disp);font-stretch:118%;font-weight:800;font-size:1.5rem;color:var(--gold);margin-top:4px;line-height:1.1}
+.sum-total .h small{font-size:.76rem;color:var(--muted-d);font-weight:500;font-family:var(--body);letter-spacing:.05em}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:16px 28px;border-radius:60px;transition:.35s;cursor:pointer;border:none;text-align:center}
+.btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 24px rgba(217,179,108,.25)}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px rgba(217,179,108,.35)}
+.btn-gold:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{border:1px solid var(--line-d);color:var(--text-d);background:transparent}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-2)}
+.btn-maroon{background:var(--maroon);color:#fff}
+.btn-maroon:hover{background:var(--maroon-deep);transform:translateY(-2px)}
+.btn-block{width:100%}
+.btn-lg{padding:18px 36px;font-size:.85rem}
+.stage-nav{display:flex;gap:12px;justify-content:space-between;margin-top:36px;flex-wrap:wrap}
+
+/* ===== FOOTER ===== */
+footer{background:#07080c;padding:50px 0 30px;border-top:1px solid var(--line-d);text-align:center}
+footer p{color:var(--muted-d);font-size:.88rem;font-weight:300}
+footer p b{color:var(--gold);font-family:var(--serif);font-style:italic}
+
+@media(max-width:980px){
+  .layout-2col{grid-template-columns:1fr;gap:30px}
+  .summary{position:static;order:-1}
+  .pay-layout{grid-template-columns:1fr}
+  .pay-box{position:static}
+  .courts,.slots-grid,.form-grid,.progress-inner{grid-template-columns:repeat(2,1fr)}
+  .progress-inner{gap:10px}
+  .p-step::after{display:none}
+  .p-label{font-size:.62rem}
+  .order-row{grid-template-columns:100px 1fr;gap:10px}
+  .order-row .v{grid-column:2;font-size:.86rem}
+  .cal-grid{gap:4px}
+  .cal-cell{font-size:.8rem}
+}
+@media(max-width:560px){
+  .courts,.slots-grid,.form-grid{grid-template-columns:1fr}
+  .success-actions{flex-direction:column}
+  .success-actions .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-bar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">P</div>
+      <div class="logo-txt"><b>PANDAWA</b><span>Social Sport</span></div>
+    </a>
+    <a href="index.html" class="back">← Beranda</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Beranda</a><i>/</i><span>Reservasi Online</span>
+    </div>
+    <h1 class="display">Book Your <em>Court.</em></h1>
+    <p>Reservasi lapangan padel, minisoccer, atau badminton langsung dari web ini. Pilih jadwal, lengkapi data, bayar dengan metode favorit — konfirmasi instan.</p>
+  </div>
+</section>
+
+<!-- Progress -->
+<div class="progress">
+  <div class="wrap progress-inner">
+    <div class="p-step active" data-step="1"><div class="p-dot"><span>1</span></div><span class="p-label">Fasilitas</span></div>
+    <div class="p-step" data-step="2"><div class="p-dot"><span>2</span></div><span class="p-label">Jadwal</span></div>
+    <div class="p-step" data-step="3"><div class="p-dot"><span>3</span></div><span class="p-label">Data</span></div>
+    <div class="p-step" data-step="4"><div class="p-dot"><span>4</span></div><span class="p-label">Bayar</span></div>
+    <div class="p-step" data-step="5"><div class="p-dot"><span>5</span></div><span class="p-label">Konfirmasi</span></div>
+  </div>
+</div>
+
+<main class="main">
+<div class="wrap">
+
+  <!-- ====== STAGE 1: PILIH FASILITAS ====== -->
+  <section class="stage active" id="stage1">
+    <div class="stage-head">
+      <div>
+        <div class="sec-head"><span class="sec-no">01</span><span class="sec-line"></span><span class="sec-tag">Pilih Fasilitas</span></div>
+        <h2 class="stage-title display">Choose Your <em>Court.</em></h2>
+        <p class="stage-sub">Pilih jenis lapangan premium sesuai aktivitas olahraga Anda.</p>
+      </div>
+    </div>
+
+    <div class="courts" id="courts">
+      <div class="court" data-id="terracotta" data-name="Terracotta Padel Court" data-base="200000" data-type="padel">
+        <div class="court-img"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb02146.png" alt="Terracotta Padel"></div>
+        <div class="court-body">
+          <h3>Terracotta Padel Court</h3>
+          <div class="desc">Court ikonik bernuansa hangat dengan kaca panoramic & tribun penonton.</div>
+          <div class="court-price"><span class="from">Mulai dari</span><span><span class="amt">Rp180K</span><span class="per"> / sesi</span></span></div>
+        </div>
+      </div>
+      <div class="court" data-id="royalblue" data-name="Royal Blue Padel Court" data-base="200000" data-type="padel">
+        <div class="court-img"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/0f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb07555.png" alt="Royal Blue Padel"></div>
+        <div class="court-body">
+          <h3>Royal Blue Padel Court</h3>
+          <div class="desc">Court biru royal standar turnamen & pembinaan atlet PBPI Kota Madiun.</div>
+          <div class="court-price"><span class="from">Mulai dari</span><span><span class="amt">Rp180K</span><span class="per"> / sesi</span></span></div>
+        </div>
+      </div>
+      <div class="court" data-id="minisoccer" data-name="Minisoccer Field" data-base="250000" data-type="minisoccer">
+        <div class="court-img"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80" alt="Minisoccer"></div>
+        <div class="court-body">
+          <h3>Minisoccer Field</h3>
+          <div class="desc">Lapangan fun match & turnamen. Include 2 dus air mineral setiap sesi.</div>
+          <div class="court-price"><span class="from">Mulai dari</span><span><span class="amt">Rp250K</span><span class="per"> / sesi</span></span></div>
+        </div>
+      </div>
+      <div class="court" data-id="badminton" data-name="Badminton Court" data-base="200000" data-type="badminton">
+        <div class="court-img"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb06321.png" alt="Badminton"></div>
+        <div class="court-body">
+          <h3>Badminton Court</h3>
+          <div class="desc">Court indoor nyaman dengan pencahayaan premium, cocok rally santai atau sparing.</div>
+          <div class="court-price"><span class="from">Mulai dari</span><span><span class="amt">Rp180K</span><span class="per"> / sesi</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-nav">
+      <div></div>
+      <button class="btn btn-gold btn-lg" id="toStage2" disabled>Lanjut Pilih Jadwal →</button>
+    </div>
+  </section>
+
+  <!-- ====== STAGE 2: TANGGAL & JAM ====== -->
+  <section class="stage" id="stage2">
+    <div class="stage-head">
+      <div>
+        <div class="sec-head"><span class="sec-no">02</span><span class="sec-line"></span><span class="sec-tag">Pilih Jadwal</span></div>
+        <h2 class="stage-title display">Pick Your <em>Date & Time.</em></h2>
+        <p class="stage-sub">Pilih tanggal dari kalender dan slot waktu yang tersedia. Weekday 10.00–15.00 adalah harga paling hemat.</p>
+      </div>
+    </div>
+
+    <div class="layout-2col">
+      <div class="schedule-wrap">
+        <div class="cal-panel">
+          <div class="cal-head">
+            <h3 id="calMonth">Agustus <span>2026</span></h3>
+            <div class="cal-nav">
+              <button id="calPrev">‹</button>
+              <button id="calNext">›</button>
+            </div>
+          </div>
+          <div class="cal-days"><span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span></div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="slots-panel">
+          <h3>Slot Waktu — <span id="slotsDate">pilih tanggal dulu</span></h3>
+          <p class="hint" id="slotsHint">Klik tanggal di kalender di atas untuk melihat slot yang tersedia.</p>
+          <div class="slots-grid" id="slotsGrid"></div>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <div class="summary-head"><div class="k">Ringkasan</div><div class="h">Order Preview</div></div>
+        <div class="summary-body">
+          <div class="sum-row"><span class="k">Lapangan</span><span class="v" id="s-court">—</span></div>
+          <div class="sum-row"><span class="k">Tanggal</span><span class="v" id="s-date">—</span></div>
+          <div class="sum-row"><span class="k">Jam</span><span class="v" id="s-slot">—</span></div>
+        </div>
+        <div class="sum-total">
+          <div class="k">Total</div>
+          <div class="h" id="s-total">Rp0 <small>/ sesi</small></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn btn-ghost" id="backStage1">← Kembali</button>
+      <button class="btn btn-gold btn-lg" id="toStage3" disabled>Lanjut Isi Data →</button>
+    </div>
+  </section>
+
+  <!-- ====== STAGE 3: DATA PEMESAN ====== -->
+  <section class="stage" id="stage3">
+    <div class="stage-head">
+      <div>
+        <div class="sec-head"><span class="sec-no">03</span><span class="sec-line"></span><span class="sec-tag">Data Pemesan</span></div>
+        <h2 class="stage-title display">Your <em>Details.</em></h2>
+        <p class="stage-sub">Informasi ini digunakan untuk konfirmasi booking & komunikasi saat hari bermain.</p>
+      </div>
+    </div>
+
+    <div class="layout-2col">
+      <div class="form-wrap">
+        <div class="form-grid">
+          <div class="input-group full">
+            <label>Nama Lengkap <small>*</small></label>
+            <input type="text" id="f-name" placeholder="Contoh: Bagus Panuntun">
+          </div>
+          <div class="input-group">
+            <label>Nomor WhatsApp <small>*</small></label>
+            <input type="tel" id="f-phone" placeholder="0812-xxxx-xxxx">
+          </div>
+          <div class="input-group">
+            <label>Email <small>*</small></label>
+            <input type="email" id="f-email" placeholder="email@domain.com">
+          </div>
+          <div class="input-group">
+            <label>Jumlah Pemain</label>
+            <select id="f-players">
+              <option value="2">2 Pemain</option>
+              <option value="4" selected>4 Pemain</option>
+              <option value="6">6 Pemain</option>
+              <option value="8">8 Pemain</option>
+              <option value="10">10 Pemain</option>
+              <option value="12">12 Pemain</option>
+            </select>
+            <div class="input-hint">Kapasitas maks. 12 pax per lapangan.</div>
+          </div>
+          <div class="input-group">
+            <label>Sewa Raket?</label>
+            <select id="f-equip">
+              <option value="Tidak">Tidak, bawa sendiri</option>
+              <option value="Ya, 1 raket">Ya, 1 raket (+Rp15K)</option>
+              <option value="Ya, 2 raket">Ya, 2 raket (+Rp30K)</option>
+              <option value="Ya, 4 raket">Ya, 4 raket (+Rp60K)</option>
+            </select>
+          </div>
+          <div class="input-group full">
+            <label>Catatan Tambahan</label>
+            <textarea id="f-note" rows="3" placeholder="Mis. datang dari luar kota, ingin foto dokumentasi, dll"></textarea>
+          </div>
+          <div class="input-group full">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <input type="checkbox" id="f-agree" style="width:auto">
+              <span style="letter-spacing:.08em;font-size:.78rem">Saya setuju dengan <a href="#" style="color:var(--gold);text-decoration:underline">aturan venue</a> Pandawa Social Sport.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <div class="summary-head"><div class="k">Ringkasan</div><div class="h">Order Preview</div></div>
+        <div class="summary-body">
+          <div class="sum-row"><span class="k">Lapangan</span><span class="v" id="s2-court">—</span></div>
+          <div class="sum-row"><span class="k">Tanggal</span><span class="v" id="s2-date">—</span></div>
+          <div class="sum-row"><span class="k">Jam</span><span class="v" id="s2-slot">—</span></div>
+          <div class="sum-row"><span class="k">Pemain</span><span class="v" id="s2-players">4 orang</span></div>
+        </div>
+        <div class="sum-total">
+          <div class="k">Total</div>
+          <div class="h" id="s2-total">Rp0 <small>/ sesi</small></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn btn-ghost" id="backStage2">← Kembali</button>
+      <button class="btn btn-gold btn-lg" id="toStage4" disabled>Lanjut ke Pembayaran →</button>
+    </div>
+  </section>
+
+  <!-- ====== STAGE 4: PEMBAYARAN ====== -->
+  <section class="stage" id="stage4">
+    <div class="stage-head">
+      <div>
+        <div class="sec-head"><span class="sec-no">04</span><span class="sec-line"></span><span class="sec-tag">Review & Bayar</span></div>
+        <h2 class="stage-title display">Payment <em>Checkout.</em></h2>
+        <p class="stage-sub">Tinjau detail pesanan Anda, lalu pilih metode pembayaran favorit.</p>
+      </div>
+    </div>
+
+    <div class="pay-layout">
+      <div class="order-box">
+        <div class="order-head">
+          <div class="label">Order ID</div>
+          <div class="id" id="orderId">—</div>
+        </div>
+        <div class="order-body">
+          <div class="order-row"><span class="k">Fasilitas</span><span class="v" id="o-court">—</span></div>
+          <div class="order-row"><span class="k">Tanggal</span><span class="v" id="o-date">—</span></div>
+          <div class="order-row"><span class="k">Jam</span><span class="v" id="o-slot">—</span></div>
+          <div class="order-row"><span class="k">Pemesan</span><span class="v" id="o-name">—</span></div>
+          <div class="order-row"><span class="k">Kontak</span><span class="v" id="o-phone">—</span></div>
+          <div class="order-row"><span class="k">Pemain</span><span class="v" id="o-players">—</span></div>
+          <div class="order-row"><span class="k">Raket</span><span class="v" id="o-equip">—</span></div>
+          <div class="order-row"><span class="k">Catatan</span><span class="v" id="o-note">—</span></div>
+        </div>
+      </div>
+
+      <div class="pay-box">
+        <h3>Pilih Metode Pembayaran</h3>
+        <p class="sub">Pilih salah satu metode di bawah, lalu klik tombol bayar.</p>
+        <div class="pay-methods" id="payMethods">
+          <div class="pay-m selected" data-method="QRIS" data-fee="0">
+            <div class="ic">📱</div>
+            <div class="info"><h4>QRIS</h4><p>Scan via semua e-wallet & m-banking</p></div>
+          </div>
+          <div class="pay-m" data-method="Transfer Bank" data-fee="0">
+            <div class="ic">🏦</div>
+            <div class="info"><h4>Transfer Bank</h4><p>BCA, Mandiri, BNI, BRI (VA)</p></div>
+          </div>
+          <div class="pay-m" data-method="E-Wallet" data-fee="0">
+            <div class="ic">💳</div>
+            <div class="info"><h4>E-Wallet</h4><p>GoPay, OVO, DANA, ShopeePay</p></div>
+          </div>
+          <div class="pay-m" data-method="Kartu Kredit" data-fee="15000">
+            <div class="ic">💠</div>
+            <div class="info"><h4>Kartu Kredit / Debit</h4><p>Visa, Mastercard, JCB (+biaya admin Rp15K)</p></div>
+          </div>
+        </div>
+        <div class="pay-total">
+          <div class="k">Total Pembayaran</div>
+          <div class="h" id="p-total">Rp0</div>
+          <div class="pay-breakdown">
+            <div class="r"><span>Subtotal lapangan</span><b id="p-sub">Rp0</b></div>
+            <div class="r"><span>Sewa raket</span><b id="p-racket">Rp0</b></div>
+            <div class="r"><span>Biaya admin</span><b id="p-fee">Rp0</b></div>
+            <div class="r" style="margin-top:6px"><span style="color:var(--gold);font-weight:600">Termasuk</span><b style="color:var(--muted-d);font-weight:400">2 dus air mineral</b></div>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-block btn-lg" id="payBtn">Bayar Sekarang →</button>
+        <p style="font-size:.72rem;color:var(--muted-d);text-align:center;margin-top:12px;font-style:italic">Pembayaran diproses aman. Data Anda terenkripsi.</p>
+      </div>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn btn-ghost" id="backStage3">← Kembali</button>
+    </div>
+  </section>
+
+  <!-- ====== STAGE 5: SUKSES ====== -->
+  <section class="stage" id="stage5">
+    <div class="success">
+      <div class="success-icon">✓</div>
+      <h2 class="display">Booking <em>Confirmed.</em></h2>
+      <p>Terima kasih! Reservasi Anda telah berhasil dikonfirmasi. Detail pesanan & voucher telah dikirim ke email & WhatsApp Anda.</p>
+      <div class="oid" id="finalId">PSW-000000</div>
+
+      <div class="success-details">
+        <div class="sd-head">
+          <div class="label">Detail Reservasi</div>
+          <div class="status">✓ LUNAS</div>
+        </div>
+        <div class="sd-body">
+          <div class="sd-row"><span class="k">Fasilitas</span><span class="v" id="f-court">—</span></div>
+          <div class="sd-row"><span class="k">Tanggal</span><span class="v" id="f-date">—</span></div>
+          <div class="sd-row"><span class="k">Jam</span><span class="v" id="f-slot">—</span></div>
+          <div class="sd-row"><span class="k">Pemesan</span><span class="v" id="f-name">—</span></div>
+          <div class="sd-row"><span class="k">Pemain</span><span class="v" id="f-players">—</span></div>
+          <div class="sd-row"><span class="k">Metode Bayar</span><span class="v" id="f-method">—</span></div>
+        </div>
+        <div class="sd-total">
+          <div class="k">Total Dibayar</div>
+          <div class="h" id="f-total">Rp0</div>
+        </div>
+      </div>
+
+      <p style="font-size:.85rem;color:var(--muted-d);font-style:italic;margin:16px 0">✦ Hadir 15–30 menit sebelum jadwal bermain.<br>Reschedule maksimal H-1 (sekali).</p>
+
+      <div class="success-actions">
+        <a href="index.html" class="btn btn-gold btn-lg">Kembali ke Beranda</a>
+        <button class="btn btn-ghost btn-lg" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 <b>Pandawa Social Sport</b> — Jl. Basuki Rahmad No. 1, Kota Madiun, Jawa Timur.</p>
+    <p style="margin-top:8px"><b>Own The Stage.</b></p>
+  </div>
+</footer>
+
+<script>
+/* ===== STATE ===== */
+const state = {
+  step: 1,
+  court: null, courtName: '', courtBase: 0, courtType: '',
+  date: null, dateStr: '', dayName: '', isWeekend: false,
+  slot: '', slotLabel: '', slotPrice: 0,
+  name:'', phone:'', email:'', players:4, equip:'Tidak', equipFee:0, note:'', agree:false,
+  method:'QRIS', fee:0, orderId: ''
+};
+
+const DAYS = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const MONTHS = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+/* ===== NAVIGATION ===== */
+function goStep(n){
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  document.getElementById('stage'+n).classList.add('active');
+  document.querySelectorAll('.p-step').forEach(p => {
+    const s = +p.dataset.step;
+    p.classList.toggle('active', s===n);
+    p.classList.toggle('done', s<n);
+  });
+  state.step = n;
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+/* ===== STAGE 1: COURTS ===== */
+document.querySelectorAll('.court').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.court').forEach(x => x.classList.remove('selected'));
+    c.classList.add('selected');
+    state.court = c.dataset.id;
+    state.courtName = c.dataset.name;
+    state.courtBase = +c.dataset.base;
+    state.courtType = c.dataset.type;
+    document.getElementById('toStage2').disabled = false;
+    updateSummary();
+  });
+});
+document.getElementById('toStage2').addEventListener('click', () => goStep(2));
+
+/* ===== STAGE 2: CALENDAR ===== */
+let calDate = new Date();
+const today = new Date(); today.setHours(0,0,0,0);
+
+function renderCalendar(){
+  const year = calDate.getFullYear();
+  const month = calDate.getMonth();
+  document.getElementById('calMonth').innerHTML = `${MONTHS[month]} <span>${year}</span>`;
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  for (let i=0; i<firstDay; i++) grid.insertAdjacentHTML('beforeend','<div class="cal-cell empty"></div>');
+  for (let d=1; d<=daysInMonth; d++){
+    const date = new Date(year, month, d);
+    const disabled = date < today;
+    const isToday = date.getTime() === today.getTime();
+    const sel = state.date && state.date.getTime() === date.getTime();
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell' + (disabled?' disabled':'') + (isToday?' today':'') + (sel?' selected':'');
+    cell.textContent = d;
+    if (!disabled) cell.addEventListener('click', () => selectDate(date));
+    grid.appendChild(cell);
+  }
+}
+function selectDate(d){
+  state.date = d;
+  state.dateStr = `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  state.dayName = DAYS[d.getDay()];
+  state.isWeekend = d.getDay()===0 || d.getDay()===6;
+  state.slot = ''; state.slotLabel=''; state.slotPrice=0;
+  document.getElementById('slotsDate').textContent = `${state.dayName}, ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  document.getElementById('slotsHint').textContent = state.isWeekend
+    ? 'Hari ini weekend — harga flat Rp250K untuk padel/badminton.'
+    : 'Weekday — slot siang 10.00–15.00 paling hemat.';
+  renderSlots();
+  renderCalendar();
+  updateSummary();
+}
+function renderSlots(){
+  const grid = document.getElementById('slotsGrid');
+  grid.innerHTML = '';
+  let slots;
+  if (state.courtType === 'minisoccer'){
+    slots = [
+      {t:'06.00–12.00', l:'Pagi', p:250000},
+      {t:'12.00–18.00', l:'Siang', p:250000},
+      {t:'18.00–00.00', l:'Malam', p:250000}
+    ];
+  } else {
+    slots = state.isWeekend
+      ? [
+          {t:'06.00–12.00', l:'Pagi Weekend', p:250000},
+          {t:'12.00–18.00', l:'Siang Weekend', p:250000},
+          {t:'18.00–00.00', l:'Malam Weekend', p:280000}
+        ]
+      : [
+          {t:'06.00–10.00', l:'Weekday Pagi', p:200000},
+          {t:'10.00–15.00', l:'Weekday Siang (Hemat)', p:180000},
+          {t:'15.00–00.00', l:'Weekday Sore/Malam', p:250000}
+        ];
+  }
+  slots.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'slot';
+    el.innerHTML = `<div class="s-time">${s.t}</div><div class="s-label">${s.l}</div><div class="s-price">Rp${(s.p/1000).toFixed(0)}K</div>`;
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.slot').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected');
+      state.slot = s.t; state.slotLabel = s.l; state.slotPrice = s.p;
+      document.getElementById('toStage3').disabled = false;
+      updateSummary();
+    });
+    grid.appendChild(el);
+  });
+}
+document.getElementById('calPrev').addEventListener('click', () => { calDate.setMonth(calDate.getMonth()-1); renderCalendar(); });
+document.getElementById('calNext').addEventListener('click', () => { calDate.setMonth(calDate.getMonth()+1); renderCalendar(); });
+document.getElementById('backStage1').addEventListener('click', () => goStep(1));
+document.getElementById('toStage3').addEventListener('click', () => {
+  ['s2-court','s2-date','s2-slot'].forEach(id=>{document.getElementById(id).textContent=document.getElementById(id.replace('2-','-')).textContent});
+  document.getElementById('s2-players').textContent = state.players+' orang';
+  updateSummary();
+  goStep(3);
+});
+renderCalendar();
+
+/* ===== STAGE 3: FORM ===== */
+const formInputs = ['f-name','f-phone','f-email','f-players','f-equip','f-note','f-agree'];
+function validateForm(){
+  const n = document.getElementById('f-name').value.trim();
+  const p = document.getElementById('f-phone').value.trim();
+  const e = document.getElementById('f-email').value.trim();
+  const a = document.getElementById('f-agree').checked;
+  document.getElementById('toStage4').disabled = !(n && p && e && a);
+}
+formInputs.forEach(id => document.getElementById(id).addEventListener('input', validateForm));
+document.getElementById('backStage2').addEventListener('click', () => goStep(2));
+document.getElementById('toStage4').addEventListener('click', () => {
+  state.name = document.getElementById('f-name').value.trim();
+  state.phone = document.getElementById('f-phone').value.trim();
+  state.email = document.getElementById('f-email').value.trim();
+  state.players = +document.getElementById('f-players').value;
+  state.equip = document.getElementById('f-equip').value;
+  const m = state.equip.match(/(\d+) raket/);
+  state.equipFee = m ? +m[1]*15000 : 0;
+  state.note = document.getElementById('f-note').value.trim() || '—';
+  state.orderId = 'PSW-' + Date.now().toString().slice(-8);
+  document.getElementById('orderId').textContent = state.orderId;
+  ['o-court','o-date','o-slot','o-name','o-phone','o-players','o-equip','o-note'].forEach(id => {
+    const k = id.replace('o-','');
+    document.getElementById(id).textContent = state[k==='court'?'courtName':k==='name'?'name':k==='phone'?'phone':k==='players'?('players')+' orang':k==='equip'?'equip':k==='note'?'note':k==='date'?'dateStr':k==='slot'?state.slot+' ('+state.slotLabel+')':''];
+  });
+  document.getElementById('o-date').textContent = state.dateStr + ' ('+state.dayName+')';
+  document.getElementById('o-slot').textContent = state.slot + ' • ' + state.slotLabel;
+  document.getElementById('o-players').textContent = state.players + ' orang';
+  document.getElementById('o-name').textContent = state.name;
+  document.getElementById('o-phone').textContent = state.phone;
+  document.getElementById('o-equip').textContent = state.equip;
+  document.getElementById('o-note').textContent = state.note;
+  updatePayment();
+  goStep(4);
+});
+
+/* ===== STAGE 4: PAYMENT ===== */
+document.querySelectorAll('.pay-m').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pay-m').forEach(x => x.classList.remove('selected'));
+    p.classList.add('selected');
+    state.method = p.dataset.method;
+    state.fee = +p.dataset.fee;
+    updatePayment();
+  });
+});
+function updatePayment(){
+  const sub = state.slotPrice;
+  const fee = state.fee;
+  const total = sub + state.equipFee + fee;
+  document.getElementById('p-sub').textContent = 'Rp' + sub.toLocaleString('id-ID');
+  document.getElementById('p-racket').textContent = 'Rp' + state.equipFee.toLocaleString('id-ID');
+  document.getElementById('p-fee').textContent = 'Rp' + fee.toLocaleString('id-ID');
+  document.getElementById('p-total').textContent = 'Rp' + total.toLocaleString('id-ID');
+  state.total = total;
+}
+document.getElementById('backStage3').addEventListener('click', () => goStep(3));
+document.getElementById('payBtn').addEventListener('click', () => {
+  const btn = document.getElementById('payBtn');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+  setTimeout(() => {
+    document.getElementById('finalId').textContent = state.orderId;
+    document.getElementById('f-court').textContent = state.courtName;
+    document.getElementById('f-date').textContent = state.dateStr + ' ('+state.dayName+')';
+    document.getElementById('f-slot').textContent = state.slot + ' • ' + state.slotLabel;
+    document.getElementById('f-name').textContent = state.name;
+    document.getElementById('f-players').textContent = state.players + ' orang';
+    document.getElementById('f-method').textContent = state.method;
+    document.getElementById('f-total').textContent = 'Rp' + state.total.toLocaleString('id-ID');
+    btn.disabled = false; btn.textContent = 'Bayar Sekarang →';
+    goStep(5);
+  }, 1400);
+});
+
+/* ===== SUMMARY UPDATE ===== */
+function updateSummary(){
+  const set = (id, v) => { document.getElementById(id).textContent = v || '—'; };
+  set('s-court', state.courtName);
+  set('s-date', state.dateStr);
+  set('s-slot', state.slot ? state.slot+' • '+state.slotLabel : '');
+  document.getElementById('s-total').innerHTML = 'Rp'+(state.slotPrice||0).toLocaleString('id-ID')+' <small>/ sesi</small>';
+}
+
+/* URL param auto-select */
+const q = new URLSearchParams(location.search).get('court');
+if (q){
+  const c = document.querySelector(`.court[data-id="${q}"]`);
+  if (c) c.click();
+}
+</script>
+</body>
+</html>
