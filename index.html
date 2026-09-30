@@ -13,7 +13,7 @@
 <style>
 /* ============ DESIGN TOKENS ============ */
 :root{
-  --ink:#0b0d12;          /* hitam kebiruan */
+  --ink:#0b0d12;
   --ink-2:#12151c;
   --maroon:#7b1113;
   --maroon-deep:#4d090b;
@@ -21,9 +21,9 @@
   --gold-2:#ecd7a7;
   --cream:#f4eee2;
   --cream-2:#ece2cf;
-  --text-d:#e9e6df;       /* teks di bg gelap */
+  --text-d:#e9e6df;
   --muted-d:#98a0ae;
-  --text-c:#1c1712;       /* teks di bg cream */
+  --text-c:#1c1712;
   --muted-c:#6f6555;
   --line-d:rgba(255,255,255,.09);
   --line-c:rgba(28,23,18,.14);
@@ -34,11 +34,11 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--ink);color:var(--text-d);line-height:1.7;overflow-x:hidden}
+body{font-family:var(--body);background:var(--ink);color:var(--text-d);line-height:1.6;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
-section{scroll-margin-top:86px;position:relative}
+section{scroll-margin-top:70px;position:relative}
 ::selection{background:var(--gold);color:var(--ink)}
 
 /* noise overlay */
@@ -46,253 +46,277 @@ body::after{content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;o
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");}
 
 .wrap{width:min(1180px,92%);margin:0 auto}
-.display{font-family:var(--disp);font-stretch:118%;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02}
+.display{font-family:var(--disp);font-stretch:118%;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.05}
 .serif-it{font-family:var(--serif);font-style:italic;font-weight:400}
 
 /* ============ HEADER ============ */
-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.4s;padding:20px 0}
-header.scrolled{background:rgba(11,13,18,.92);backdrop-filter:blur(14px);padding:12px 0;border-bottom:1px solid var(--line-d)}
-.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-mark{width:42px;height:42px;border-radius:10px;background:var(--maroon);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:900;color:var(--gold);font-size:1.25rem;box-shadow:inset 0 0 0 1px rgba(217,179,108,.35)}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.4s;padding:16px 0;background:rgba(11,13,18,.85);backdrop-filter:blur(10px)}
+header.scrolled{background:rgba(11,13,18,.95);padding:12px 0;border-bottom:1px solid var(--line-d)}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;border-radius:8px;background:var(--maroon);display:grid;place-items:center;font-family:var(--disp);font-stretch:120%;font-weight:900;color:var(--gold);font-size:1.1rem;box-shadow:inset 0 0 0 1px rgba(217,179,108,.35)}
 .logo-txt{line-height:1.1}
-.logo-txt b{font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.06em;font-size:1.02rem;color:#fff;display:block}
-.logo-txt span{font-size:.62rem;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
-nav ul{display:flex;gap:26px;align-items:center}
+.logo-txt b{font-family:var(--disp);font-stretch:115%;font-weight:800;letter-spacing:.05em;font-size:.95rem;color:#fff;display:block}
+.logo-txt span{font-size:.55rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+
+nav ul{display:flex;gap:24px;align-items:center}
 nav ul li a{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-d);font-weight:600;position:relative;padding:6px 0;transition:.3s}
 nav ul li a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:.3s}
 nav ul li a:hover{color:var(--gold-2)}
 nav ul li a:hover::after{width:100%}
-.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:14px 26px;border-radius:60px;transition:.35s;cursor:pointer;border:none}
-.btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 24px rgba(217,179,108,.25)}
-.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 34px rgba(217,179,108,.35)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 22px;border-radius:60px;transition:.35s;cursor:pointer;border:none;text-align:center}
+.btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 24px rgba(217,179,108,.2)}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--line-d);color:var(--text-d);background:transparent}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold-2)}
 .btn-maroon{background:var(--maroon);color:#fff}
-.btn-maroon:hover{background:var(--maroon-deep);transform:translateY(-2px)}
-.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
-.burger span{width:26px;height:2px;background:var(--gold);display:block;transition:.3s}
+.btn-maroon:hover{background:var(--maroon-deep)}
+
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:5px}
+.burger span{width:24px;height:2px;background:var(--gold);display:block;transition:.3s}
 
 /* ============ HERO ============ */
-.hero{min-height:100svh;display:flex;align-items:center;padding:150px 0 90px;position:relative;overflow:hidden;
+.hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 60px;position:relative;overflow:hidden;
   background:
-   radial-gradient(900px 500px at 85% -10%, rgba(123,17,19,.5), transparent 60%),
-   radial-gradient(700px 500px at -10% 90%, rgba(123,17,19,.35), transparent 60%),
+   radial-gradient(700px 400px at 85% -10%, rgba(123,17,19,.4), transparent 60%),
+   radial-gradient(500px 400px at -10% 90%, rgba(123,17,19,.3), transparent 60%),
    var(--ink);}
-.hero::before{content:"";position:absolute;inset:0;opacity:.9;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='560' viewBox='0 0 900 560'%3E%3Cg fill='none' stroke='%23d9b36c' stroke-opacity='.07' stroke-width='2'%3E%3Crect x='20' y='20' width='860' height='520' rx='6'/%3E%3Cline x1='450' y1='20' x2='450' y2='540'/%3E%3Ccircle cx='450' cy='280' r='95'/%3E%3Crect x='20' y='165' width='130' height='230'/%3E%3Crect x='750' y='165' width='130' height='230'/%3E%3C/g%3E%3C/svg%3E") center/900px auto no-repeat;}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
-.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:26px}
-.eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
-.hero h1{font-size:clamp(3rem,7.2vw,6rem);color:#fff}
-.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold);letter-spacing:0}
-.hero-sub{max-width:520px;color:var(--muted-d);font-size:1.02rem;font-weight:300;margin:26px 0 36px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(2.8rem,6vw,5.5rem);color:#fff}
+.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--gold)}
+.hero-sub{max-width:520px;color:var(--muted-d);font-size:.95rem;font-weight:300;margin:20px 0 28px}
 .hero-sub b{color:var(--text-d);font-weight:600}
-.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-.hero-meta{display:flex;gap:26px;margin-top:44px;flex-wrap:wrap}
-.hero-meta div{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-d)}
-.hero-meta b{display:block;color:var(--gold-2);font-size:.95rem;letter-spacing:.06em}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:20px;margin-top:36px;flex-wrap:wrap}
+.hero-meta div{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d)}
+.hero-meta b{display:block;color:var(--gold-2);font-size:.88rem;letter-spacing:.05em}
 
 /* kolase kanan */
-.hero-visual{position:relative;justify-self:end;width:min(460px,100%)}
-.frame{position:relative;border-radius:220px 220px 18px 18px;overflow:hidden;border:1px solid rgba(217,179,108,.35);box-shadow:0 40px 80px rgba(0,0,0,.5)}
-.frame img{width:100%;height:520px;object-fit:cover;transition:1.2s ease}
-.frame:hover img{transform:scale(1.05)}
-.polaroid{position:absolute;left:-70px;bottom:34px;width:170px;background:#fff;padding:10px 10px 14px;border-radius:6px;transform:rotate(-7deg);box-shadow:0 20px 40px rgba(0,0,0,.45)}
-.polaroid img{height:150px;width:100%;object-fit:cover;border-radius:3px}
-.polaroid figcaption{font-family:var(--serif);font-style:italic;color:#333;font-size:.8rem;text-align:center;margin-top:8px}
-.spin-badge{position:absolute;right:-38px;top:-30px;width:120px;height:120px}
+.hero-visual{position:relative;justify-self:center;width:min(420px,100%)}
+.frame{position:relative;border-radius:180px 180px 16px 16px;overflow:hidden;border:1px solid rgba(217,179,108,.35);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.frame img{width:100%;height:460px;object-fit:cover;transition:1.2s ease}
+
+.polaroid{position:absolute;left:-20px;bottom:20px;width:140px;background:#fff;padding:8px 8px 12px;border-radius:6px;transform:rotate(-6deg);box-shadow:0 15px 30px rgba(0,0,0,.45)}
+.polaroid img{height:110px;width:100%;object-fit:cover;border-radius:3px}
+.polaroid figcaption{font-family:var(--serif);font-style:italic;color:#333;font-size:.75rem;text-align:center;margin-top:6px}
+
+.spin-badge{position:absolute;right:-15px;top:-15px;width:100px;height:100px}
 .spin-badge svg{width:100%;height:100%;animation:spin 22s linear infinite}
 .spin-badge text{font-size:10.5px;letter-spacing:2.6px;fill:var(--gold);text-transform:uppercase;font-family:var(--body);font-weight:700}
-.spin-badge .core{position:absolute;inset:0;display:grid;place-items:center;font-size:1.5rem;color:var(--gold)}
+.spin-badge .core{position:absolute;inset:0;display:grid;place-items:center;font-size:1.2rem;color:var(--gold)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* stats */
-.stats{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);margin-top:80px;position:relative}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
-.stat{padding:34px 20px;text-align:center;border-right:1px solid var(--line-d)}
+.stats{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);margin-top:60px;position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:26px 15px;text-align:center;border-right:1px solid var(--line-d)}
 .stat:last-child{border-right:none}
-.stat h3{font-family:var(--disp);font-stretch:118%;font-weight:800;font-size:2.4rem;color:var(--gold)}
-.stat p{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-d);margin-top:4px}
+.stat h3{font-family:var(--disp);font-stretch:118%;font-weight:800;font-size:2rem;color:var(--gold)}
+.stat p{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d);margin-top:4px}
 
 /* marquee */
-.marquee{background:var(--maroon);overflow:hidden;padding:16px 0;border-block:1px solid rgba(217,179,108,.3)}
+.marquee{background:var(--maroon);overflow:hidden;padding:12px 0;border-block:1px solid rgba(217,179,108,.3)}
 .marquee-track{display:flex;gap:0;width:max-content;animation:mq 28s linear infinite}
-.marquee span{font-family:var(--disp);font-stretch:115%;font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:.85rem;color:var(--gold-2);padding:0 22px;white-space:nowrap}
+.marquee span{font-family:var(--disp);font-stretch:115%;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:.8rem;color:var(--gold-2);padding:0 18px;white-space:nowrap}
 .marquee i{color:rgba(255,255,255,.5);font-style:normal}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* ============ SECTION HEAD ============ */
-.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
-.sec-no{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--gold)}
-.sec-line{width:52px;height:1px;background:var(--gold)}
-.sec-tag{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sec-no{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--gold)}
+.sec-line{width:40px;height:1px;background:var(--gold)}
+.sec-tag{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
 .on-dark .sec-tag{color:var(--muted-d)}
-h2.title{font-size:clamp(2.1rem,4.4vw,3.4rem);color:inherit}
+h2.title{font-size:clamp(1.8rem,4vw,3.2rem);color:inherit}
 h2.title em{font-family:var(--serif);font-style:italic;font-weight:500;text-transform:none;color:var(--maroon)}
 .on-dark h2.title em{color:var(--gold)}
-.sec-sub{max-width:640px;margin-top:16px;font-weight:300}
+.sec-sub{max-width:640px;margin-top:12px;font-weight:300;font-size:.92rem}
 
 /* ============ TENTANG ============ */
-.about{background:var(--cream);color:var(--text-c);padding:110px 0}
-.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;margin-top:50px}
-.about-txt p{margin-bottom:18px;color:#41382c;font-weight:300}
+.about{background:var(--cream);color:var(--text-c);padding:70px 0}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;margin-top:36px}
+.about-txt p{margin-bottom:16px;color:#41382c;font-weight:300;font-size:.92rem}
 .about-txt p b{font-weight:600;color:var(--text-c)}
-.about-quote{border-left:3px solid var(--maroon);padding:6px 0 6px 22px;margin:26px 0;font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--maroon);line-height:1.5}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.chips li{border:1px solid var(--line-c);border-radius:50px;padding:8px 18px;font-size:.78rem;font-weight:600;letter-spacing:.06em;color:#4c4234;background:#fff;transition:.3s}
-.chips li:hover{background:var(--maroon);color:var(--gold-2);border-color:var(--maroon);transform:translateY(-2px)}
-.about-visual{position:relative}
-.about-visual .big{border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(28,23,18,.25)}
-.about-visual .big img{height:520px;width:100%;object-fit:cover}
-.about-visual .small{position:absolute;width:220px;right:-30px;bottom:-40px;border-radius:12px;overflow:hidden;border:6px solid var(--cream);box-shadow:0 20px 40px rgba(28,23,18,.3)}
-.exp-badge{position:absolute;top:-34px;left:-34px;width:110px;height:110px;border-radius:50%;background:var(--maroon);color:var(--gold-2);display:grid;place-items:center;text-align:center;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;line-height:1.5;box-shadow:0 16px 30px rgba(123,17,19,.4);padding:10px}
-.exp-badge b{font-family:var(--disp);font-stretch:115%;font-size:1.5rem;display:block;color:#fff}
+.about-quote{border-left:3px solid var(--maroon);padding:4px 0 4px 18px;margin:20px 0;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--maroon);line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips li{border:1px solid var(--line-c);border-radius:50px;padding:6px 14px;font-size:.72rem;font-weight:600;letter-spacing:.04em;color:#4c4234;background:#fff}
+
+.about-visual{position:relative;margin-top:20px}
+.about-visual .big{border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(28,23,18,.2)}
+.about-visual .big img{height:380px;width:100%;object-fit:cover}
+.about-visual .small{position:absolute;width:170px;right:-10px;bottom:-30px;border-radius:12px;overflow:hidden;border:4px solid var(--cream);box-shadow:0 15px 30px rgba(28,23,18,.25)}
+.exp-badge{position:absolute;top:-20px;left:-10px;width:90px;height:90px;border-radius:50%;background:var(--maroon);color:var(--gold-2);display:grid;place-items:center;text-align:center;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;line-height:1.3;box-shadow:0 10px 20px rgba(123,17,19,.4);padding:8px;z-index:3}
+.exp-badge b{font-family:var(--disp);font-stretch:115%;font-size:1.2rem;display:block;color:#fff}
 
 /* ============ FASILITAS ============ */
-.facilities{background:var(--ink);padding:110px 0}
-.fac-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:56px}
-.card{background:var(--ink-2);border:1px solid var(--line-d);border-radius:16px;overflow:hidden;transition:.45s;position:relative;display:flex;flex-direction:column}
-.card:hover{transform:translateY(-10px);border-color:rgba(217,179,108,.5);box-shadow:0 30px 60px rgba(0,0,0,.5)}
-.card-img{height:210px;overflow:hidden;position:relative}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:1s ease}
-.card:hover .card-img img{transform:scale(1.08)}
+.facilities{background:var(--ink);padding:70px 0}
+.fac-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.card{background:var(--ink-2);border:1px solid var(--line-d);border-radius:14px;overflow:hidden;transition:.35s;display:flex;flex-direction:column}
+.card-img{height:190px;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover}
 .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,13,18,.75),transparent 55%)}
-.card-no{position:absolute;top:14px;left:16px;z-index:2;font-family:var(--serif);font-style:italic;color:var(--gold-2);font-size:.95rem}
-.card-body{padding:24px 22px 26px;display:flex;flex-direction:column;flex:1}
-.card-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:1.05rem;color:#fff;letter-spacing:.03em}
-.card-body p{font-size:.86rem;color:var(--muted-d);font-weight:300;margin:12px 0 18px;flex:1}
-.card-meta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-d);padding-top:16px;font-size:.78rem}
-.card-meta .price{color:var(--gold);font-weight:700;letter-spacing:.05em}
-.card-meta a{color:var(--text-d);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;transition:.3s}
-.card-meta a:hover{color:var(--gold-2)}
+.card-no{position:absolute;top:12px;left:14px;z-index:2;font-family:var(--serif);font-style:italic;color:var(--gold-2);font-size:.85rem}
+.card-body{padding:20px 18px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:.98rem;color:#fff}
+.card-body p{font-size:.82rem;color:var(--muted-d);font-weight:300;margin:10px 0 16px;flex:1}
+.card-meta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-d);padding-top:14px;font-size:.75rem}
+.card-meta .price{color:var(--gold);font-weight:700}
+.card-meta a{color:var(--text-d);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.68rem}
 
 /* ============ HARGA ============ */
-.pricing{background:var(--cream);color:var(--text-c);padding:110px 0}
-.price-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;margin-top:56px;align-items:start}
-.rate-panel{background:#fff;border:1px solid var(--line-c);border-radius:18px;padding:38px 40px;box-shadow:0 20px 50px rgba(28,23,18,.08)}
-.rate-panel + .rate-panel{margin-top:26px}
-.rate-panel h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.15rem;color:var(--maroon);display:flex;justify-content:space-between;align-items:center;gap:10px}
-.rate-panel h3 span{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted-c);font-size:.9rem;text-transform:none}
-.rate-row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px dashed var(--line-c);font-size:.95rem}
+.pricing{background:var(--cream);color:var(--text-c);padding:70px 0}
+.price-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:35px;margin-top:40px;align-items:start}
+.rate-panel{background:#fff;border:1px solid var(--line-c);border-radius:14px;padding:26px 22px;box-shadow:0 10px 30px rgba(28,23,18,.05)}
+.rate-panel + .rate-panel{margin-top:20px}
+.rate-panel h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.05rem;color:var(--maroon);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rate-panel h3 span{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted-c);font-size:.82rem;text-transform:none}
+.rate-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px dashed var(--line-c);font-size:.88rem}
 .rate-row:last-child{border-bottom:none}
 .rate-row .lbl{font-weight:600}
 .rate-row .dots{flex:1;border-bottom:2px dotted var(--line-c);transform:translateY(-4px)}
-.rate-row .val{font-family:var(--disp);font-stretch:110%;font-weight:800;color:var(--maroon)}
-.rate-note{margin-top:14px;font-size:.8rem;color:var(--muted-c);font-style:italic}
-.clinic-box{background:var(--maroon);color:#fff;border-radius:18px;padding:38px 40px;position:sticky;top:110px;box-shadow:0 30px 60px rgba(123,17,19,.35)}
-.clinic-box h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.3rem;color:var(--gold-2)}
-.clinic-box .price-tag{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:#fff;margin:8px 0 4px}
-.clinic-box .price-tag small{font-size:1rem;color:var(--gold-2)}
-.clinic-box ul{margin:20px 0 26px}
-.clinic-box li{padding:9px 0 9px 28px;position:relative;font-size:.9rem;font-weight:300;border-bottom:1px solid rgba(255,255,255,.12)}
-.clinic-box li::before{content:"✦";position:absolute;left:2px;color:var(--gold)}
+.rate-row .val{font-family:var(--disp);font-stretch:110%;font-weight:800;color:var(--maroon);white-space:nowrap}
+.rate-note{margin-top:12px;font-size:.75rem;color:var(--muted-c);font-style:italic}
 
-/* ============ CLINIC / MEMBERSHIP STRIP ============ */
-.member{background:var(--ink);padding:100px 0;overflow:hidden}
-.member-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
-.member-img{border-radius:16px;overflow:hidden;position:relative}
-.member-img img{height:480px;width:100%;object-fit:cover}
-.member-img::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(217,179,108,.3);border-radius:16px}
-.member h2{font-size:clamp(1.9rem,3.6vw,2.9rem);color:#fff}
-.member p{color:var(--muted-d);font-weight:300;margin:20px 0 14px}
-.member .perks{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin:26px 0 34px}
-.member .perks li{font-size:.88rem;color:var(--text-d);padding-left:24px;position:relative;font-weight:500}
+.clinic-box{background:var(--maroon);color:#fff;border-radius:14px;padding:28px 24px;position:sticky;top:90px;box-shadow:0 20px 40px rgba(123,17,19,.3)}
+.clinic-box h3{font-family:var(--disp);font-stretch:112%;text-transform:uppercase;font-weight:800;font-size:1.2rem;color:var(--gold-2)}
+.clinic-box .price-tag{font-family:var(--serif);font-style:italic;font-size:2rem;color:#fff;margin:6px 0 4px}
+.clinic-box .price-tag small{font-size:.9rem;color:var(--gold-2)}
+.clinic-box ul{margin:16px 0 22px}
+.clinic-box li{padding:8px 0 8px 22px;position:relative;font-size:.85rem;font-weight:300;border-bottom:1px solid rgba(255,255,255,.12)}
+.clinic-box li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
+
+/* ============ MEMBERSHIP ============ */
+.member{background:var(--ink);padding:70px 0;overflow:hidden}
+.member-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
+.member-img{border-radius:14px;overflow:hidden;position:relative}
+.member-img img{height:360px;width:100%;object-fit:cover}
+.member p{color:var(--muted-d);font-weight:300;margin:16px 0 14px;font-size:.9rem}
+.member .perks{display:grid;grid-template-columns:1fr 1fr;gap:10px 15px;margin:20px 0 28px}
+.member .perks li{font-size:.82rem;color:var(--text-d);padding-left:20px;position:relative;font-weight:500}
 .member .perks li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
 
 /* ============ GALERI IG ============ */
-.gallery{background:var(--cream-2);color:var(--text-c);padding:110px 0}
-.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px;align-items:start}
-.ig-wrap{border-radius:14px;overflow:hidden;box-shadow:0 16px 40px rgba(28,23,18,.14);background:#fff}
-.ig-fallback{display:block;text-align:center;padding:14px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon)}
-.ig-cta{margin-top:46px;text-align:center}
+.gallery{background:var(--cream-2);color:var(--text-c);padding:70px 0}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.ig-wrap{border-radius:12px;overflow:hidden;box-shadow:0 12px 30px rgba(28,23,18,.1);background:#fff}
+.ig-fallback{display:block;text-align:center;padding:12px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--maroon)}
+.ig-cta{margin-top:36px;text-align:center}
 
 /* ============ EVENT ============ */
-.events{background:var(--ink);padding:110px 0}
-.event-list{margin-top:56px;border-top:1px solid var(--line-d)}
-.event{display:grid;grid-template-columns:130px 1fr auto;gap:34px;align-items:center;padding:36px 10px;border-bottom:1px solid var(--line-d);transition:.35s}
-.event:hover{background:rgba(123,17,19,.14);padding-left:26px;padding-right:26px}
-.ev-date{text-align:center;border-right:1px solid var(--line-d);padding-right:26px}
-.ev-date b{font-family:var(--disp);font-stretch:115%;font-weight:900;font-size:2.6rem;color:var(--gold);display:block;line-height:1}
-.ev-date span{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-d)}
-.ev-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:1.25rem;color:#fff;margin-bottom:8px}
-.ev-body p{color:var(--muted-d);font-weight:300;font-size:.92rem;max-width:640px}
-.ev-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.ev-tags li{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold-2);border:1px solid rgba(217,179,108,.4);padding:5px 12px;border-radius:50px}
+.events{background:var(--ink);padding:70px 0}
+.event-list{margin-top:36px;border-top:1px solid var(--line-d)}
+.event{display:grid;grid-template-columns:110px 1fr auto;gap:20px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line-d)}
+.ev-date{text-align:center;border-right:1px solid var(--line-d);padding-right:20px}
+.ev-date b{font-family:var(--disp);font-stretch:115%;font-weight:900;font-size:2.2rem;color:var(--gold);display:block;line-height:1}
+.ev-date span{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted-d)}
+.ev-body h3{font-family:var(--disp);font-stretch:112%;font-weight:800;text-transform:uppercase;font-size:1.1rem;color:#fff;margin-bottom:6px}
+.ev-body p{color:var(--muted-d);font-weight:300;font-size:.86rem;max-width:640px}
+.ev-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.ev-tags li{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--gold-2);border:1px solid rgba(217,179,108,.4);padding:4px 10px;border-radius:50px}
 
 /* ============ TESTIMONI ============ */
-.testi{background:var(--cream);color:var(--text-c);padding:110px 0}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
-.t-card{background:#fff;border:1px solid var(--line-c);border-radius:16px;padding:36px 32px;position:relative;transition:.4s}
-.t-card:hover{transform:translateY(-8px);box-shadow:0 26px 50px rgba(28,23,18,.14)}
-.t-card .q{font-family:var(--serif);font-style:italic;font-size:3.4rem;color:var(--maroon);line-height:1;opacity:.35}
-.t-card p{font-family:var(--serif);font-style:italic;font-size:1.08rem;line-height:1.6;margin:10px 0 22px;color:#33291d}
-.t-card .stars{color:var(--gold);letter-spacing:4px;font-size:.9rem}
-.t-card .who{margin-top:14px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
+.testi{background:var(--cream);color:var(--text-c);padding:70px 0}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.t-card{background:#fff;border:1px solid var(--line-c);border-radius:14px;padding:26px 22px;position:relative}
+.t-card .q{font-family:var(--serif);font-style:italic;font-size:2.8rem;color:var(--maroon);line-height:1;opacity:.35}
+.t-card p{font-family:var(--serif);font-style:italic;font-size:.98rem;line-height:1.5;margin:6px 0 16px;color:#33291d}
+.t-card .stars{color:var(--gold);letter-spacing:3px;font-size:.82rem}
+.t-card .who{margin-top:10px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted-c)}
 .t-card .who b{color:var(--maroon)}
 
 /* ============ LOKASI ============ */
-.location{background:var(--ink);padding:110px 0}
-.loc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;margin-top:56px;align-items:stretch}
-.loc-card{border:1px solid var(--line-d);border-radius:18px;padding:44px;background:var(--ink-2);display:flex;flex-direction:column;gap:26px}
-.loc-item h4{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.loc-item p{color:var(--text-d);font-weight:300;font-size:.98rem}
+.location{background:var(--ink);padding:70px 0}
+.loc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:35px;margin-top:36px;align-items:stretch}
+.loc-card{border:1px solid var(--line-d);border-radius:14px;padding:30px 24px;background:var(--ink-2);display:flex;flex-direction:column;gap:20px}
+.loc-item h4{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.loc-item p{color:var(--text-d);font-weight:300;font-size:.9rem}
 .loc-item p b{font-weight:600}
-.loc-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto}
-.map-box{border-radius:18px;overflow:hidden;border:1px solid var(--line-d);min-height:420px}
-.map-box iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(25%) contrast(1.05)}
+.loc-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.map-box{border-radius:14px;overflow:hidden;border:1px solid var(--line-d);min-height:300px}
+.map-box iframe{width:100%;height:100%;min-height:300px;border:0;filter:grayscale(25%) contrast(1.05)}
 
 /* ============ FOOTER ============ */
-footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)}
-.foot-word{font-family:var(--disp);font-stretch:120%;font-weight:900;text-transform:uppercase;font-size:clamp(3rem,10vw,8.4rem);line-height:.95;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(217,179,108,.35);letter-spacing:.02em;user-select:none}
-.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;margin:64px 0 50px}
-.foot-grid h5{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-.foot-grid p, .foot-grid a{color:var(--muted-d);font-weight:300;font-size:.9rem}
-.foot-grid ul li{margin-bottom:10px}
-.foot-grid ul a{transition:.3s}
-.foot-grid ul a:hover{color:var(--gold-2);padding-left:6px}
-.foot-bottom{border-top:1px solid var(--line-d);padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--muted-d)}
+footer{background:#07080c;padding:50px 0 26px;border-top:1px solid var(--line-d)}
+.foot-word{font-family:var(--disp);font-stretch:120%;font-weight:900;text-transform:uppercase;font-size:clamp(2.5rem,8vw,7rem);line-height:.95;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(217,179,108,.35);letter-spacing:.02em;user-select:none}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:35px;margin:40px 0 35px}
+.foot-grid h5{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.foot-grid p, .foot-grid a{color:var(--muted-d);font-weight:300;font-size:.85rem}
+.foot-grid ul li{margin-bottom:8px}
+.foot-bottom{border-top:1px solid var(--line-d);padding-top:20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;color:var(--muted-d)}
 .foot-bottom i{font-family:var(--serif);color:var(--gold)}
 
 /* ============ FLOATING WA ============ */
-.floating-wa{position:fixed;bottom:28px;right:28px;z-index:1500;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 12px 30px rgba(31,191,95,.4);transition:.3s}
-.floating-wa:hover{transform:translateY(-4px) scale(1.05)}
-.floating-wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:pulse 2s infinite}
-@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
-.floating-wa svg{width:30px;height:30px;fill:#fff}
+.floating-wa{position:fixed;bottom:20px;right:20px;z-index:1500;width:52px;height:52px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 25px rgba(31,191,95,.4)}
+.floating-wa svg{width:26px;height:26px;fill:#fff}
 
 /* ============ REVEAL ============ */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.65,.25,1),transform .9s cubic-bezier(.2,.65,.25,1)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.65,.25,1),transform .7s cubic-bezier(.2,.65,.25,1)}
 .rv.on{opacity:1;transform:none}
 
-/* ============ RESPONSIVE ============ */
+/* ============ RESPONSIVE (MOBILE OPTIMIZED) ============ */
 @media(max-width:1024px){
   .cards{grid-template-columns:repeat(2,1fr)}
-  .hero-grid{grid-template-columns:1fr;gap:70px}
-  .hero-visual{justify-self:center}
-  .price-grid,.member-grid,.loc-grid,.about-grid{grid-template-columns:1fr}
+  .hero-grid,.price-grid,.member-grid,.loc-grid,.about-grid{grid-template-columns:1fr}
   .clinic-box{position:static}
   .ig-grid,.testi-grid{grid-template-columns:1fr 1fr}
   .about-visual .small{right:0}
 }
-@media(max-width:760px){
-  nav ul{position:fixed;inset:0;background:rgba(7,8,12,.98);flex-direction:column;justify-content:center;gap:26px;transform:translateY(-100%);transition:.5s;z-index:-1}
-  nav.open ul{transform:none}
-  nav ul li a{font-size:1rem}
-  .burger{display:flex;z-index:2}
+
+@media(max-width:768px){
+  /* Navigation Mobile */
+  nav{position:fixed;top:0;right:0;bottom:0;width:80%;max-width:300px;background:var(--ink-2);z-index:1001;padding:80px 30px;transform:translateX(100%);transition:.4s ease;box-shadow:-10px 0 30px rgba(0,0,0,.5);border-left:1px solid var(--line-d)}
+  nav.open{transform:translateX(0)}
+  nav ul{flex-direction:column;align-items:flex-start;gap:20px}
+  nav ul li a{font-size:.95rem}
+  
+  .burger{display:flex;z-index:1002}
   .nav-cta{display:none}
+
+  /* Hero Adjustments */
+  .hero{padding:100px 0 40px}
+  .hero-cta{flex-direction:column;width:100%}
+  .hero-cta .btn{width:100%}
+  .hero-meta{gap:15px}
+  .hero-meta div{width:45%}
+
+  /* Visual Hero Compact */
+  .hero-visual{margin-top:20px}
+  .frame img{height:340px}
+  .polaroid{width:110px;left:-10px;bottom:10px;padding:6px 6px 10px}
+  .polaroid img{height:80px}
+  .spin-badge{width:80px;height:80px;right:-10px;top:-10px}
+
+  /* Stats Layout HP */
+  .stats{margin-top:40px}
   .stats-grid{grid-template-columns:1fr 1fr}
+  .stat{padding:18px 10px}
+  .stat:nth-child(1), .stat:nth-child(2){border-bottom:1px solid var(--line-d)}
   .stat:nth-child(2){border-right:none}
-  .stat{border-bottom:1px solid var(--line-d)}
-  .stat:nth-child(3),.stat:nth-child(4){border-bottom:none}
+
+  /* Cards & Grids */
   .cards,.ig-grid,.testi-grid{grid-template-columns:1fr}
-  .event{grid-template-columns:1fr;gap:16px}
-  .ev-date{border-right:none;text-align:left;display:flex;gap:10px;align-items:baseline}
-  .polaroid{left:-8px}
-  .spin-badge{right:-8px}
-  .foot-grid{grid-template-columns:1fr}
-  .frame img{height:420px}
+  
+  /* Events Mobile */
+  .event{grid-template-columns:1fr;gap:12px;padding:20px 0}
+  .ev-date{border-right:none;text-align:left;display:flex;gap:10px;align-items:baseline;padding-right:0}
+  .ev-date b{font-size:1.8rem}
+
+  /* About Section Mobile */
+  .about-visual .big img{height:280px}
+  .about-visual .small{width:130px;bottom:-20px}
+  .exp-badge{width:75px;height:75px;font-size:.5rem;top:-15px;left:-5px}
+  .exp-badge b{font-size:1rem}
+
+  /* Footer */
+  .foot-grid{grid-template-columns:1fr;gap:25px}
+  .foot-bottom{flex-direction:column;text-align:center;gap:6px}
+
+  /* Rate Table Dot Removal for Clean Lines */
+  .rate-row .dots{display:none}
 }
 </style>
 </head>
@@ -325,9 +349,9 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow rv">Jl. Basuki Rahmad No. 1 — Kota Madiun</p>
+        <p class="eyebrow rv">Jl. Basuki Rahmad No. 1 — Madiun</p>
         <h1 class="display rv">Own The<br><em>Stage.</em></h1>
-        <p class="hero-sub rv">The first integrated social sport space in Madiun. <b>Padel, minisoccer, badminton</b> & secangkir kopi dari <b>Moest Coffee</b> — satu kawasan untuk bermain, terhubung, dan jadi bagian dari sport lifestyle. <em class="serif-it">More than just a game.</em></p>
+        <p class="hero-sub rv">The first integrated social sport space in Madiun. <b>Padel, minisoccer, badminton</b> & secangkir kopi dari <b>Moest Coffee</b> — satu kawasan untuk bermain, terhubung, dan jadi bagian dari sport lifestyle.</p>
         <div class="hero-cta rv">
           <a href="booking.html" class="btn btn-gold">Reservasi Lapangan</a>
           <a href="#fasilitas" class="btn btn-ghost">Jelajahi Fasilitas</a>
@@ -341,7 +365,6 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
 
       <div class="hero-visual rv">
         <div class="frame">
-          <!-- Ganti dengan foto dari feed IG @pandawasocialsport bila diinginkan -->
           <img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/2f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb08859.png" alt="Suasana social sport di Pandawa" loading="eager">
         </div>
         <figure class="polaroid">
@@ -385,11 +408,11 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
     <div class="about-grid">
       <div class="about-txt rv">
         <p><b>Pandawa Social Sport</b> adalah integrated social sport area pertama di Madiun yang menghadirkan pengalaman olahraga modern melalui fasilitas padel premium, minisoccer, badminton, dan ruang sosial yang dirancang untuk komunitas aktif.</p>
-        <p>Lebih dari sekadar tempat olahraga, Pandawa adalah destinasi untuk membangun koneksi, menikmati gaya hidup sehat, dan menjadi bagian dari tren sport lifestyle yang berkembang di Kota Madiun — sekaligus rumah pembinaan atlet padel menuju level nasional.</p>
+        <p>Lebih dari sekadar tempat olahraga, Pandawa adalah destinasi untuk membangun koneksi, menikmati gaya hidup sehat, dan menjadi bagian dari tren sport lifestyle yang berkembang di Kota Madiun.</p>
         <div class="about-quote">“It’s never just about the game. It’s about spending quality time with the people who matter most.”</div>
-        <p>Standar fasilitas tingkat tinggi, kebersihan terjaga (skor kebersihan <b>4.9/5</b>), dan layanan yang ramah — karena setiap kunjungan adalah pengalaman.</p>
+        <p>Standar fasilitas tingkat tinggi, kebersihan terjaga (skor kebersihan <b>4.9/5</b>), dan layanan yang ramah.</p>
         <ul class="chips">
-          <li>☕ Cafe & Resto — Moest Coffee</li><li>🚿 Hot Shower</li><li>👕 Ruang Ganti</li><li>🕌 Musholla</li><li>🚗 Parkir Luas</li><li>🪑 Tribun Penonton</li><li>📶 Wi-Fi Gratis</li><li>🥤 Jual Minuman</li>
+          <li>☕ Cafe & Resto</li><li>🚿 Hot Shower</li><li>👕 Ruang Ganti</li><li>🕌 Musholla</li><li>🚗 Parkir Luas</li><li>🪑 Tribun Penonton</li><li>📶 Wi-Fi Gratis</li>
         </ul>
       </div>
       <div class="about-visual rv">
@@ -417,7 +440,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="card-img"><span class="card-no">No. 01</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb02146.png" alt="Terracotta Padel Court" loading="lazy"></div>
         <div class="card-body">
           <h3>Terracotta Padel Court</h3>
-          <p>Court ikonik bernuansa hangat dengan kaca panoramic dan tribun penonton — “best padel venue in Madiun” versi komunitas.</p>
+          <p>Court ikonik bernuansa hangat dengan kaca panoramic dan tribun penonton.</p>
           <div class="card-meta"><span class="price">Mulai 180K</span><a href="booking.html?court=terracotta">Reservasi →</a></div>
         </div>
       </article>
@@ -426,7 +449,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="card-img"><span class="card-no">No. 02</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/0f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb07555.png" alt="Royal Blue Padel Court" loading="lazy"></div>
         <div class="card-body">
           <h3>Royal Blue Padel Court</h3>
-          <p>Court biru royal standar turnamen — panggung resmi Madiun’s first padel tournament dan latihan atlet PBPI.</p>
+          <p>Court biru royal standar turnamen — panggung resmi turnamen padel Madiun.</p>
           <div class="card-meta"><span class="price">Mulai 180K</span><a href="booking.html?court=royalblue">Reservasi →</a></div>
         </div>
       </article>
@@ -435,7 +458,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="card-img"><span class="card-no">No. 03</span><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80" alt="Minisoccer Field" loading="lazy"></div>
         <div class="card-body">
           <h3>Minisoccer Field</h3>
-          <p>Lapangan untuk fun match, turnamen komunitas, hingga corporate event. Include 2 dus air mineral setiap sesi.</p>
+          <p>Lapangan untuk fun match & turnamen. Include 2 dus air mineral setiap sesi.</p>
           <div class="card-meta"><span class="price">Mulai 250K</span><a href="booking.html?court=minisoccer">Reservasi →</a></div>
         </div>
       </article>
@@ -444,7 +467,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="card-img"><span class="card-no">No. 04</span><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/3f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb06321.png" alt="Badminton Court" loading="lazy"></div>
         <div class="card-body">
           <h3>Badminton Court</h3>
-          <p>Court indoor nyaman untuk rally santai maupun sparing serius — lengkap dengan pencahayaan premium.</p>
+          <p>Court indoor nyaman untuk rally santai maupun sparing serius.</p>
           <div class="card-meta"><span class="price">via AYO</span><a href="booking.html?court=badminton">Reservasi →</a></div>
         </div>
       </article>
@@ -461,32 +484,31 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
     <div class="price-grid">
       <div class="rv">
         <div class="rate-panel">
-          <h3>Padel Court <span>per sesi • soft opening rate</span></h3>
+          <h3>Padel Court <span>per sesi • soft opening</span></h3>
           <div class="rate-row"><span class="lbl">Weekdays • 06.00 – 10.00</span><span class="dots"></span><span class="val">Rp200K</span></div>
           <div class="rate-row"><span class="lbl">Weekdays • 10.00 – 15.00</span><span class="dots"></span><span class="val">Rp180K</span></div>
           <div class="rate-row"><span class="lbl">Weekdays • 15.00 – 00.00</span><span class="dots"></span><span class="val">Rp250K</span></div>
           <div class="rate-row"><span class="lbl">Weekend</span><span class="dots"></span><span class="val">Bundling</span></div>
-          <p class="rate-note">* Reservasi melalui aplikasi AYO — tersedia opsi DP, reschedule, promo & voucher.</p>
+          <p class="rate-note">* Reservasi melalui aplikasi AYO — tersedia opsi DP & promo.</p>
         </div>
         <div class="rate-panel">
-          <h3>Minisoccer <span>per sesi • maks. 12 pax / lapangan</span></h3>
-          <div class="rate-row"><span class="lbl">Sesi reguler (include 2 dus air mineral)</span><span class="dots"></span><span class="val">Rp250K</span></div>
-          <div class="rate-row"><span class="lbl">Event / turnamen / corporate</span><span class="dots"></span><span class="val">Hubungi Admin</span></div>
+          <h3>Minisoccer <span>per sesi</span></h3>
+          <div class="rate-row"><span class="lbl">Reguler (+ 2 dus air)</span><span class="dots"></span><span class="val">Rp250K</span></div>
+          <div class="rate-row"><span class="lbl">Event / Corporate</span><span class="dots"></span><span class="val">Kontak Admin</span></div>
         </div>
       </div>
 
       <aside class="clinic-box rv" id="clinic">
         <h3>Coaching Clinic</h3>
         <div class="price-tag">Rp75K <small>/ pax</small></div>
-        <p style="font-weight:300;font-size:.9rem;opacity:.9">Your first padel experience starts here — dirancang khusus untuk pemain pemula.</p>
+        <p style="font-weight:300;font-size:.85rem;opacity:.9">Your first padel experience starts here — khusus untuk pemain pemula.</p>
         <ul>
           <li>1 jam akses court</li>
-          <li>Pendampingan coach bersertifikat</li>
-          <li>Sewa raket</li>
-          <li>Bola padel</li>
-          <li>Dokumentasi fotografer</li>
+          <li>Pendampingan coach</li>
+          <li>Sewa raket & bola padel</li>
+          <li>Dokumentasi foto</li>
         </ul>
-        <a href="https://lynk.id/pandawasocialsport" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center">Daftar Clinic</a>
+        <a href="https://lynk.id/pandawasocialsport" target="_blank" class="btn btn-gold" style="width:100%;margin-top:10px">Daftar Clinic</a>
       </aside>
     </div>
   </div>
@@ -497,9 +519,9 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
   <div class="wrap member-grid">
     <div class="member-img rv"><img src="https://image.qwenlm.ai/public_source/697d49cd-2483-4717-b7c9-88cbd2282a0d/1f9bcdb5d-e6c2-4a6e-b8d6-873f415d8cb05322.png" alt="Padel action di Pandawa" loading="lazy"></div>
     <div class="rv">
-      <div class="sec-head"><span class="sec-no">04</span><span class="sec-line"></span><span class="sec-tag">Membership & Rewards</span></div>
+      <div class="sec-head"><span class="sec-no">04</span><span class="sec-line"></span><span class="sec-tag">Membership</span></div>
       <h2 class="display">Play More,<br><em>Earn More.</em></h2>
-      <p>There’s more waiting behind every game. <b style="color:var(--text-d)">Pandawa Padel Membership</b> memberi nilai lebih setiap kali Anda melangkah ke court, bersama <b style="color:var(--text-d)">Padelapan Club</b> — pantau jam bermain Anda dan buka exclusive perks seiring perjalanan padel Anda.</p>
+      <p> Dapatkan akses eksklusif dan keuntungan menarik setiap kali Anda bermain di Pandawa Social Sport melalui program keanggotaan resmi kami.</p>
       <ul class="perks">
         <li>Exclusive member benefits</li>
         <li>Track playing hours</li>
@@ -511,12 +533,12 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
   </div>
 </section>
 
-<!-- ================= GALERI INSTAGRAM ================= -->
+<!-- ================= GALERI ================= -->
 <section class="gallery" id="galeri">
   <div class="wrap">
     <div class="sec-head rv"><span class="sec-no">05</span><span class="sec-line"></span><span class="sec-tag">Dokumentasi</span></div>
     <h2 class="title display rv">Straight From <em>Our Feed.</em></h2>
-    <p class="sec-sub rv" style="color:var(--muted-c)">Momen keseruan komunitas — diambil langsung dari postingan Instagram resmi <b>@pandawasocialsport</b>.</p>
+    <p class="sec-sub rv" style="color:var(--muted-c)">Momen keseruan komunitas dari Instagram resmi <b>@pandawasocialsport</b>.</p>
 
     <div class="ig-grid">
       <div class="ig-wrap rv">
@@ -550,30 +572,20 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="ev-date"><b>15–17</b><span>Aug 2026</span></div>
         <div class="ev-body">
           <h3>Pandawa Merdeka Cup 2026</h3>
-          <p>Turnamen minisoccer antar komunitas se-Kota Madiun menyambut HUT RI ke-81, dengan total hadiah jutaan rupiah. Segera daftarkan tim Anda!</p>
-          <ul class="ev-tags"><li>Minisoccer</li><li>Turnamen</li><li>Komunitas</li></ul>
+          <p>Turnamen minisoccer antar komunitas se-Kota Madiun menyambut HUT RI ke-81.</p>
+          <ul class="ev-tags"><li>Minisoccer</li><li>Turnamen</li></ul>
         </div>
         <a href="booking.html" class="btn btn-gold">Daftar Tim</a>
       </div>
 
       <div class="event rv">
-        <div class="ev-date"><b>31</b><span>Setiap Bulan</span></div>
+        <div class="ev-date"><b>31</b><span>Bulanan</span></div>
         <div class="ev-body">
           <h3>Fun Minisoccer — Community Night</h3>
-          <p>Kolaborasi bersama komunitas Madiun: malam penuh koneksi dan kompetisi seru di lapangan. Edisi berikutnya segera diumumkan — follow IG kami.</p>
+          <p>Malam penuh koneksi dan kompetisi seru bersama komunitas Madiun.</p>
           <ul class="ev-tags"><li>Fun Match</li><li>Networking</li></ul>
         </div>
         <a href="https://www.instagram.com/pandawasocialsport/" target="_blank" class="btn btn-ghost">Info IG</a>
-      </div>
-
-      <div class="event rv">
-        <div class="ev-date"><b>AM</b><span>Weekend</span></div>
-        <div class="ev-body">
-          <h3>Mindful Morning — Yoga × Padel</h3>
-          <p>Wellness collab bersama Moest Coffee & Aranya Flow: sesi yoga menenangkan dilanjutkan melangkah ke court, ditutup dengan kopi terbaik.</p>
-          <ul class="ev-tags"><li>Wellness</li><li>Yoga</li><li>Moest Coffee</li></ul>
-        </div>
-        <a href="https://wa.me/6281246813631" target="_blank" class="btn btn-ghost">Reservasi</a>
       </div>
     </div>
   </div>
@@ -590,7 +602,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="q">“</div>
         <p>Best padel venueeeeeeeee in Madiyunnnn!</p>
         <div class="stars">★★★★★</div>
-        <div class="who"><b>Fachrizal R.</b> — Terracotta Padel Court</div>
+        <div class="who"><b>Fachrizal R.</b> — Terracotta Court</div>
       </div>
       <div class="t-card rv">
         <div class="q">“</div>
@@ -602,7 +614,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         <div class="q">“</div>
         <p>Nice place… kereeen!</p>
         <div class="stars">★★★★★</div>
-        <div class="who"><b>Aji W. & Fachrizal</b> — Minisoccer Field</div>
+        <div class="who"><b>Aji W. & Fachrizal</b> — Minisoccer</div>
       </div>
     </div>
   </div>
@@ -618,7 +630,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
       <div class="loc-card rv">
         <div class="loc-item">
           <h4>Alamat</h4>
-          <p><b>Jl. Basuki Rahmad No. 1</b>, Tawangrejo, Kec. Kartoharjo, Kota Madiun, Jawa Timur</p>
+          <p><b>Jl. Basuki Rahmad No. 1</b>, Tawangrejo, Kec. Kartoharjo, Kota Madiun</p>
         </div>
         <div class="loc-item">
           <h4>Jam Operasional</h4>
@@ -626,7 +638,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         </div>
         <div class="loc-item">
           <h4>Kontak</h4>
-          <p>WA <b>+62 812-4681-3631</b><br>Email pandawasocialsport@gmail.com</p>
+          <p>WA <b>+62 812-4681-3631</b></p>
         </div>
         <div class="loc-links">
           <a href="https://wa.me/6281246813631" target="_blank" class="btn btn-gold">Chat Admin</a>
@@ -634,7 +646,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
         </div>
       </div>
       <div class="map-box rv">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.5422615468165!2d111.5348986!3d-7.6247072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bf0063f13615%3A0xc3f28cf69e3a6503!2sKota%20Madiun%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Pandawa Social Sport"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.5422615468165!2d111.5348986!3d-7.6247072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bf0063f13615%3A0xc3f28cf69e3a6503!2sKota%20Madiun%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" title="Lokasi Pandawa Social Sport"></iframe>
       </div>
     </div>
   </div>
@@ -647,7 +659,7 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
     <div class="foot-grid">
       <div>
         <h5>Pandawa Social Sport</h5>
-        <p>The first integrated social sport space in Madiun. Padel, badminton, minisoccer & cafe — dibangun untuk komunitas aktif. <i class="serif-it">Own the stage.</i></p>
+        <p>The first integrated social sport space in Madiun. <i class="serif-it">Own the stage.</i></p>
       </div>
       <div>
         <h5>Jelajah</h5>
@@ -656,21 +668,18 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
           <li><a href="#fasilitas">Fasilitas</a></li>
           <li><a href="#harga">Harga</a></li>
           <li><a href="#event">Event</a></li>
-          <li><a href="booking.html">Reservasi</a></li>
         </ul>
       </div>
       <div>
         <h5>Terhubung</h5>
         <ul>
-          <li><a href="https://www.instagram.com/pandawasocialsport/" target="_blank">Instagram — @pandawasocialsport</a></li>
+          <li><a href="https://www.instagram.com/pandawasocialsport/" target="_blank">Instagram</a></li>
           <li><a href="https://wa.me/6281246813631" target="_blank">WhatsApp Admin</a></li>
-          <li><a href="https://ayo.co.id/v/pandawa-social-sport" target="_blank">AYO Indonesia</a></li>
-          <li><a href="https://lynk.id/pandawasocialsport" target="_blank">lynk.id/pandawasocialsport</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Pandawa Social Sport. Hak cipta dilindungi.</span>
+      <span>© 2026 Pandawa Social Sport.</span>
       <span><i>Own The Stage.</i> — Madiun, Jawa Timur</span>
     </div>
   </div>
@@ -681,34 +690,33 @@ footer{background:#07080c;padding:80px 0 34px;border-top:1px solid var(--line-d)
   <svg viewBox="0 0 24 24"><path d="M12.031 21.082h-.002c-1.621 0-3.208-.435-4.596-1.261l-5.111 1.34 1.365-4.984c-.905-1.428-1.382-3.08-1.382-4.781 0-4.922 4.004-8.927 8.927-8.927 2.387 0 4.632.93 6.318 2.618 1.687 1.688 2.617 3.932 2.617 6.32 0 4.922-4.005 8.925-8.926 8.925zm4.908-6.702c-.269-.135-1.593-.787-1.841-.877-.248-.09-.43-.135-.609.135-.179.27-.697.877-.855 1.057-.157.18-.315.203-.585.068-2.038-1.022-3.32-2.193-4.148-3.633-.11-.191.077-.184.342-.713.09-.18.045-.337-.023-.472-.068-.135-.609-1.469-.834-2.012-.22-.527-.442-.455-.608-.464-.158-.009-.338-.011-.518-.011-.18 0-.472.068-.72.338-.248.27-.945.923-.945 2.25 0 1.328.968 2.61 1.103 2.79.135.18 1.902 2.905 4.607 4.072 1.977.854 2.698.928 3.655.776.81-.128 2.518-1.028 2.87-2.02.353-.993.353-1.843.248-2.02-.105-.18-.383-.27-.653-.405z"/></svg>
 </a>
 
-<!-- Instagram embed (foto asli dari feed IG) -->
 <script async src="//www.instagram.com/embed.js"></script>
 
 <script>
 // Header scrolled state
 const header = document.getElementById('header');
-addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40));
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 30));
 
-// Mobile menu
+// Mobile menu toggle
 const burger = document.getElementById('burger'), nav = document.getElementById('nav');
 burger.addEventListener('click', () => nav.classList.toggle('open'));
 nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-// Reveal on scroll
+// Reveal animation on scroll
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-}), { threshold: .12 });
-document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * .08 + 's'; io.observe(el); });
+}), { threshold: .1 });
+document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 3) * .06 + 's'; io.observe(el); });
 
 // Count-up stats
 const cio = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
   const el = e.target, end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0);
-  const t0 = performance.now(), dur = 1600;
+  const t0 = performance.now(), dur = 1400;
   (function tick(t){ const p = Math.min((t - t0) / dur, 1), v = end * (1 - Math.pow(1 - p, 3));
     el.textContent = v.toFixed(dec); if (p < 1) requestAnimationFrame(tick); })(t0);
   cio.unobserve(el);
-}), { threshold: .6 });
+}), { threshold: .5 });
 document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 </script>
 </body>
